@@ -5,3 +5,8 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/Sigmaaaa08/minitcc?style=for-the-badge)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/Sigmaaaa08/minitcc?style=for-the-badge&color=%23800080)
 
+## Participantes 
+  **Karen Luísa da Silva Nabas**
+  **Lucas de Paula Galiardo **
+  **José Eduardo Rodrigues Sabino**
+
