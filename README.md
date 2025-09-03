@@ -7,6 +7,6 @@
 
 ## Participantes 
   **Karen Luísa da Silva Nabas**
-  **Lucas de Paula Galiardo **
+  **Lucas de Paula Galiardo**
   **José Eduardo Rodrigues Sabino**
 
