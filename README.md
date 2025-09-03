@@ -12,5 +12,5 @@
 
 
 ## Tema
-Aplicativo *desktop* na linguagem Java para gerenciamento de um estacionamento. 
+Aplicativo *desktop* na linguagem *Java* para gerenciamento de um estacionamento. 
 
