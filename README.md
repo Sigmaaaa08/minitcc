@@ -7,7 +7,7 @@
 
 ## Participantes 
   **[Karen Luísa da Silva Nabas](https://github.com/Sigmaaaa08)** <br>
-  **[Lucas de Paula Galiardo](https://github.com/lucasdepaulagailhardo-crypto)** <br>
+  **[Lucas de Paula Gailhardo](https://github.com/lucasdepaulagailhardo-crypto)** <br>
   **José Eduardo Rodrigues Sabino** <br>
 
 
