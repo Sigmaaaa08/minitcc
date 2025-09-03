@@ -6,7 +6,7 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/Sigmaaaa08/minitcc?style=for-the-badge&color=%23800080)
 
 ## Participantes 
-  **Karen Luísa da Silva Nabas** <br>
+  **[Karen Luísa da Silva Nabas](https://github.com/Sigmaaaa08)** <br>
   **[Lucas de Paula Galiardo](https://github.com/lucasdepaulagailhardo-crypto)** <br>
   **José Eduardo Rodrigues Sabino** <br>
 
