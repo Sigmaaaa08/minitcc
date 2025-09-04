@@ -15,5 +15,7 @@
 Aplicativo *desktop* na linguagem *Java* para gerenciamento de um estacionamento. 
 
 ## Mockup
+### Tela de entrada
+<img src="https://github.com/Sigmaaaa08/minitcc/blob/main/minitcc/imgs/mockup/telaEntrada.png" alt=Tela de Entrada> 
 
 
