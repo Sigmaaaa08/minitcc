@@ -7,10 +7,13 @@
 
 ## Participantes 
   **[Karen Luísa da Silva Nabas](https://github.com/Sigmaaaa08)** <br>
-  **[Lucas de Paula Galiardo](https://github.com/lucasdepaulagailhardo-crypto)** <br>
+  **[Lucas de Paula Galhardo](https://github.com/lucasdepaulagailhardo-crypto)** <br>
   **[José Eduardo Rodrigues Sabino](https://github.com/Revestus)** <br>
 
 
 ## Tema
 Aplicativo *desktop* na linguagem *Java* para gerenciamento de um estacionamento. 
+
+## Mockup
+
 
