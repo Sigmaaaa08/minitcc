@@ -10,9 +10,12 @@
   **[Lucas de Paula Gailhardo](https://github.com/lucasdepaulagailhardo-crypto)** <br>
   **[José Eduardo Rodrigues Sabino](https://github.com/Revestus)** <br>
 ## Tema
-Aplicativo *desktop* na linguagem *Java* para gerenciamento de um estacionamento. 
+Aplicativo *desktop* na linguagem *Java* para gerenciamento de um estacionamento.  <br>
 
-## Mockup
+## Der
+<img src="https://i.imgur.com/FmkNJC5.jpeg"> <br>
+
+## Mockup (Protótipo)
 ### Home
 <img src="https://github.com/Sigmaaaa08/minitcc/blob/main/minitcc/imgs/mockup/telaHome.png" alt=Tela Home> <br>
 ### Entrada
