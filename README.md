@@ -21,7 +21,7 @@ Aplicativo *desktop* na linguagem *Java* para gerenciamento de um estacionamento
 ### Entrada
 <img src="https://github.com/Sigmaaaa08/minitcc/blob/main/minitcc/imgs/mockup/telaEntrada.png" alt=Tela de Entrada> <br>
 ### Cadastro do Estacionamento 
-<img src="https://github.com/Sigmaaaa08/minitcc/blob/main/minitcc/imgs/mockup/telaCadastroEstacionamento.png" alt=Tela de cadastro de estacionamento> <br>
+<img src="https://github.com/Sigmaaaa08/minitcc/blob/main/imgs%2Fmockup%2FtelaCadastroEstacionamento.png" alt=Tela de cadastro de estacionamento> <br>
 ### Cadastro de Funcionario
 <img src="https://github.com/Sigmaaaa08/minitcc/blob/main/minitcc/imgs/mockup/telacadastroFuncionario.png" alt=Tela de cadastro de funcionario><br>
 ### Historico de Vagas
