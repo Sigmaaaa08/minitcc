@@ -4,7 +4,10 @@
  */
 package Model;
 
-
-public class Cliente {
+/**
+ *
+ * @author LABINFO
+ */
+public class Funcionario {
     
 }
