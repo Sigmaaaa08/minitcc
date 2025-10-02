@@ -19,7 +19,6 @@ public class ConVeiculo {
                 vei.setString(1, veiculo.getPlacaveiculo());
                 vei.setString(2, veiculo.getModeloveiculo());
                 vei.setString(3, veiculo.getTipoveiculo());
-                vei.setString(4, veiculo.getEndereco());
                 
                 vei.executeUpdate();
                 
