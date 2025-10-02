@@ -8,6 +8,6 @@ package Model;
  *
  * @author LABINFO
  */
-public class Cliente {
+public class Veiculos {
     
 }
