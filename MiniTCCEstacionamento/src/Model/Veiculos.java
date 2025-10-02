@@ -4,7 +4,15 @@
  */
 package Model;
 
+<<<<<<< HEAD:MiniTCCEstacionamento/src/Model/Veiculos.java
+/**
+ *
+ * @author LABINFO
+ */
+public class Veiculos {
+=======
 
 public class Cliente {
+>>>>>>> 8a094493de4bf1323a25c98ebad5612229ba1277:MiniTCCEstacionamento/src/Model/Cliente.java
     
 }
