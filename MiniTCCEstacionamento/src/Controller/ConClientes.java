@@ -40,7 +40,7 @@ public class ConClientes {
     
     public Vector listar(){
         Vector lista = new Vector();
-        String sql = "Select idcliente,nomecliente,telefonecliente,cpfcliente,credencliente from CLIENTE";
+        String sql = "Select idcliente,nomecliente,telefonecliente,cpfcliente,credencliente from TBCLIENTE";
         try{
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
             ResultSet rs = psmt.executeQuery();
@@ -59,6 +59,8 @@ public class ConClientes {
                 novalinha.addElement(cliente.getTelefone());
                 novalinha.addElement(cliente.getCpf());
                 novalinha.addElement(cliente.getCredencial());
+                
+                lista.add(novalinha);
             }
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, ex);
