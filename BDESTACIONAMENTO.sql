@@ -124,6 +124,13 @@ INNER JOIN tbservico S
 ON F.IDFUNCI=S.CODFUNCI
 WHERE F.IDFUNCI=3 AND S.DATAINICIAL BETWEEN "2025-09-01" AND "2025-09-30";
 
+/*Consultar os nomem dos funcionários e quantidades de serviços feitos por eles*/
+SELECT F.NOMEFUNCI, COUNT(S.DATAINICIAL)
+FROM tbfuncionario F
+INNER JOIN tbservico S
+ON F.IDFUNCI=S.CODFUNCI
+GROUP BY F.IDFUNCI;
+
 /*Consultar os dados das tabelas TBCLIENTE e TBVEICULO mostrando o nome dos clientes que possuem carro e não possuem credencial.*/
 SELECT C.NOMECLIENTE, V.MODELOVEICULO
 FROM tbcliente C
@@ -131,13 +138,17 @@ INNER JOIN tbveiculo V
 ON C.IDCLIENTE=V.CODCLIENTE
 WHERE C.CREDENCLIENTE="N" AND V.TIPOVEICULO="CARRO";
 
-/*Consulte os dados das tabelas TBSERVICOS, TBVAGA e TBCATEGORIA usando INNER JOIN para mostrar vagas ocupadas no mês de agosto*/
-SELECT V.NOMEVAGA
+/*Consulte os dados das tabelas TBSERVICOS, TBVAGA, TBCATEGORIA, TBVEICULO e TBCLIENTE usando INNER JOIN para mostrar vagas ocupadas no mês de agosto pelo respectivo cliente*/
+SELECT V.NOMEVAGA, CLI.NOMECLIENTE
 FROM tbservico S
 INNER JOIN tbvaga V
 ON V.IDVAGA=S.CODVAGA
 INNER JOIN tbcategoria C
 ON V.CODCAT=C.IDCAT
+INNER JOIN tbveiculo VEI
+ON VEI.IDVEICULO=S.CODVEICULO
+INNER JOIN tbcliente CLI
+ON CLI.IDCLIENTE=VEI.CODCLIENTE
 WHERE C.VAGACAT = "COMUM" AND S.DATAFINAL BETWEEN "2025-08-01" AND "2025-08-31";
 
 /*Consulte os dados das tabelas TBVAGA e TBCATEGORIA, como os tipos da vaga e o valor total(soma) de serviços realizados com cada tipo de vaga*/
@@ -154,25 +165,37 @@ INNER JOIN tbservico S
 ON V.IDVEICULO = S.CODVEICULO
 WHERE V.TIPOVEICULO = "MOTO";
 
-/*Statustodas as vagas*/
+/*Status e nomes de todas as vagas no atual momento do Banco de Dados*/
 SELECT V.NOMEVAGA, V.STATUSVAGA
 FROM tbvaga V;
 
-SELECT ((TIMESTAMPDIFF(SECOND, S.HORASAIDA, S.HORAENTRADA) / 3600.0)*-1)
-FROM tbservico S
-WHERE S.IDSERVICO=1;
-
-/**/
-SELECT CLI.NOMECLIENTE, VEI.PLACAVEICULO, ((S.DATAFINAL - S.DATAINICIAL) * 24) + ((TIMESTAMPDIFF(SECOND, S.HORASAIDA, S.HORAENTRADA) / 3600.0)*-1) * CAT.PRECOCAT
-FROM tbvaga VAG
-INNER JOIN tbservico S
-ON VAG.IDVAGA=S.CODVAGA
-INNER JOIN tbcategoria CAT
-ON CAT.IDCAT=VAG.CODCAT
-INNER JOIN tbveiculo VEI
-ON VEI.IDVEICULO=S.CODVEICULO
-INNER JOIN tbcliente CLI
-ON VEI.CODCLIENTE=CLI.IDCLIENTE
-WHERE IF((TIMESTAMPDIFF(SECOND, S.HORASAIDA, S.HORAENTRADA) / 3600.0)<0)
-GROUP BY S.IDSERVICO;
-
+/*Calcula o total de horas e preço da estadia no estacionamento, a partir do preço por hora da vaga, mostrando o nome do cliente, a placa e modelo do veículo em ordem crescente*/
+SELECT
+    CLI.NOMECLIENTE AS CLIENTE,
+    VEI.PLACAVEICULO AS PLACA,
+    VEI.MODELOVEICULO AS MODELO,
+   	/* -- TIMESTAMPDIFF: função que calcula a diferença entre dois valores de data, hora ou carimbo de data/hora (timestamp);
+    Retorna em um valor de intervalo de tempo horas, minutos, segundos, etc... */
+    -- CONCAT: Concatena Strings, nesse caso está combinando DATE e TIME para formar um DATATIME.
+    TIMESTAMPDIFF(MINUTE,
+        CONCAT(S.DATAINICIAL, ' ', S.HORASAIDA),
+        CONCAT(S.DATAFINAL, ' ', S.HORAENTRADA)
+    )/60 AS DURACAO_EM_HORAS,
+    CAT.PRECOCAT AS PRECO_POR_HORA,
+    -- Calculate Total Cost: Duration (in hours) * Price Per Hour
+    (TIMESTAMPDIFF(MINUTE,
+        CONCAT(S.DATAINICIAL, ' ', S.HORASAIDA),
+        CONCAT(S.DATAFINAL, ' ', S.HORAENTRADA)
+    )/60) * CAT.PRECOCAT AS CUSTO_TOTAL
+FROM
+    tbservico S
+INNER JOIN
+    tbvaga VAG ON VAG.IDVAGA = S.CODVAGA
+INNER JOIN
+    tbcategoria CAT ON CAT.IDCAT = VAG.CODCAT
+INNER JOIN
+    tbveiculo VEI ON VEI.IDVEICULO = S.CODVEICULO
+INNER JOIN
+    tbcliente CLI ON VEI.CODCLIENTE = CLI.IDCLIENTE
+ORDER BY 
+    S.IDSERVICO ASC;
