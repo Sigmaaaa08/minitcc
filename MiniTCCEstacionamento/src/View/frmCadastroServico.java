@@ -53,6 +53,7 @@ public class frmCadastroServico extends javax.swing.JFrame {
         txtCodFuncionario = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtCodVaga = new javax.swing.JTextField();
+        bntAnterior = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,6 +128,13 @@ public class frmCadastroServico extends javax.swing.JFrame {
 
         jLabel4.setText("CodVaga");
 
+        bntAnterior.setText("Anterior");
+        bntAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntAnteriorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -188,6 +196,10 @@ public class frmCadastroServico extends javax.swing.JFrame {
                                     .addComponent(txtCodVeiculo)
                                     .addComponent(txtCodVaga))
                                 .addGap(49, 49, 49))))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bntAnterior)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,7 +246,9 @@ public class frmCadastroServico extends javax.swing.JFrame {
                         .addComponent(txtCodVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(bntAnterior)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -301,6 +315,13 @@ public class frmCadastroServico extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtHoraSaidaActionPerformed
 
+    private void bntAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAnteriorActionPerformed
+        // TODO add your handling code here:
+        frmCadastroVeiculo frmVeiculo = new frmCadastroVeiculo();
+        setVisible(false);
+        frmVeiculo.setVisible(true);
+    }//GEN-LAST:event_bntAnteriorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -337,6 +358,7 @@ public class frmCadastroServico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntAnterior;
     private javax.swing.JButton bntListar;
     private javax.swing.JButton bntSalvar;
     private javax.swing.JLabel jLabel1;

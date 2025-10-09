@@ -45,6 +45,8 @@ public class frmCadastroVeiculo extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         txtCodCliente = new javax.swing.JTextField();
+        bntAnterior = new javax.swing.JButton();
+        bntProximo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +107,20 @@ public class frmCadastroVeiculo extends javax.swing.JFrame {
             }
         });
 
+        bntAnterior.setText("Anterior");
+        bntAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntAnteriorActionPerformed(evt);
+            }
+        });
+
+        bntProximo.setText("Próximo");
+        bntProximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntProximoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,6 +164,12 @@ public class frmCadastroVeiculo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bntAnterior)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bntProximo)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,6 +197,10 @@ public class frmCadastroVeiculo extends javax.swing.JFrame {
                     .addComponent(bntListar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntProximo)
+                    .addComponent(bntAnterior))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -234,6 +260,20 @@ public class frmCadastroVeiculo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodClienteActionPerformed
 
+    private void bntAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAnteriorActionPerformed
+        // TODO add your handling code here:
+        frmCadastroCliente frmCliente = new frmCadastroCliente();
+        setVisible(false);
+        frmCliente.setVisible(true);
+    }//GEN-LAST:event_bntAnteriorActionPerformed
+
+    private void bntProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntProximoActionPerformed
+        // TODO add your handling code here:
+        frmCadastroServico frmServico = new frmCadastroServico();
+        setVisible(false);
+        frmServico.setVisible(true);
+    }//GEN-LAST:event_bntProximoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -264,13 +304,15 @@ public class frmCadastroVeiculo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmCadastroVeiculo().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntAnterior;
     private javax.swing.JButton bntListar;
+    private javax.swing.JButton bntProximo;
     private javax.swing.JButton bntSalvar;
     private javax.swing.JComboBox<String> cbTipoVeiculo;
     private javax.swing.JLabel jLabel1;

@@ -15,7 +15,6 @@ import javax.swing.table.DefaultTableModel;
  * @author Documentos
  */
 public class frmCadastroCliente extends javax.swing.JFrame {
-
     /**
      * Creates new form frmCadastroCliente
      */
@@ -39,7 +38,7 @@ public class frmCadastroCliente extends javax.swing.JFrame {
         txtCpf = new javax.swing.JTextField();
         txtTelefone = new javax.swing.JTextField();
         bntSalvar = new javax.swing.JButton();
-        bntListar = new javax.swing.JButton();
+        bntProximo = new javax.swing.JButton();
         chkCredencial = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -65,10 +64,10 @@ public class frmCadastroCliente extends javax.swing.JFrame {
             }
         });
 
-        bntListar.setText("Listar");
-        bntListar.addActionListener(new java.awt.event.ActionListener() {
+        bntProximo.setText("Próximo");
+        bntProximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntListarActionPerformed(evt);
+                bntProximoActionPerformed(evt);
             }
         });
 
@@ -99,18 +98,13 @@ public class frmCadastroCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel5)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(8, 8, 8))
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(bntSalvar)
-                                .addGap(18, 18, 18)
-                                .addComponent(bntListar))
+                            .addComponent(bntSalvar)
                             .addComponent(chkCredencial)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(54, 54, 54)
@@ -120,7 +114,10 @@ public class frmCadastroCliente extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
-                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(bntProximo, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -141,11 +138,11 @@ public class frmCadastroCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkCredencial)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bntSalvar)
-                    .addComponent(bntListar))
+                .addComponent(bntSalvar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(bntProximo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -159,9 +156,9 @@ public class frmCadastroCliente extends javax.swing.JFrame {
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
         // TODO add your handling code here:
         try{
-            Clientes cliente = new Clientes();
             ConClientes conCliente = new ConClientes();
-
+            Clientes cliente = new Clientes();
+            
             cliente.setNome(txtNome.getText());
             cliente.setTelefone(txtTelefone.getText());
             cliente.setCpf(txtCpf.getText());
@@ -177,29 +174,14 @@ public class frmCadastroCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bntSalvarActionPerformed
 
-    private void bntListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntListarActionPerformed
+    private void bntProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntProximoActionPerformed
         // TODO add your handling code here:
-        Vector cabecalhoClienete = new Vector();
-
-
-        try{
-            //cabecalho.addElement("Código"); //0
-            cabecalhoClienete.addElement("Código"); // 1
-            cabecalhoClienete.addElement("Nome"); // 2
-            cabecalhoClienete.addElement("Telefone"); // 3
-            cabecalhoClienete.addElement("CPF"); // 4
-            cabecalhoClienete.addElement("Credencial"); // 5
-
-            ConClientes conClientes = new ConClientes();
-            jTable1.setModel(new DefaultTableModel(
-                conClientes.listar(),cabecalhoClienete));
-
-
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante "
-                + "a exibição de dados");
-        }
-    }//GEN-LAST:event_bntListarActionPerformed
+        
+        frmCadastroVeiculo frmVeiculo = new frmCadastroVeiculo();
+        
+        setVisible(false);
+        frmVeiculo.setVisible(true);
+    }//GEN-LAST:event_bntProximoActionPerformed
 
     private void chkCredencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkCredencialActionPerformed
         // TODO add your handling code here:
@@ -241,7 +223,7 @@ public class frmCadastroCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bntListar;
+    private javax.swing.JButton bntProximo;
     private javax.swing.JButton bntSalvar;
     private javax.swing.JCheckBox chkCredencial;
     private javax.swing.JLabel jLabel2;
