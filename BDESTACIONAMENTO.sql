@@ -115,7 +115,7 @@ INSERT INTO TBSERVICO (CODVAGA,CODVEICULO,CODFUNCI,DATAFINAL,DATAINICIAL,HORAENT
 (7, 7, 1, "2025-09-03", "2025-09-03", "07:59:41", "13:12:08"),
 (8, 8, 2, "2025-09-03", "2025-09-03", "08:47:06", "17:14:21"),
 (9, 9, 3, "2025-09-03", "2025-09-04", "23:03:05", "00:04:57"),
-(10, 10, 1, "2025-09-04", "2025-09-03", "17:59:17", "10:08:32");
+(10, 10, 1, "2025-09-04", "2025-09-05", "17:59:17", "10:08:32");
 
 /*Consultar o nome do funcionário de ID=3 e quantidade de serviços feitos por ele no mês de setembro*/
 SELECT F.NOMEFUNCI, COUNT(S.DATAINICIAL)
@@ -174,18 +174,18 @@ SELECT
     CLI.NOMECLIENTE AS CLIENTE,
     VEI.PLACAVEICULO AS PLACA,
     VEI.MODELOVEICULO AS MODELO,
-   	/* -- TIMESTAMPDIFF: função que calcula a diferença entre dois valores de data, hora ou carimbo de data/hora (timestamp);
+ /* -- TIMESTAMPDIFF: função que calcula a diferença entre dois valores de data, hora ou carimbo de data/hora (timestamp);
     Retorna em um valor de intervalo de tempo horas, minutos, segundos, etc... */
     -- CONCAT: Concatena Strings, nesse caso está combinando DATE e TIME para formar um DATATIME.
     TIMESTAMPDIFF(MINUTE,
-        CONCAT(S.DATAINICIAL, ' ', S.HORASAIDA),
-        CONCAT(S.DATAFINAL, ' ', S.HORAENTRADA)
+        CONCAT(S.DATAFINAL, ' ', S.HORAENTRADA),
+        CONCAT(S.DATAINICIAL, ' ', S.HORASAIDA)
     )/60 AS DURACAO_EM_HORAS,
     CAT.PRECOCAT AS PRECO_POR_HORA,
-    -- Calculate Total Cost: Duration (in hours) * Price Per Hour
+    -- calcula o custo Total: duração (em horas) * preço por hora
     (TIMESTAMPDIFF(MINUTE,
-        CONCAT(S.DATAINICIAL, ' ', S.HORASAIDA),
-        CONCAT(S.DATAFINAL, ' ', S.HORAENTRADA)
+        CONCAT(S.DATAFINAL, ' ', S.HORAENTRADA),
+        CONCAT(S.DATAINICIAL, ' ', S.HORASAIDA)
     )/60) * CAT.PRECOCAT AS CUSTO_TOTAL
 FROM
     tbservico S
@@ -199,3 +199,4 @@ INNER JOIN
     tbcliente CLI ON VEI.CODCLIENTE = CLI.IDCLIENTE
 ORDER BY 
     S.IDSERVICO ASC;
+    
