@@ -28,7 +28,7 @@ public class ConVeiculos {
                 JOptionPane.showMessageDialog(null, "Ocorreu um ERRO:"+ ex);
             }
         }
-         public Vector listar(){
+    public Vector listar(){
         Vector lista = new Vector();
         String sql = "Select idveiculo, codcliente, placaveiculo, modeloveiculo,tipoveiculo from TBVEICULO";
         try{
@@ -56,5 +56,60 @@ public class ConVeiculos {
             JOptionPane.showMessageDialog(null, ex);
         }
         return lista;
-    }    
+    }
+    public Veiculos pesquisar (String placa){
+        String sql = "Select * from TBVEICULO where PLACAVEICULO = ?";
+         
+        try{
+           PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
+           pstmt.setString(1, placa);
+           ResultSet rs = pstmt.executeQuery();
+            
+           Veiculos veiculo = new Veiculos();
+            
+           while(rs.next()){
+               veiculo.setCodigo(rs.getInt("idveiculo"));
+               veiculo.setCodcliente(rs.getInt("codcliente"));
+               veiculo.setPlaca(rs.getString("placaveiculo"));
+               veiculo.setModelo(rs.getString("modeloveiculo"));
+               veiculo.setTipo(rs.getString("tipoveiculo"));
+            }
+           
+           return veiculo;
+           }
+        catch(SQLException ex){
+           JOptionPane.showMessageDialog(null, ex);
+           return null;
+        }
+    }
+    public void editar(Veiculos veiculo){
+        String sql = "UPDATE TBVEICULO set codcliente=?, placaveiculo=?, modeloveiculo=?, tipoveiculo=?"
+                + " where idveiculo=?";
+        
+        try{
+            PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
+            
+            psmt.setString(1, veiculo.getPlaca());
+            psmt.setString(2, veiculo.getModelo());
+            psmt.setString(3, veiculo.getTipo());
+            psmt.setInt(4, veiculo.getCodcliente());
+            psmt.setInt(5, veiculo.getCodigo());
+            psmt.executeUpdate();
+            conexao.desconectar();
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"Ocorreu um ERRO:"+ex);
+        }
+    }
+    public void excluir(int codigo){
+        String sql = "DELETE from TBVEICULO where idveiculo = ?";
+        try{
+            PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
+            psmt.setInt(1, codigo);
+            psmt.executeUpdate();
+            conexao.desconectar();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"Ocorreu um ERRO:"+ex);
+        }
+    }
 }

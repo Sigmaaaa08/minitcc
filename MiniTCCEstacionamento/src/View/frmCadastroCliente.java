@@ -108,8 +108,18 @@ public class frmCadastroCliente extends javax.swing.JFrame {
         });
 
         bntEditar.setText("Editar");
+        bntEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntEditarActionPerformed(evt);
+            }
+        });
 
         bntExcluir.setText("Excluir");
+        bntExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntExcluirActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Código");
 
@@ -262,7 +272,7 @@ public class frmCadastroCliente extends javax.swing.JFrame {
     private void bntPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPesquisarActionPerformed
         // TODO add your handling code here:
         Clientes cliente = new Clientes();
-            ConClientes conCliente = new ConClientes();
+        ConClientes conCliente = new ConClientes();
             
             cliente.setCpf(txtCpf.getText());
             cliente=conCliente.pesquisar(cliente.getCpf());
@@ -276,6 +286,14 @@ public class frmCadastroCliente extends javax.swing.JFrame {
             else chkCredencial.setSelected(false);
             
     }//GEN-LAST:event_bntPesquisarActionPerformed
+
+    private void bntEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bntEditarActionPerformed
+
+    private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bntExcluirActionPerformed
 
     /**
      * @param args the command line arguments
