@@ -67,4 +67,56 @@ public class ConClientes {
         }
         return lista;
     }
+    
+    public Clientes pesquisar(String cpf){
+        String sql = "Select * from TBCLIENTE where cpfcliente = ?";
+        try{
+            PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
+            pstmt.setString(1,cpf);
+            ResultSet rs = pstmt.executeQuery();
+            
+            Clientes cliente = new Clientes();
+            //percorre os resultados obtidos na consulta sql
+            while(rs.next()){
+                cliente.setCodigo(rs.getInt("idcliente"));
+                cliente.setNome(rs.getString("nomecliente"));
+                cliente.setTelefone(rs.getString("telefonecliente"));
+                cliente.setCpf(rs.getString("cpfcliente"));
+                cliente.setCredencial(rs.getString("credencliente"));
+            }
+            return cliente;
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex);
+            return null;
+        }
+    }
+    
+     public void editar(Clientes cliente){
+        String sql = "UPDATE TBCLIENTE set nomecliente=?,credencliente=?,telefonecliente=?,cpfcliente=?" +
+                "where idcliente = ?";
+        try{
+            PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
+            psmt.setString(1,cliente.getNome());
+            psmt.setString(2,cliente.getTelefone());
+            psmt.setString(3,cliente.getCpf());
+            psmt.setString(4,cliente.getCredencial());
+            psmt.setInt(5,cliente.getCodigo());
+            psmt.executeUpdate();
+            conexao.desconectar();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"Ocorreu um ERRO:"+ex);
+        }
+    }
+     
+    public void excluir(int codigo){
+        String sql = "DELETE from TBCLIENTE where idcliente = ?";
+        try{
+            PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
+            psmt.setInt(1,codigo);
+            psmt.executeUpdate();
+            conexao.desconectar();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"Ocorreu um ERRO:"+ex);
+        }
+    }
 }
