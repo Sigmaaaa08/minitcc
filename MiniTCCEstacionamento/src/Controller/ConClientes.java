@@ -92,14 +92,14 @@ public class ConClientes {
     }
     
      public void editar(Clientes cliente){
-        String sql = "UPDATE TBCLIENTE set nomecliente=?,credencliente=?,telefonecliente=?,cpfcliente=?" +
-                "where idcliente = ?";
+        String sql = "UPDATE TBCLIENTE set nomecliente=?,CREDENCLIENTE=?,telefonecliente=?,cpfcliente=?" +
+                " where idcliente = ?";
         try{
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
             psmt.setString(1,cliente.getNome());
-            psmt.setString(2,cliente.getTelefone());
-            psmt.setString(3,cliente.getCpf());
-            psmt.setString(4,cliente.getCredencial());
+            psmt.setString(2,cliente.getCredencial());
+            psmt.setString(3,cliente.getTelefone());
+            psmt.setString(4,cliente.getCpf());
             psmt.setInt(5,cliente.getCodigo());
             psmt.executeUpdate();
             conexao.desconectar();
