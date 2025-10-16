@@ -222,28 +222,30 @@ public class frmCadastroCliente extends javax.swing.JFrame {
 
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             Clientes cliente = new Clientes();
             ConClientes conCliente = new ConClientes();
-            
-            if(txtNome.getText().isEmpty() || txtNome == null ||
-                       txtCpf.getText().isEmpty() || txtCpf == null ||
-                      txtTelefone.getText().isEmpty() || txtTelefone == null )
-                        JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
-                    else{
-            cliente.setNome(txtNome.getText());
-            cliente.setTelefone(txtTelefone.getText());
-            cliente.setCpf(txtCpf.getText());
-            if(chkCredencial.isSelected())
-            cliente.setCredencial("S");
-            else cliente.setCredencial("N");
 
-            conCliente.cadastrar(cliente);
-            JOptionPane.showMessageDialog(null, "registro cadastrado com sucesso!");
+            if (txtNome.getText().isEmpty() || txtNome == null
+                    || txtCpf.getText().isEmpty() || txtCpf == null
+                    || txtTelefone.getText().isEmpty() || txtTelefone == null) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
+            } else {
+                cliente.setNome(txtNome.getText());
+                cliente.setTelefone(txtTelefone.getText());
+                cliente.setCpf(txtCpf.getText());
+                if (chkCredencial.isSelected()) {
+                    cliente.setCredencial("S");
+                } else {
+                    cliente.setCredencial("N");
+                }
+
+                conCliente.cadastrar(cliente);
+                JOptionPane.showMessageDialog(null, "registro cadastrado com sucesso!");
             }
-            
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
         }
     }//GEN-LAST:event_bntSalvarActionPerformed
 
@@ -251,8 +253,7 @@ public class frmCadastroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         Vector cabecalhoClienete = new Vector();
 
-
-        try{
+        try {
             //cabecalho.addElement("Código"); //0
             cabecalhoClienete.addElement("Código"); // 1
             cabecalhoClienete.addElement("Nome"); // 2
@@ -262,12 +263,11 @@ public class frmCadastroCliente extends javax.swing.JFrame {
 
             ConClientes conClientes = new ConClientes();
             jTable1.setModel(new DefaultTableModel(
-                conClientes.listar(),cabecalhoClienete));
+                    conClientes.listar(), cabecalhoClienete));
 
-
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante "
-                + "a exibição de dados");
+                    + "a exibição de dados");
         }
     }//GEN-LAST:event_bntListarActionPerformed
 
@@ -277,71 +277,75 @@ public class frmCadastroCliente extends javax.swing.JFrame {
 
     private void bntPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPesquisarActionPerformed
         // TODO add your handling code here:
-        try{
-        Clientes cliente = new Clientes();
+        try {
+            Clientes cliente = new Clientes();
             ConClientes conCliente = new ConClientes();
-            
-            if(txtCpf.getText().isEmpty() || txtCpf == null)
+
+            if (txtCpf.getText().isEmpty() || txtCpf == null) {
                 JOptionPane.showMessageDialog(null, "Preencha o CPF para realizar a pesquisa");
-            else{
-            cliente.setCpf(txtCpf.getText());
-            cliente=conCliente.pesquisar(cliente.getCpf());
-            
-            txtCodigo.setText(String.valueOf(cliente.getCodigo()));
-            txtCpf.setText(cliente.getCpf());
-            txtNome.setText(cliente.getNome());
-            txtTelefone.setText(cliente.getTelefone());
-            if(cliente.getCredencial().equals("S"))
-            chkCredencial.setSelected(true);
-            else chkCredencial.setSelected(false);
+            } else {
+                cliente.setCpf(txtCpf.getText());
+                cliente = conCliente.pesquisar(cliente.getCpf());
+
+                txtCodigo.setText(String.valueOf(cliente.getCodigo()));
+                txtCpf.setText(cliente.getCpf());
+                txtNome.setText(cliente.getNome());
+                txtTelefone.setText(cliente.getTelefone());
+                if (cliente.getCredencial().equals("S")) {
+                    chkCredencial.setSelected(true);
+                } else {
+                    chkCredencial.setSelected(false);
+                }
             }
-        }catch(Exception ex){
-         JOptionPane.showMessageDialog(null, "Ocorreu um erro:"+ex);
-       }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
+        }
     }//GEN-LAST:event_bntPesquisarActionPerformed
 
     private void bntEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarActionPerformed
         // TODO add your handling code here:
-         try{
-                    Clientes cliente = new Clientes();
-                    ConClientes conCliente = new ConClientes();
-                    
-                    if(txtNome.getText().isEmpty() || txtNome == null ||
-                      txtCpf.getText().isEmpty() || txtCpf == null ||
-                      txtTelefone.getText().isEmpty() || txtTelefone == null )
-                      JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
-                    else{
-                    cliente.setCodigo(Integer.parseInt(txtCodigo.getText()));
-                    cliente.setNome(txtNome.getText());
-                    cliente.setTelefone(txtTelefone.getText());
-                    cliente.setCpf(txtCpf.getText());  
-                    if(chkCredencial.isSelected())
-                      cliente.setCredencial("S");
-                     else cliente.setCredencial("N");
-                    
-                    conCliente.editar(cliente);
-                    JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso!");
-                    }
-                   }catch(Exception ex){
-                       JOptionPane.showMessageDialog(null, "Ocorreu um erro:"+ex);
-                   }
+        try {
+            Clientes cliente = new Clientes();
+            ConClientes conCliente = new ConClientes();
+
+            if (txtNome.getText().isEmpty() || txtNome == null
+                    || txtCpf.getText().isEmpty() || txtCpf == null
+                    || txtTelefone.getText().isEmpty() || txtTelefone == null) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
+            } else {
+                cliente.setCodigo(Integer.parseInt(txtCodigo.getText()));
+                cliente.setNome(txtNome.getText());
+                cliente.setTelefone(txtTelefone.getText());
+                cliente.setCpf(txtCpf.getText());
+                if (chkCredencial.isSelected()) {
+                    cliente.setCredencial("S");
+                } else {
+                    cliente.setCredencial("N");
+                }
+
+                conCliente.editar(cliente);
+                JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso!");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
+        }
     }//GEN-LAST:event_bntEditarActionPerformed
 
     private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
         // TODO add your handling code here:
-         try{
+        try {
             ConClientes conCliente = new ConClientes();
-            if(txtCodigo.getText().isEmpty() || txtCodigo == null){
+            if (txtCodigo.getText().isEmpty() || txtCodigo == null) {
                 JOptionPane.showMessageDialog(null, "Preencha o ID do cliente a ser excluido");
-            }else{
-                if(JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir?","Confirme exclusão",JOptionPane.YES_NO_OPTION)!=1 ){
-            int codigo=Integer.parseInt(txtCodigo.getText());
-            conCliente.excluir(codigo);
-            JOptionPane.showMessageDialog(null,"Registro atualizado com sucesso!");
+            } else {
+                if (JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir?", "Confirme exclusão", JOptionPane.YES_NO_OPTION) != 1) {
+                    int codigo = Integer.parseInt(txtCodigo.getText());
+                    conCliente.excluir(codigo);
+                    JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso!");
                 }
             }
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Ocorreu um erro:"+ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
         }
     }//GEN-LAST:event_bntExcluirActionPerformed
 
