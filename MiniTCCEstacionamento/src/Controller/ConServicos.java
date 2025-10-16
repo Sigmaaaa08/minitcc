@@ -17,38 +17,38 @@ import javax.swing.JOptionPane;
  * @author LABINFO
  */
 public class ConServicos {
-           
+
     Conexao conexao = new Conexao();
-    
-    public void cadastrar(Servicos servico){
-        String sql = "INSERT INTO TBSERVICO(datafinal,datainicial,horaentrada,horasaida, codvaga,codfunci,codveiculo)" + 
-                "VALUES (?,?,?,?,?,?,?)";
-        
-        try{
+
+    public void cadastrar(Servicos servico) {
+        String sql = "INSERT INTO TBSERVICO(datafinal,datainicial,horaentrada,horasaida, codvaga,codfunci,codveiculo)"
+                + "VALUES (?,?,?,?,?,?,?)";
+
+        try {
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
-            psmt.setString(1,servico.getDatafinal());
-            psmt.setString(2,servico.getDatainicial());
-            psmt.setString(3,servico.getHoraentrada());
-            psmt.setString(4,servico.getHorasaida());
-            psmt.setInt(5,servico.getCodvaga());
-            psmt.setInt(6,servico.getCodfuncionario());
-            psmt.setInt(7,servico.getCodveiculo());
+            psmt.setString(1, servico.getDatafinal());
+            psmt.setString(2, servico.getDatainicial());
+            psmt.setString(3, servico.getHoraentrada());
+            psmt.setString(4, servico.getHorasaida());
+            psmt.setInt(5, servico.getCodvaga());
+            psmt.setInt(6, servico.getCodfuncionario());
+            psmt.setInt(7, servico.getCodveiculo());
             psmt.executeUpdate();
-            
+
             conexao.desconectar();
-        }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu um ERRO: "+ ex);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um ERRO: " + ex);
         }
     }
-    
-    public Vector listar(){
+
+    public Vector listar() {
         Vector lista = new Vector();
         String sql = "Select idservico,codvaga,codveiculo,codfunci,datainicial,datafinal,horaentrada,horasaida from TBSERVICO";
-        try{
+        try {
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
             ResultSet rs = psmt.executeQuery();
             //percorre os resultados obtidos na consulta sql
-            while(rs.next()){
+            while (rs.next()) {
                 Servicos servico = new Servicos();
                 servico.setCodigo(rs.getInt("idservico"));
                 servico.setCodvaga(rs.getInt("codvaga"));
@@ -69,13 +69,38 @@ public class ConServicos {
                 novalinha.addElement(servico.getHoraentrada());
                 novalinha.addElement(servico.getHorasaida());
 
-                
                 lista.add(novalinha);
             }
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
         return lista;
     }
-}
 
+    public Servicos pesquisar(int idservico) {
+        String sql = "Select * from TBSERVICO where idservico= ? ";
+
+        try {
+            PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
+            pstmt.setInt(1, idservico);
+            ResultSet rs = pstmt.executeQuery();
+            Servicos servicos = new Servicos();
+            while (rs.next()) {
+                servicos.setCodigo(rs.getInt("idservico"));
+                servicos.setCodfuncionario(rs.getInt("codfunci"));
+                servicos.setCodvaga(rs.getInt("codvaga"));
+                servicos.setCodveiculo(rs.getInt("codveiculo"));
+                servicos.setHoraentrada(rs.getString("horaentrada"));
+                servicos.setHorasaida(rs.getString("horasaida"));
+                servicos.setDatainicial(rs.getString("datainicial"));
+                servicos.setDatafinal(rs.getString("datafinal"));
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+            return null;
+        }
+        return null;
+    }
+
+}
