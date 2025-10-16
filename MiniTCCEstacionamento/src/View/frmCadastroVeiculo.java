@@ -7,6 +7,7 @@ package View;
 import Controller.ConVeiculos;
 import Model.Veiculos;
 import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,6 +16,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Documentos
  */
 public class frmCadastroVeiculo extends javax.swing.JFrame {
+    Veiculos veiculo = new Veiculos();
+    ConVeiculos conVeiculo = new ConVeiculos();
 
     /**
      * Creates new form frmCadastroVeiculo
@@ -73,7 +76,12 @@ public class frmCadastroVeiculo extends javax.swing.JFrame {
 
         jLabel9.setText("Veiculo");
 
-        cbTipoVeiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Carro", "Moto", "Caminhão" }));
+        cbTipoVeiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CARRO", "MOTO", "CAMINHAO" }));
+        cbTipoVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoVeiculoActionPerformed(evt);
+            }
+        });
 
         bntSalvar.setText("Salvar");
         bntSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -111,8 +119,18 @@ public class frmCadastroVeiculo extends javax.swing.JFrame {
         });
 
         bntPesquisar.setText("Pesquisar");
+        bntPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntPesquisarActionPerformed(evt);
+            }
+        });
 
         bntEditar.setText("Editar");
+        bntEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntEditarActionPerformed(evt);
+            }
+        });
 
         bntExcluir.setText("Excluir");
 
@@ -228,8 +246,6 @@ public class frmCadastroVeiculo extends javax.swing.JFrame {
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
         // TODO add your handling code here:
         try{
-            Veiculos veiculo = new Veiculos();
-            ConVeiculos conVeiculo = new ConVeiculos();
 
             veiculo.setPlaca(txtPlaca.getText());
             veiculo.setModelo(txtModelo.getText());
@@ -269,6 +285,41 @@ public class frmCadastroVeiculo extends javax.swing.JFrame {
     private void txtCodClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodClienteActionPerformed
+
+    private void bntPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPesquisarActionPerformed
+        // TODO add your handling code here:
+        veiculo.setPlaca(txtPlaca.getText());
+        veiculo=conVeiculo.pesquisar(veiculo.getPlaca());
+        
+        txtCodigo.setText(String.valueOf(veiculo.getCodigo()));
+        txtPlaca.setText(veiculo.getPlaca());
+        txtModelo.setText(veiculo.getModelo());
+        txtCodCliente.setText(String.valueOf(veiculo.getCodcliente()));
+        cbTipoVeiculo.setSelectedItem(veiculo.getTipo());
+        
+    }//GEN-LAST:event_bntPesquisarActionPerformed
+
+    private void bntEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarActionPerformed
+        // TODO add your handling code here:
+        try {
+            veiculo.setCodigo(Integer.parseInt(txtCodigo.getText()));
+            veiculo.setPlaca(txtPlaca.getText());
+            veiculo.setModelo(txtModelo.getText());
+            veiculo.setTipo(cbTipoVeiculo.getSelectedItem().toString());
+            veiculo.setCodcliente(Integer.parseInt(txtCodCliente.getText()));
+            
+
+            conVeiculo.editar(veiculo);
+
+            JOptionPane.showMessageDialog(null, "Registro cadastrado com sucesso!!!");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um Erro " + ex);
+        }
+    }//GEN-LAST:event_bntEditarActionPerformed
+
+    private void cbTipoVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoVeiculoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTipoVeiculoActionPerformed
 
     /**
      * @param args the command line arguments
