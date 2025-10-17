@@ -40,26 +40,24 @@ public class frmMenu extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         dialogCadastroCliente = new javax.swing.JDialog();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtCpf = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtTelefone = new javax.swing.JTextField();
-        chkCredencial = new javax.swing.JCheckBox();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        bntListar = new javax.swing.JButton();
         bntSalvar = new javax.swing.JButton();
         bntEditar = new javax.swing.JButton();
         bntExcluir = new javax.swing.JButton();
         bntVoltar = new javax.swing.JButton();
         bntPesquisar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
+        txtCpf = new javax.swing.JTextField();
+        txtTelefone = new javax.swing.JTextField();
+        chkCredencial = new javax.swing.JCheckBox();
+        jLabel8 = new javax.swing.JLabel();
+        txtCodigo = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        bntListar = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JSeparator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -74,126 +72,6 @@ public class frmMenu extends javax.swing.JFrame {
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
         jMenuItem2.setText("jMenuItem2");
-
-        jLabel8.setText("Código");
-
-        jLabel3.setText("Nome:");
-
-        txtNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("CPF:");
-
-        jLabel5.setText("Telefone:");
-
-        chkCredencial.setText("Credencial");
-        chkCredencial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkCredencialActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chkCredencial)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(248, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(40, 40, 40)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(226, Short.MAX_VALUE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-                .addComponent(chkCredencial)
-                .addGap(16, 16, 16))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(52, 52, 52)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(50, Short.MAX_VALUE)))
-        );
-
-        jTabbedPane1.addTab("Cadastro", jPanel1);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        bntListar.setText("Listar");
-        bntListar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntListarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(bntListar))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bntListar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jTabbedPane1.addTab("Registros", jPanel2);
 
         bntSalvar.setText("Salvar");
         bntSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -230,6 +108,47 @@ public class frmMenu extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("CPF:");
+
+        jLabel3.setText("Nome:");
+
+        jLabel5.setText("Telefone:");
+
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeActionPerformed(evt);
+            }
+        });
+
+        chkCredencial.setText("Credencial");
+        chkCredencial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkCredencialActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Código");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        bntListar.setText("Listar");
+        bntListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntListarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout dialogCadastroClienteLayout = new javax.swing.GroupLayout(dialogCadastroCliente.getContentPane());
         dialogCadastroCliente.getContentPane().setLayout(dialogCadastroClienteLayout);
         dialogCadastroClienteLayout.setHorizontalGroup(
@@ -237,18 +156,50 @@ public class frmMenu extends javax.swing.JFrame {
             .addGroup(dialogCadastroClienteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(dialogCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
                     .addGroup(dialogCadastroClienteLayout.createSequentialGroup()
-                        .addComponent(bntSalvar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bntPesquisar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bntEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bntExcluir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bntVoltar)))
-                .addContainerGap())
+                        .addGroup(dialogCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(dialogCadastroClienteLayout.createSequentialGroup()
+                                .addGroup(dialogCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(dialogCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(dialogCadastroClienteLayout.createSequentialGroup()
+                                .addComponent(bntSalvar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bntPesquisar)))
+                        .addGroup(dialogCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(dialogCadastroClienteLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bntEditar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bntExcluir)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bntVoltar)
+                                .addContainerGap())
+                            .addGroup(dialogCadastroClienteLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(dialogCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(dialogCadastroClienteLayout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(chkCredencial))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(15, 15, 15))))
+                    .addGroup(dialogCadastroClienteLayout.createSequentialGroup()
+                        .addGroup(dialogCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogCadastroClienteLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(bntListar)))
+                        .addContainerGap())))
+            .addComponent(jSeparator4)
         );
         dialogCadastroClienteLayout.setVerticalGroup(
             dialogCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,9 +211,30 @@ public class frmMenu extends javax.swing.JFrame {
                     .addComponent(bntEditar)
                     .addComponent(bntVoltar)
                     .addComponent(bntPesquisar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addGroup(dialogCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dialogCadastroClienteLayout.createSequentialGroup()
+                        .addGroup(dialogCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(dialogCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(chkCredencial)))
+                    .addGroup(dialogCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dialogCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(bntListar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -298,42 +270,63 @@ public class frmMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeActionPerformed
+        frmMenu cliente = new frmMenu();
+        cliente.dialogCadastroCliente.setSize(500, 300);
+        cliente.dialogCadastroCliente.setLocationRelativeTo(null);
+        cliente.dialogCadastroCliente.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void chkCredencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkCredencialActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chkCredencialActionPerformed
-
-    private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
+    private void bntPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPesquisarActionPerformed
         // TODO add your handling code here:
         try {
             Clientes cliente = new Clientes();
             ConClientes conCliente = new ConClientes();
 
-            if (txtNome.getText().isEmpty() || txtNome == null
-                || txtCpf.getText().isEmpty() || txtCpf == null
-                || txtTelefone.getText().isEmpty() || txtTelefone == null) {
-                JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
+            if (txtCpf.getText().isEmpty() || txtCpf == null) {
+                JOptionPane.showMessageDialog(null, "Preencha o CPF para realizar a pesquisa");
             } else {
-                cliente.setNome(txtNome.getText());
-                cliente.setTelefone(txtTelefone.getText());
                 cliente.setCpf(txtCpf.getText());
-                if (chkCredencial.isSelected()) {
-                    cliente.setCredencial("S");
+                cliente = conCliente.pesquisar(cliente.getCpf());
+
+                txtCodigo.setText(String.valueOf(cliente.getCodigo()));
+                txtCpf.setText(cliente.getCpf());
+                txtNome.setText(cliente.getNome());
+                txtTelefone.setText(cliente.getTelefone());
+                if (cliente.getCredencial().equals("S")) {
+                    chkCredencial.setSelected(true);
                 } else {
-                    cliente.setCredencial("N");
+                    chkCredencial.setSelected(false);
                 }
-
-                conCliente.cadastrar(cliente);
-                JOptionPane.showMessageDialog(null, "registro cadastrado com sucesso!");
             }
-
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
         }
-    }//GEN-LAST:event_bntSalvarActionPerformed
+    }//GEN-LAST:event_bntPesquisarActionPerformed
+
+    private void bntVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVoltarActionPerformed
+        // TODO add your handling code here:
+        this.dialogCadastroCliente.setVisible(false);
+    }//GEN-LAST:event_bntVoltarActionPerformed
+
+    private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
+        // TODO add your handling code here:
+        try {
+            ConClientes conCliente = new ConClientes();
+            if (txtCodigo.getText().isEmpty() || txtCodigo == null) {
+                JOptionPane.showMessageDialog(null, "Preencha o ID do cliente a ser excluido");
+            } else {
+                if (JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir?", "Confirme exclusão", JOptionPane.YES_NO_OPTION) != 1) {
+                    int codigo = Integer.parseInt(txtCodigo.getText());
+                    conCliente.excluir(codigo);
+                    JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso!");
+                }
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
+        }
+    }//GEN-LAST:event_bntExcluirActionPerformed
 
     private void bntEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarActionPerformed
         // TODO add your handling code here:
@@ -364,23 +357,42 @@ public class frmMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bntEditarActionPerformed
 
-    private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
+    private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
         // TODO add your handling code here:
         try {
+            Clientes cliente = new Clientes();
             ConClientes conCliente = new ConClientes();
-            if (txtCodigo.getText().isEmpty() || txtCodigo == null) {
-                JOptionPane.showMessageDialog(null, "Preencha o ID do cliente a ser excluido");
+
+            if (txtNome.getText().isEmpty() || txtNome == null
+                || txtCpf.getText().isEmpty() || txtCpf == null
+                || txtTelefone.getText().isEmpty() || txtTelefone == null) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
             } else {
-                if (JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir?", "Confirme exclusão", JOptionPane.YES_NO_OPTION) != 1) {
-                    int codigo = Integer.parseInt(txtCodigo.getText());
-                    conCliente.excluir(codigo);
-                    JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso!");
+                cliente.setNome(txtNome.getText());
+                cliente.setTelefone(txtTelefone.getText());
+                cliente.setCpf(txtCpf.getText());
+                if (chkCredencial.isSelected()) {
+                    cliente.setCredencial("S");
+                } else {
+                    cliente.setCredencial("N");
                 }
+
+                conCliente.cadastrar(cliente);
+                JOptionPane.showMessageDialog(null, "registro cadastrado com sucesso!");
             }
+
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
         }
-    }//GEN-LAST:event_bntExcluirActionPerformed
+    }//GEN-LAST:event_bntSalvarActionPerformed
+
+    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeActionPerformed
+
+    private void chkCredencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkCredencialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkCredencialActionPerformed
 
     private void bntListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntListarActionPerformed
         // TODO add your handling code here:
@@ -403,46 +415,6 @@ public class frmMenu extends javax.swing.JFrame {
                 + "a exibição de dados");
         }
     }//GEN-LAST:event_bntListarActionPerformed
-
-    private void bntPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPesquisarActionPerformed
-        // TODO add your handling code here:
-        try {
-            Clientes cliente = new Clientes();
-            ConClientes conCliente = new ConClientes();
-
-            if (txtCpf.getText().isEmpty() || txtCpf == null) {
-                JOptionPane.showMessageDialog(null, "Preencha o CPF para realizar a pesquisa");
-            } else {
-                cliente.setCpf(txtCpf.getText());
-                cliente = conCliente.pesquisar(cliente.getCpf());
-
-                txtCodigo.setText(String.valueOf(cliente.getCodigo()));
-                txtCpf.setText(cliente.getCpf());
-                txtNome.setText(cliente.getNome());
-                txtTelefone.setText(cliente.getTelefone());
-                if (cliente.getCredencial().equals("S")) {
-                    chkCredencial.setSelected(true);
-                } else {
-                    chkCredencial.setSelected(false);
-                }
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
-        }
-    }//GEN-LAST:event_bntPesquisarActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-        frmMenu cliente = new frmMenu();
-        cliente.dialogCadastroCliente.setSize(500, 300);
-        cliente.dialogCadastroCliente.setLocationRelativeTo(null);
-        cliente.dialogCadastroCliente.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void bntVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVoltarActionPerformed
-        // TODO add your handling code here:
-        this.dialogCadastroCliente.setVisible(false);
-    }//GEN-LAST:event_bntVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -502,14 +474,12 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCpf;
