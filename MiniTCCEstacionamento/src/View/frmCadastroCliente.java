@@ -277,19 +277,11 @@ public class frmCadastroCliente extends javax.swing.JFrame {
 
     private void bntPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPesquisarActionPerformed
         // TODO add your handling code here:
-<<<<<<< HEAD
-        try {
-            Clientes cliente = new Clientes();
-            ConClientes conCliente = new ConClientes();
-
-            if (txtCpf.getText().isEmpty() || txtCpf == null) {
-=======
         try{
         Clientes cliente = new Clientes();
         ConClientes conCliente = new ConClientes();
             
             if(txtCpf.getText().isEmpty() || txtCpf == null)
->>>>>>> d9a5a324613d3ef60612e95139ba6231e8726e8e
                 JOptionPane.showMessageDialog(null, "Preencha o CPF para realizar a pesquisa");
             } else {
                 cliente.setCpf(txtCpf.getText());
@@ -312,7 +304,6 @@ public class frmCadastroCliente extends javax.swing.JFrame {
 
     private void bntEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarActionPerformed
         // TODO add your handling code here:
-<<<<<<< HEAD
         try {
             Clientes cliente = new Clientes();
             ConClientes conCliente = new ConClientes();
@@ -338,9 +329,6 @@ public class frmCadastroCliente extends javax.swing.JFrame {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
         }
-=======
-<<<<<<< HEAD
-=======
          try{
                     Clientes cliente = new Clientes();
                     ConClientes conCliente = new ConClientes();
@@ -364,19 +352,11 @@ public class frmCadastroCliente extends javax.swing.JFrame {
                    }catch(Exception ex){
                        JOptionPane.showMessageDialog(null, "Ocorreu um erro:"+ex);
                    }
->>>>>>> 0dee781c8a13f8abcf35b787bf2913cc6919d8e3
->>>>>>> d9a5a324613d3ef60612e95139ba6231e8726e8e
     }//GEN-LAST:event_bntEditarActionPerformed
 
     private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
         // TODO add your handling code here:
-<<<<<<< HEAD
-        try {
-=======
-<<<<<<< HEAD
-=======
          try{
->>>>>>> d9a5a324613d3ef60612e95139ba6231e8726e8e
             ConClientes conCliente = new ConClientes();
             if (txtCodigo.getText().isEmpty() || txtCodigo == null) {
                 JOptionPane.showMessageDialog(null, "Preencha o ID do cliente a ser excluido");
@@ -390,7 +370,6 @@ public class frmCadastroCliente extends javax.swing.JFrame {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
         }
->>>>>>> 0dee781c8a13f8abcf35b787bf2913cc6919d8e3
     }//GEN-LAST:event_bntExcluirActionPerformed
 
     /**
