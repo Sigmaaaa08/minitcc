@@ -281,7 +281,7 @@ public class frmCadastroCliente extends javax.swing.JFrame {
         Clientes cliente = new Clientes();
         ConClientes conCliente = new ConClientes();
             
-            if(txtCpf.getText().isEmpty() || txtCpf == null)
+            if(txtCpf.getText().isEmpty() || txtCpf == null){
                 JOptionPane.showMessageDialog(null, "Preencha o CPF para realizar a pesquisa");
             } else {
                 cliente.setCpf(txtCpf.getText());
