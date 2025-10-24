@@ -11,6 +11,20 @@ package Model;
 public class Funcionarios {
 
     /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
      * @return the codigo
      */
     public int getCodigo() {
@@ -27,16 +41,6 @@ public class Funcionarios {
     /**
      * @return the datacont
      */
-    public String getDatacont() {
-        return datacont;
-    }
-
-    /**
-     * @param datacont the datacont to set
-     */
-    public void setDatacont(String datacont) {
-        this.datacont = datacont;
-    }
 
     /**
      * @return the senha
@@ -108,10 +112,10 @@ public class Funcionarios {
         this.nome = nome;
     }
     private int codigo;
-    private String datacont;
     private String senha;
     private String telefone;
     private String email;
     private String cpf;
     private String nome;
+    private String status;
 }

@@ -5,8 +5,12 @@
 package View;
 
 import Controller.ConClientes;
+import Controller.ConFuncionarios;
 import Model.Clientes;
+import Model.Funcionarios;
+import java.util.Arrays;
 import java.util.Vector;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -61,9 +65,7 @@ public class frmMenu extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         txtSenha1 = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        txtDataContratacao1 = new javax.swing.JTextField();
         txtEmail1 = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
         txtNome2 = new javax.swing.JTextField();
@@ -310,8 +312,6 @@ public class frmMenu extends javax.swing.JFrame {
 
         jLabel34.setText("Nome:");
 
-        jLabel35.setText("Data da contratação:");
-
         jLabel33.setText("CPF:");
 
         jLabel32.setText("Email:");
@@ -350,11 +350,7 @@ public class frmMenu extends javax.swing.JFrame {
                             .addGroup(jPanel13Layout.createSequentialGroup()
                                 .addComponent(jLabel33)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCpf2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel35)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDataContratacao1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtCpf2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -384,9 +380,7 @@ public class frmMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
-                    .addComponent(txtCpf2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel35)
-                    .addComponent(txtDataContratacao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCpf2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
@@ -606,7 +600,7 @@ public class frmMenu extends javax.swing.JFrame {
                                 .addGap(15, 15, 15)))
                         .addGroup(dialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtLoginEmailFuncionario)
-                            .addComponent(passwordLoginSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(passwordLoginSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(dialogLoginLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(bntLogar)
@@ -1380,8 +1374,8 @@ public class frmMenu extends javax.swing.JFrame {
     private void bntDialogLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDialogLoginActionPerformed
         // TODO add your handling code here:
         frmMenu Login = new frmMenu();
+        if(!Login.dialogLogin.isVisible())
         Login.dialogLogin.setVisible(true);
-        
     }//GEN-LAST:event_bntDialogLoginActionPerformed
 
     private void bntCancelarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarLoginActionPerformed
@@ -1391,7 +1385,25 @@ public class frmMenu extends javax.swing.JFrame {
 
     private void bntLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLogarActionPerformed
         // TODO add your handling code here:
+        ConFuncionarios conFunci = new ConFuncionarios();
         
+        char[] senhaChar = passwordLoginSenhaFuncionario.getPassword();
+        String senha = new String(senhaChar);
+        Arrays.fill(senhaChar, '\0');
+        if(conFunci.logar(senha)!=null){
+            frmMenu menu = new frmMenu();
+            menu.setVisible(true);
+            menu.setSize(600, 400);
+            menu.setLocationRelativeTo(null);
+            menu.setVisible(true);
+            
+            menu.dialogLogin.dispose();
+            this.dialogLogin.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            this.dialogLogin.setVisible(false);
+        }
+        
+       
+            
     }//GEN-LAST:event_bntLogarActionPerformed
 
     /**
@@ -1425,14 +1437,11 @@ public class frmMenu extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 frmMenu menu = new frmMenu();
-                menu.dialogLogin.setSize(250,200);
-                menu.dialogLogin.setLocationRelativeTo(null);
-                menu.dialogLogin.setVisible(true);
                 
-                if(!menu.dialogLogin.isVisible()){
-                menu.setSize(600, 400);
-                menu.setLocationRelativeTo(null);
-                menu.setVisible(true);
+                if(!menu.isVisible()){
+                menu.dialogLogin.setSize(250, 200);
+                menu.dialogLogin.setLocationRelativeTo(null);
+                menu.dialogLogin.setVisible(true); 
                 }
             }
         });
@@ -1492,7 +1501,6 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
@@ -1543,7 +1551,6 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JTable tableSourcePlaca1;
     private javax.swing.JTextField txtCpf2;
     private javax.swing.JTextField txtCpfCliente;
-    private javax.swing.JTextField txtDataContratacao1;
     private javax.swing.JTextField txtDataEntrada1;
     private javax.swing.JTextField txtDataSaida1;
     private javax.swing.JTextField txtEmail1;

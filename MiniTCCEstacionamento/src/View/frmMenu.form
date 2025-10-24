@@ -298,13 +298,9 @@
                                               <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="txtCpf2" min="-2" pref="98" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jLabel35" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtDataContratacao1" min="-2" pref="99" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="34" max="32767" attributes="0"/>
+                                      <EmptySpace min="84" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -341,8 +337,6 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel33" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtCpf2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel35" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtDataContratacao1" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -375,17 +369,10 @@
                         <Property name="text" type="java.lang.String" value="Nome:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel35">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Data da contrata&#xe7;&#xe3;o:"/>
-                      </Properties>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="jLabel33">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="CPF:"/>
                       </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="txtDataContratacao1">
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtEmail1">
                     </Component>
@@ -658,7 +645,7 @@
                           </Group>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="txtLoginEmailFuncionario" max="32767" attributes="0"/>
-                              <Component id="passwordLoginSenhaFuncionario" min="-2" max="-2" attributes="0"/>
+                              <Component id="passwordLoginSenhaFuncionario" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
