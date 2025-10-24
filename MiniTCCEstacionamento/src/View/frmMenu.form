@@ -707,9 +707,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="passwordLoginSenhaFuncionario">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jPasswordField1"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtLoginEmailFuncionario">
         </Component>
@@ -717,6 +714,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Logar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntLogarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="bntCancelarLogin">
           <Properties>

@@ -575,9 +575,12 @@ public class frmMenu extends javax.swing.JFrame {
 
         jLabel24.setText("Senha:");
 
-        passwordLoginSenhaFuncionario.setText("jPasswordField1");
-
         bntLogar.setText("Logar");
+        bntLogar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntLogarActionPerformed(evt);
+            }
+        });
 
         bntCancelarLogin.setText("Cancelar");
         bntCancelarLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -1386,6 +1389,11 @@ public class frmMenu extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_bntCancelarLoginActionPerformed
 
+    private void bntLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLogarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_bntLogarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1417,9 +1425,15 @@ public class frmMenu extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 frmMenu menu = new frmMenu();
+                menu.dialogLogin.setSize(250,200);
+                menu.dialogLogin.setLocationRelativeTo(null);
+                menu.dialogLogin.setVisible(true);
+                
+                if(!menu.dialogLogin.isVisible()){
                 menu.setSize(600, 400);
                 menu.setLocationRelativeTo(null);
                 menu.setVisible(true);
+                }
             }
         });
     }
