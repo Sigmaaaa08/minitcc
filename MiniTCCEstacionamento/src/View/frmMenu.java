@@ -89,10 +89,9 @@ public class frmMenu extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tableListarFuncionario = new javax.swing.JTable();
         dialogLogin = new javax.swing.JDialog();
-        jLabel23 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         passwordLoginSenhaFuncionario = new javax.swing.JPasswordField();
-        txtLoginEmailFuncionario = new javax.swing.JTextField();
         bntLogar = new javax.swing.JButton();
         bntCancelarLogin = new javax.swing.JButton();
         dialogOperacional = new javax.swing.JDialog();
@@ -163,7 +162,7 @@ public class frmMenu extends javax.swing.JFrame {
         txtNomeFuncionarioLogado = new javax.swing.JLabel();
         bntDialogCliente = new javax.swing.JButton();
         bntDialogFuncionario = new javax.swing.JButton();
-        bntDialogLogin = new javax.swing.JButton();
+        bntSair = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -565,8 +564,6 @@ public class frmMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel23.setText("Email:");
-
         jLabel24.setText("Senha:");
 
         bntLogar.setText("Logar");
@@ -583,47 +580,53 @@ public class frmMenu extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(passwordLoginSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(bntLogar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bntCancelarLogin)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(passwordLoginSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntLogar)
+                    .addComponent(bntCancelarLogin))
+                .addGap(17, 17, 17))
+        );
+
         javax.swing.GroupLayout dialogLoginLayout = new javax.swing.GroupLayout(dialogLogin.getContentPane());
         dialogLogin.getContentPane().setLayout(dialogLoginLayout);
         dialogLoginLayout.setHorizontalGroup(
             dialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogLoginLayout.createSequentialGroup()
-                .addGroup(dialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dialogLoginLayout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(dialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogLoginLayout.createSequentialGroup()
-                                .addComponent(jLabel24)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(dialogLoginLayout.createSequentialGroup()
-                                .addComponent(jLabel23)
-                                .addGap(15, 15, 15)))
-                        .addGroup(dialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtLoginEmailFuncionario)
-                            .addComponent(passwordLoginSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(dialogLoginLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(bntLogar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bntCancelarLogin)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         dialogLoginLayout.setVerticalGroup(
             dialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogLoginLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(dialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(txtLoginEmailFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(dialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel24)
-                    .addComponent(passwordLoginSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(dialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bntLogar)
-                    .addComponent(bntCancelarLogin))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jLabel20.setText("Valor 1ª Hora");
@@ -1121,10 +1124,10 @@ public class frmMenu extends javax.swing.JFrame {
 
         bntDialogFuncionario.setText("Funcionário");
 
-        bntDialogLogin.setText("Login");
-        bntDialogLogin.addActionListener(new java.awt.event.ActionListener() {
+        bntSair.setText("Sair");
+        bntSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntDialogLoginActionPerformed(evt);
+                bntSairActionPerformed(evt);
             }
         });
 
@@ -1140,7 +1143,7 @@ public class frmMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bntDialogFuncionario)
                 .addGap(18, 18, 18)
-                .addComponent(bntDialogLogin)
+                .addComponent(bntSair)
                 .addContainerGap())
         );
         jPanel24Layout.setVerticalGroup(
@@ -1153,7 +1156,7 @@ public class frmMenu extends javax.swing.JFrame {
                         .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bntDialogCliente)
                             .addComponent(bntDialogFuncionario)
-                            .addComponent(bntDialogLogin)))
+                            .addComponent(bntSair)))
                     .addComponent(txtNomeFuncionarioLogado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1371,39 +1374,54 @@ public class frmMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPlacaVeiculo1ActionPerformed
 
-    private void bntDialogLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDialogLoginActionPerformed
+    private void bntSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSairActionPerformed
         // TODO add your handling code here:
-        frmMenu Login = new frmMenu();
-        if(!Login.dialogLogin.isVisible())
-        Login.dialogLogin.setVisible(true);
-    }//GEN-LAST:event_bntDialogLoginActionPerformed
+        try{
+        this.dispose();
+        
+        this.dialogLogin.setSize(250, 200);
+        this.dialogLogin.setLocationRelativeTo(null);
+        this.dialogLogin.setVisible(true);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
+        } 
+    }//GEN-LAST:event_bntSairActionPerformed
 
     private void bntCancelarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarLoginActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
+        try{
+        System.exit(0);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
+        } 
     }//GEN-LAST:event_bntCancelarLoginActionPerformed
 
     private void bntLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLogarActionPerformed
         // TODO add your handling code here:
+        try{
         ConFuncionarios conFunci = new ConFuncionarios();
         
         char[] senhaChar = passwordLoginSenhaFuncionario.getPassword();
         String senha = new String(senhaChar);
         Arrays.fill(senhaChar, '\0');
-        if(conFunci.logar(senha)!=null){
-            frmMenu menu = new frmMenu();
+        Funcionarios funcionario = conFunci.logar(senha);
+         
+        if(funcionario!=null){
+        frmMenu menu = new frmMenu();
             menu.setVisible(true);
             menu.setSize(600, 400);
             menu.setLocationRelativeTo(null);
-            menu.setVisible(true);
             
-            menu.dialogLogin.dispose();
-            this.dialogLogin.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            menu.txtNomeFuncionarioLogado.setText(funcionario.getNome());
+            
+            this.dialogLogin.dispose();
             this.dialogLogin.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(null, "Senha inválida");
         }
-        
-       
-            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
+        } 
     }//GEN-LAST:event_bntLogarActionPerformed
 
     /**
@@ -1453,7 +1471,6 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JButton bntCancelarServico1;
     private javax.swing.JButton bntDialogCliente;
     private javax.swing.JButton bntDialogFuncionario;
-    private javax.swing.JButton bntDialogLogin;
     private javax.swing.JButton bntEditar1;
     private javax.swing.JButton bntEditarCliente;
     private javax.swing.JButton bntEditarOperacional;
@@ -1472,6 +1489,7 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JButton bntPesquisar1;
     private javax.swing.JButton bntPesquisarCliente;
     private javax.swing.JButton bntPesquisarServico1;
+    private javax.swing.JButton bntSair;
     private javax.swing.JButton bntSalvar1;
     private javax.swing.JButton bntSalvarCliente;
     private javax.swing.JButton bntSalvarServico1;
@@ -1488,7 +1506,6 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
@@ -1518,6 +1535,7 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -1556,7 +1574,6 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmail1;
     private javax.swing.JTextField txtHoraEntrada1;
     private javax.swing.JTextField txtHoraSaida1;
-    private javax.swing.JTextField txtLoginEmailFuncionario;
     private javax.swing.JTextField txtModeloVeiculo1;
     private javax.swing.JTextField txtNome2;
     private javax.swing.JTextField txtNomeCliente;
