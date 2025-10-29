@@ -1235,14 +1235,15 @@ public class frmMenu extends javax.swing.JFrame {
             jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel34Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(txtPlacaVeiculo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtModeloVeiculo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel12)
-                        .addComponent(cbTipoVeiculo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbTipoVeiculo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel14)
+                        .addComponent(txtPlacaVeiculo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtModeloVeiculo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1519,23 +1520,20 @@ public class frmMenu extends javax.swing.JFrame {
                     .addGroup(jPanel18Layout.createSequentialGroup()
                         .addComponent(jLabel39)
                         .addGap(51, 51, 51)
-                        .addComponent(jLabel40)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel40))
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addComponent(jLabel41)
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel42))
                     .addGroup(jPanel18Layout.createSequentialGroup()
                         .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel18Layout.createSequentialGroup()
-                                .addComponent(jLabel41)
-                                .addGap(63, 63, 63)
-                                .addComponent(jLabel42))
-                            .addGroup(jPanel18Layout.createSequentialGroup()
-                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtQtdDias1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel31))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel38)
-                                    .addComponent(txtQtdHoras1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 6, Short.MAX_VALUE))))
+                            .addComponent(txtQtdDias1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel31))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel38)
+                            .addComponent(txtQtdHoras1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 6, Short.MAX_VALUE))
             .addGroup(jPanel18Layout.createSequentialGroup()
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel18Layout.createSequentialGroup()
@@ -2454,7 +2452,7 @@ public class frmMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         try{
             ConOperacional conOperacional = new ConOperacional();
-            Operacional operacional = new Operacional();
+            Operacional operacional = conOperacional.precos();
             
             this.txtDataEntrada.setText(conOperacional.getDate());
             this.txtHoraEntrada.setText(conOperacional.getTime());
@@ -2698,18 +2696,12 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JButton bntCancelarVeiculo;
     private javax.swing.JButton bntDialogClienteVeiculo;
     private javax.swing.JButton bntDialogFuncionario;
-    private javax.swing.JButton bntEditar2;
-    private javax.swing.JButton bntEditar3;
     private javax.swing.JButton bntEditarCliente;
     private javax.swing.JButton bntEditarCliente1;
     private javax.swing.JButton bntEditarFuncionario;
     private javax.swing.JButton bntEditarOperacional;
     private javax.swing.JButton bntEditarServico1;
     private javax.swing.JButton bntEditarVeiculo;
-    private javax.swing.JButton bntExcluir3;
-    private javax.swing.JButton bntExcluir4;
-    private javax.swing.JButton bntExcluir5;
-    private javax.swing.JButton bntExcluir6;
     private javax.swing.JButton bntExcluirCliente;
     private javax.swing.JButton bntExcluirCliente1;
     private javax.swing.JButton bntExcluirFuncionario;
@@ -2724,16 +2716,12 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JButton bntNewCliente;
     private javax.swing.JButton bntNovo1;
     private javax.swing.JButton bntOperacional1;
-    private javax.swing.JButton bntPesquisar2;
-    private javax.swing.JButton bntPesquisar3;
     private javax.swing.JButton bntPesquisarCliente;
     private javax.swing.JButton bntPesquisarCliente1;
     private javax.swing.JButton bntPesquisarFuncionario;
     private javax.swing.JButton bntPesquisarServico1;
     private javax.swing.JButton bntPesquisarVeiculo;
     private javax.swing.JButton bntSair;
-    private javax.swing.JButton bntSalvar2;
-    private javax.swing.JButton bntSalvar3;
     private javax.swing.JButton bntSalvarCliente;
     private javax.swing.JButton bntSalvarCliente1;
     private javax.swing.JButton bntSalvarFuncionario;
@@ -2813,8 +2801,6 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
-    private javax.swing.JPanel jPanel25;
-    private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
     private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel29;
