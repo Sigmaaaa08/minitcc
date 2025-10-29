@@ -21,16 +21,16 @@ public class ConClientes {
     Conexao conexao = new Conexao();
 
     public void cadastrar(Clientes cliente) {
-        String sql = "INSERT INTO TBCLIENTE(nomecliente,credencliente,telefonecliente,cpfcliente)"
-                + "VALUES (?,?,?,?)";
+        String sql = "INSERT INTO TBCLIENTE(nomecliente,telefonecliente,cpfcliente)"
+                + "VALUES (?,?,?)";
 
         try {
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
             psmt.setString(1, cliente.getNome());
-            psmt.setString(2, cliente.getCredencial());
-            psmt.setString(3, cliente.getTelefone());
-            psmt.setString(4, cliente.getCpf());
+            psmt.setString(2, cliente.getTelefone());
+            psmt.setString(3, cliente.getCpf());
             psmt.executeUpdate();
+            psmt.close();
 
             conexao.desconectar();
         } catch (SQLException ex) {
@@ -40,7 +40,7 @@ public class ConClientes {
 
     public Vector listar() {
         Vector lista = new Vector();
-        String sql = "Select idcliente,nomecliente,telefonecliente,cpfcliente,credencliente from TBCLIENTE";
+        String sql = "Select idcliente,nomecliente,telefonecliente,cpfcliente from TBCLIENTE";
         try {
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
             ResultSet rs = psmt.executeQuery();
@@ -51,14 +51,12 @@ public class ConClientes {
                 cliente.setNome(rs.getString("nomecliente"));
                 cliente.setTelefone(rs.getString("telefonecliente"));
                 cliente.setCpf(rs.getString("cpfcliente"));
-                cliente.setCredencial(rs.getString("credencliente"));
                 //Cada Linha será um cliente encontrado
                 Vector novalinha = new Vector();
                 novalinha.addElement(cliente.getCodigo());
                 novalinha.addElement(cliente.getNome());
                 novalinha.addElement(cliente.getTelefone());
                 novalinha.addElement(cliente.getCpf());
-                novalinha.addElement(cliente.getCredencial());
 
                 lista.add(novalinha);
             }
@@ -68,11 +66,11 @@ public class ConClientes {
         return lista;
     }
 
-    public Clientes pesquisar(String cpf) {
-        String sql = "Select * from TBCLIENTE where cpfcliente = ?";
+    public Clientes pesquisar(String idcliente) {
+        String sql = "Select * from TBCLIENTE where idcliente = ?";
         try {
             PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
-            pstmt.setString(1, cpf);
+            pstmt.setString(1, idcliente);
             ResultSet rs = pstmt.executeQuery();
 
             Clientes cliente = new Clientes();
@@ -82,7 +80,6 @@ public class ConClientes {
                 cliente.setNome(rs.getString("nomecliente"));
                 cliente.setTelefone(rs.getString("telefonecliente"));
                 cliente.setCpf(rs.getString("cpfcliente"));
-                cliente.setCredencial(rs.getString("credencliente"));
             }
             return cliente;
         } catch (SQLException ex) {
@@ -90,18 +87,34 @@ public class ConClientes {
             return null;
         }
     }
+    
+    public int IDCliente() {
+        String sql = "Select idcliente from tbcliente order by idcliente desc limit 1";
+        try {
+            PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+
+            //percorre os resultados obtidos na consulta sql
+            if (rs.next()) {
+                return rs.getInt("idcliente");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        return 0;
+    }
 
     public void editar(Clientes cliente) {
-        String sql = "UPDATE TBCLIENTE set nomecliente=?,CREDENCLIENTE=?,telefonecliente=?,cpfcliente=?"
+        String sql = "UPDATE TBCLIENTE set nomecliente=?,telefonecliente=?,cpfcliente=?"
                 + " where idcliente = ?";
         try {
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
             psmt.setString(1, cliente.getNome());
-            psmt.setString(2, cliente.getCredencial());
-            psmt.setString(3, cliente.getTelefone());
-            psmt.setString(4, cliente.getCpf());
-            psmt.setInt(5, cliente.getCodigo());
+            psmt.setString(2, cliente.getTelefone());
+            psmt.setString(3, cliente.getCpf());
+            psmt.setInt(4, cliente.getCodigo());
             psmt.executeUpdate();
+            psmt.close();
             conexao.desconectar();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um ERRO:" + ex);

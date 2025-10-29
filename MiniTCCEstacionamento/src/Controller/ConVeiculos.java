@@ -12,7 +12,7 @@ public class ConVeiculos {
     Conexao conexao = new Conexao();
     
     public void cadastrar (Veiculos veiculo){
-            String sql = "INSERT INTO TBVEICULO(placaveiculo, modeloveiculo, tipoveiculo,codcliente)"
+            String sql = "INSERT INTO TBVEICULO(placaveiculo, modeloveiculo, tipoveiculo, codcliente)"
                         + "VALUES (?,?,?,?);";
             
                         try {
@@ -57,6 +57,49 @@ public class ConVeiculos {
         }
         return lista;
     }
+    
+    public Vector listarVeiculoCliente(){
+        Vector lista = new Vector();
+        String sql = "Select c.idcliente, v.idveiculo, v.codcliente, c.nomecliente, c.cpfcliente, c.telefonecliente, v.placaveiculo, v.modeloveiculo, v.tipoveiculo"
+                + " From tbcliente c Inner Join tbveiculo v "
+                + "on v.codcliente=c.idcliente";
+        try{
+            PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery();
+            //percorre os resultados obtidos na consulta sql
+            while(rs.next()){
+                Veiculos veiculo = new Veiculos();
+                Model.Clientes cliente = new Model.Clientes();
+                
+                veiculo.setCodigo(rs.getInt("idveiculo"));
+                veiculo.setCodcliente(rs.getInt("codcliente"));
+                veiculo.setPlaca(rs.getString("placaveiculo"));
+                veiculo.setModelo(rs.getString("modeloveiculo"));
+                veiculo.setTipo(rs.getString("tipoveiculo"));
+                
+                cliente.setCodigo(rs.getInt("idcliente"));
+                cliente.setNome(rs.getString("nomecliente"));
+                cliente.setTelefone(rs.getString("telefonecliente"));
+                cliente.setCpf(rs.getString("cpfcliente"));
+                
+                //Cada Linha será um veiculo encontrado
+                Vector novalinha = new Vector();
+                novalinha.addElement(cliente.getNome());
+                novalinha.addElement(cliente.getCpf());
+                novalinha.addElement(cliente.getTelefone());
+                novalinha.addElement(veiculo.getPlaca());
+                novalinha.addElement(veiculo.getModelo());
+                novalinha.addElement(veiculo.getTipo());
+                
+                
+                lista.add(novalinha);
+            }
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        return lista;
+    }
+    
     public Veiculos pesquisar (String placa){
         String sql = "Select * from TBVEICULO where PLACAVEICULO = ?";
          
@@ -89,10 +132,10 @@ public class ConVeiculos {
         try{
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
             
-            psmt.setString(1, veiculo.getPlaca());
-            psmt.setString(2, veiculo.getModelo());
-            psmt.setString(3, veiculo.getTipo());
-            psmt.setInt(4, veiculo.getCodcliente());
+            psmt.setInt(1, veiculo.getCodcliente());
+            psmt.setString(2, veiculo.getPlaca());
+            psmt.setString(3, veiculo.getModelo());
+            psmt.setString(4, veiculo.getTipo());
             psmt.setInt(5, veiculo.getCodigo());
             psmt.executeUpdate();
             conexao.desconectar();

@@ -38,19 +38,6 @@ public class Clientes {
         this.nome = nome;
     }
 
-    /**
-     * @return the credencial
-     */
-    public String getCredencial() {
-        return credencial;
-    }
-
-    /**
-     * @param credencial the credencial to set
-     */
-    public void setCredencial(String credencial) {
-        this.credencial = credencial;
-    }
 
     /**
      * @return the telefone
@@ -81,7 +68,6 @@ public class Clientes {
     }
     private int codigo;
     private String nome;
-    private String credencial;
     private String telefone;
     private String cpf;
 }
