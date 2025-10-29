@@ -222,10 +222,9 @@ public class frmMenu extends javax.swing.JFrame {
         bntListarServico1 = new javax.swing.JButton();
         jPanel24 = new javax.swing.JPanel();
         txtNomeFuncionarioLogado = new javax.swing.JLabel();
-        bntDialogCliente = new javax.swing.JButton();
         bntDialogFuncionario = new javax.swing.JButton();
         bntSair = new javax.swing.JButton();
-        bntDialogVeiculo = new javax.swing.JButton();
+        bntDialogClienteVeiculo = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -1810,13 +1809,6 @@ public class frmMenu extends javax.swing.JFrame {
 
         jTabbedPane3.addTab("Consulta", jPanel22);
 
-        bntDialogCliente.setText("Cliente");
-        bntDialogCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntDialogClienteActionPerformed(evt);
-            }
-        });
-
         bntDialogFuncionario.setText("Funcionário");
         bntDialogFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1831,10 +1823,10 @@ public class frmMenu extends javax.swing.JFrame {
             }
         });
 
-        bntDialogVeiculo.setText("Veículo");
-        bntDialogVeiculo.addActionListener(new java.awt.event.ActionListener() {
+        bntDialogClienteVeiculo.setText("Cliente");
+        bntDialogClienteVeiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntDialogVeiculoActionPerformed(evt);
+                bntDialogClienteVeiculoActionPerformed(evt);
             }
         });
 
@@ -1846,9 +1838,7 @@ public class frmMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(txtNomeFuncionarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bntDialogVeiculo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bntDialogCliente)
+                .addComponent(bntDialogClienteVeiculo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bntDialogFuncionario)
                 .addGap(18, 18, 18)
@@ -1863,10 +1853,9 @@ public class frmMenu extends javax.swing.JFrame {
                     .addGroup(jPanel24Layout.createSequentialGroup()
                         .addGap(0, 6, Short.MAX_VALUE)
                         .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bntDialogCliente)
                             .addComponent(bntDialogFuncionario)
                             .addComponent(bntSair)
-                            .addComponent(bntDialogVeiculo)))
+                            .addComponent(bntDialogClienteVeiculo)))
                     .addComponent(txtNomeFuncionarioLogado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -2384,35 +2373,7 @@ public class frmMenu extends javax.swing.JFrame {
         this.codigo1=0;
     }//GEN-LAST:event_bntCancelarFuncionarioActionPerformed
 
-    private void bntDialogClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDialogClienteActionPerformed
-        // TODO add your handling code here:
-        try{
-            this.dialogCadastroCliente.setVisible(true);
-            this.dialogCadastroCliente.setSize(600, 400);
-            this.dialogCadastroCliente.setLocationRelativeTo(null);
-            
-            Vector cabecalhoCliente = new Vector(); 
-        try{
-            //cabecalho.addElement("Código"); //0
-            cabecalhoCliente.addElement("Código"); // 1
-            cabecalhoCliente.addElement("Nome"); // 2
-            cabecalhoCliente.addElement("Telefone"); // 3
-            cabecalhoCliente.addElement("CPF"); // 4
-            cabecalhoCliente.addElement("Credencial"); // 5
-
-            ConClientes conClientes = new ConClientes();
-            tableListarCliente.setModel(new DefaultTableModel(
-                conClientes.listar(), cabecalhoCliente));
-
-        } catch (Exception error) {
-            JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante a exibição de dados: " + error);
-        }   
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
-        }
-    }//GEN-LAST:event_bntDialogClienteActionPerformed
-
-    private void bntDialogVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDialogVeiculoActionPerformed
+    private void bntDialogClienteVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDialogClienteVeiculoActionPerformed
         // TODO add your handling code here:
         try{
             this.dialogCadastroCliente1.setVisible(true);
@@ -2439,7 +2400,7 @@ public class frmMenu extends javax.swing.JFrame {
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
         }
-    }//GEN-LAST:event_bntDialogVeiculoActionPerformed
+    }//GEN-LAST:event_bntDialogClienteVeiculoActionPerformed
 
     private void bntEditarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarVeiculoActionPerformed
         // TODO add your handling code here:
@@ -2735,9 +2696,8 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JButton bntCancelarOperacional;
     private javax.swing.JButton bntCancelarServico1;
     private javax.swing.JButton bntCancelarVeiculo;
-    private javax.swing.JButton bntDialogCliente;
+    private javax.swing.JButton bntDialogClienteVeiculo;
     private javax.swing.JButton bntDialogFuncionario;
-    private javax.swing.JButton bntDialogVeiculo;
     private javax.swing.JButton bntEditar2;
     private javax.swing.JButton bntEditar3;
     private javax.swing.JButton bntEditarCliente;

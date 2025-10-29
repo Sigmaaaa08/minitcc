@@ -2475,9 +2475,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtNomeFuncionarioLogado" min="-2" pref="150" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="bntDialogVeiculo" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="bntDialogCliente" min="-2" max="-2" attributes="0"/>
+                  <Component id="bntDialogClienteVeiculo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="bntDialogFuncionario" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -2494,10 +2492,9 @@
                       <Group type="102" attributes="0">
                           <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="bntDialogCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="bntDialogFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="bntSair" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="bntDialogVeiculo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="bntDialogClienteVeiculo" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="txtNomeFuncionarioLogado" max="32767" attributes="0"/>
@@ -2509,14 +2506,6 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="txtNomeFuncionarioLogado">
-        </Component>
-        <Component class="javax.swing.JButton" name="bntDialogCliente">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Cliente"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntDialogClienteActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="bntDialogFuncionario">
           <Properties>
@@ -2534,12 +2523,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntSairActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="bntDialogVeiculo">
+        <Component class="javax.swing.JButton" name="bntDialogClienteVeiculo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ve&#xed;culo"/>
+            <Property name="text" type="java.lang.String" value="Cliente"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntDialogVeiculoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntDialogClienteVeiculoActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
