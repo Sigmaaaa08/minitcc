@@ -520,6 +520,12 @@ public class frmMenu extends javax.swing.JFrame {
 
         jLabel33.setText("CPF:");
 
+        txtEmailFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailFuncionarioActionPerformed(evt);
+            }
+        });
+
         jLabel32.setText("Email:");
 
         txtNomeFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -619,7 +625,7 @@ public class frmMenu extends javax.swing.JFrame {
                     .addComponent(txtSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chbsenhafunci)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         bntEditarFuncionario.setText("Editar");
@@ -2688,6 +2694,10 @@ public class frmMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_txtSenhaFuncionarioActionPerformed
+
+    private void txtEmailFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailFuncionarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailFuncionarioActionPerformed
 
     /**
      * @param args the command line arguments

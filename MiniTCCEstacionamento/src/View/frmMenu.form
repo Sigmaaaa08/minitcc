@@ -598,7 +598,7 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="chbsenhafunci" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="14" max="32767" attributes="0"/>
+                              <EmptySpace pref="50" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -615,6 +615,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtEmailFuncionario">
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmailFuncionarioActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel32">
                       <Properties>
