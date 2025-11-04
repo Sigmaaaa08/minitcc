@@ -6,6 +6,7 @@ package View;
 
 import Controller.ConClientes;
 import Model.Clientes;
+import java.awt.Color;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,8 +22,9 @@ public class frmCadastroCliente extends javax.swing.JFrame {
      */
     public frmCadastroCliente() {
         initComponents();
+        this.getContentPane().setBackground(new Color(173, 216, 230)); 
     }
-
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,7 +53,10 @@ public class frmCadastroCliente extends javax.swing.JFrame {
         txtCodigo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 255, 204));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("Cliente");
 
         jLabel3.setText("Nome:");
@@ -85,6 +90,7 @@ public class frmCadastroCliente extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setForeground(new java.awt.Color(173, 216, 230));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -130,68 +136,64 @@ public class frmCadastroCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(bntSalvar)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(bntListar))
-                                        .addComponent(chkCredencial))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel3)
-                                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel5)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(8, 8, 8)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(bntPesquisar)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(bntEditar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(bntExcluir)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(jLabel2)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel2))
+                    .addComponent(chkCredencial))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(jLabel8)))
-                        .addGap(31, 31, 31))))
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                        .addComponent(jLabel8)
+                        .addGap(30, 30, 30))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(bntPesquisar)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 21, Short.MAX_VALUE)
+                        .addComponent(bntSalvar)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntListar)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntEditar)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntExcluir)
+                        .addContainerGap(78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)))
+                        .addGap(30, 30, 30)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
@@ -208,10 +210,12 @@ public class frmCadastroCliente extends javax.swing.JFrame {
                     .addComponent(bntListar)
                     .addComponent(bntEditar)
                     .addComponent(bntExcluir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
+
+        getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -234,11 +238,7 @@ public class frmCadastroCliente extends javax.swing.JFrame {
                 cliente.setNome(txtNome.getText());
                 cliente.setTelefone(txtTelefone.getText());
                 cliente.setCpf(txtCpf.getText());
-                if (chkCredencial.isSelected()) {
-                    cliente.setCredencial("S");
-                } else {
-                    cliente.setCredencial("N");
-                }
+                cliente.setCredencial(chkCredencial.isSelected());
 
                 conCliente.cadastrar(cliente);
                 JOptionPane.showMessageDialog(null, "registro cadastrado com sucesso!");
@@ -291,11 +291,7 @@ public class frmCadastroCliente extends javax.swing.JFrame {
                 txtCpf.setText(cliente.getCpf());
                 txtNome.setText(cliente.getNome());
                 txtTelefone.setText(cliente.getTelefone());
-                if (cliente.getCredencial().equals("S")) {
-                    chkCredencial.setSelected(true);
-                } else {
-                    chkCredencial.setSelected(false);
-                }
+                chkCredencial.setSelected(cliente.getCredencial());
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
@@ -303,73 +299,60 @@ public class frmCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_bntPesquisarActionPerformed
 
     private void bntEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarActionPerformed
-        // TODO add your handling code here:
-        try {
-            Clientes cliente = new Clientes();
-            ConClientes conCliente = new ConClientes();
+       try {
+        Clientes cliente = new Clientes();
+        ConClientes conCliente = new ConClientes();
 
-            if (txtNome.getText().isEmpty() || txtNome == null
-                    || txtCpf.getText().isEmpty() || txtCpf == null
-                    || txtTelefone.getText().isEmpty() || txtTelefone == null) {
-                JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
-            } else {
-                cliente.setCodigo(Integer.parseInt(txtCodigo.getText()));
-                cliente.setNome(txtNome.getText());
-                cliente.setTelefone(txtTelefone.getText());
-                cliente.setCpf(txtCpf.getText());
-                if (chkCredencial.isSelected()) {
-                    cliente.setCredencial("S");
-                } else {
-                    cliente.setCredencial("N");
-                }
-
-                conCliente.editar(cliente);
-                JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso!");
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
+        if (txtNome.getText().isEmpty() || txtNome == null
+                || txtCpf.getText().isEmpty() || txtCpf == null
+                || txtTelefone.getText().isEmpty() || txtTelefone == null) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
+        } else {
+            cliente.setCodigo(Integer.parseInt(txtCodigo.getText()));
+            cliente.setNome(txtNome.getText());
+            cliente.setTelefone(txtTelefone.getText());
+            cliente.setCpf(txtCpf.getText());
+            cliente.setCredencial(chkCredencial.isSelected());
+            
+            // removi a necessidade de if/else da credencial deixando booelan
+            conCliente.editar(cliente);
+            JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso!");
         }
-         try{
-                    Clientes cliente = new Clientes();
-                    ConClientes conCliente = new ConClientes();
-                    
-                    if(txtNome.getText().isEmpty() || txtNome == null ||
-                      txtCpf.getText().isEmpty() || txtCpf == null ||
-                      txtTelefone.getText().isEmpty() || txtTelefone == null )
-                      JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
-                    else{
-                    cliente.setCodigo(Integer.parseInt(txtCodigo.getText()));
-                    cliente.setNome(txtNome.getText());
-                    cliente.setTelefone(txtTelefone.getText());
-                    cliente.setCpf(txtCpf.getText());  
-                    if(chkCredencial.isSelected())
-                      cliente.setCredencial("S");
-                     else cliente.setCredencial("N");
-                    
-                    conCliente.editar(cliente);
-                    JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso!");
-                    }
-                   }catch(Exception ex){
-                       JOptionPane.showMessageDialog(null, "Ocorreu um erro:"+ex);
-                   }
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
+    }
+    // tinha um try catch duplicado, nao sei se ja tava ou fui eu
+
     }//GEN-LAST:event_bntEditarActionPerformed
 
     private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
-        // TODO add your handling code here:
-         try{
-            ConClientes conCliente = new ConClientes();
-            if (txtCodigo.getText().isEmpty() || txtCodigo == null) {
-                JOptionPane.showMessageDialog(null, "Preencha o ID do cliente a ser excluido");
-            } else {
-                if (JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir?", "Confirme exclusão", JOptionPane.YES_NO_OPTION) != 1) {
-                    int codigo = Integer.parseInt(txtCodigo.getText());
-                    conCliente.excluir(codigo);
-                    JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso!");
-                }
+
+         try {
+        ConClientes conCliente = new ConClientes();
+        
+       
+        if (txtCodigo.getText().isEmpty()) { 
+            JOptionPane.showMessageDialog(null, "Preencha o ID do cliente a ser excluido");
+        } else {
+            // A lógica de exclusão só é executada se o usuário clicar em SIM (0)
+            int resposta = JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir?", "Confirme exclusão", JOptionPane.YES_NO_OPTION);
+            
+            if (resposta == JOptionPane.YES_OPTION) { // Verifica explicitamente se a resposta foi SIM (0)
+                
+                int codigo = Integer.parseInt(txtCodigo.getText());
+                conCliente.excluir(codigo);
+                
+     
+                JOptionPane.showMessageDialog(null, "Registro excluído com sucesso!"); 
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
         }
+        
+    // capturar exceções específicas (NumberFormatException) se o usuario tentar colocar letras no lugar de numeros
+    } catch (NumberFormatException e) { 
+        JOptionPane.showMessageDialog(null, "Erro: O código deve ser um número válido.");
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(null, "Ocorreu um erro ao tentar excluir: " + ex.getMessage());
+    }
     }//GEN-LAST:event_bntExcluirActionPerformed
 
     /**
