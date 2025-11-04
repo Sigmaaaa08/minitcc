@@ -11,6 +11,20 @@ package Model;
 public class Funcionarios {
 
     /**
+     * @return the datacont
+     */
+    public String getDatacont() {
+        return datacont;
+    }
+
+    /**
+     * @param datacont the datacont to set
+     */
+    public void setDatacont(String datacont) {
+        this.datacont = datacont;
+    }
+
+    /**
      * @return the status
      */
     public String getStatus() {
@@ -118,4 +132,6 @@ public class Funcionarios {
     private String cpf;
     private String nome;
     private String status;
+    private String datacont;
+   
 }

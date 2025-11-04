@@ -7,7 +7,7 @@ IDCAT INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 PRECO_PRIMEIRA_HORA DECIMAL(5,2) NOT NULL,
 PRECO_HORAS_ADICIONAIS DECIMAL(5,2) NOT NULL,
 PRECO_DIARIA DECIMAL(5,2) NOT NULL
-);
+); 
 
 CREATE TABLE TBCLIENTE (
 IDCLIENTE INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -32,7 +32,7 @@ TELEFONEFUNCI VARCHAR(14) NOT NULL,
 EMAILFUNCI VARCHAR(50) NOT NULL,
 CPFFUNCI VARCHAR(14) NOT NULL UNIQUE,
 NOMEFUNCI VARCHAR(30) NOT NULL,
-STATUSFUNCI VARCHAR(7) NOT NULL
+STATUSFUNCI ENUM('ATIVO', 'INATIVO') NOT NULL DEFAULT 'ATIVO'
 );
 
 CREATE TABLE TBSERVICO (
@@ -55,7 +55,6 @@ FOREIGN KEY (CODFUNCI_SAIDA) REFERENCES TBFUNCIONARIO (IDFUNCI) ON DELETE CASCAD
 
 INSERT INTO TBCATEGORIA (PRECO_PRIMEIRA_HORA,PRECO_HORAS_ADICIONAIS,PRECO_DIARIA) VALUES
 (2.00,2.00,20.00);
-
 
 INSERT INTO TBCLIENTE (NOMECLIENTE, TELEFONECLIENTE, CPFCLIENTE) VALUES
 ("KAUE CARVALHO", "17 99091-8954", "901.894.333-12"),
@@ -116,65 +115,52 @@ SELECT C.NOMECLIENTE, V.MODELOVEICULO
 FROM tbcliente C
 INNER JOIN tbveiculo V
 ON C.IDCLIENTE=V.CODCLIENTE
-WHERE C.CREDENCLIENTE="N" AND V.TIPOVEICULO="CARRO";
-
-/*Consulte os dados das tabelas TBSERVICOS, TBVAGA, TBCATEGORIA, TBVEICULO e TBCLIENTE usando INNER JOIN para mostrar vagas ocupadas no mês de agosto pelo respectivo cliente*/
-SELECT V.NOMEVAGA, CLI.NOMECLIENTE
-FROM tbservico S
-INNER JOIN tbvaga V
-ON V.IDVAGA=S.CODVAGA
-INNER JOIN tbcategoria C
-ON V.CODCAT=C.IDCAT
-INNER JOIN tbveiculo VEI
-ON VEI.IDVEICULO=S.CODVEICULO
-INNER JOIN tbcliente CLI
-ON CLI.IDCLIENTE=VEI.CODCLIENTE
-WHERE C.VAGACAT = "COMUM" AND S.DATAFINAL BETWEEN "2025-08-01" AND "2025-08-31";
-
-/*Consulte os dados das tabelas TBVAGA e TBCATEGORIA, como os tipos da vaga e o valor total(soma) de serviços realizados com cada tipo de vaga*/
-SELECT C.VAGACAT,SUM(C.PRECOCAT)
-FROM TBVAGA V
-INNER JOIN TBCATEGORIA C
-ON V.CODCAT=C.IDCAT
-GROUP BY C.VAGACAT;
+WHERE V.TIPOVEICULO="MÉDIO";
 
 /*Consultar o modelo do veículo e a suas respectivas datas de entrada e saída para cada moto //obs: a profª Fabi disse não haver visto sentido nessa consulta*/
 SELECT V.MODELOVEICULO, S.DATAINICIAL, S.DATAFINAL
 FROM tbveiculo V
 INNER JOIN tbservico S
 ON V.IDVEICULO = S.CODVEICULO
-WHERE V.TIPOVEICULO = "MOTO";
+WHERE V.TIPOVEICULO = "PEQUENO";
 
-/*Status e nomes de todas as vagas no atual momento do Banco de Dados*/
-SELECT V.NOMEVAGA, V.STATUSVAGA
-FROM tbvaga V;
 
-/*Calcula o total de horas e preço da estadia no estacionamento, a partir do preço por hora da vaga, mostrando o nome do cliente, a placa e modelo do veículo em ordem crescente*/
+/* Mostra quais veículos estão atualmente em um serviço */
+SELECT VEI.PLACAVEICULO, VEI.MODELOVEICULO, S.DATAINICIAL, S.HORAENTRADA
+FROM TBSERVICO S
+INNER JOIN TBVEICULO VEI
+ON S.CODVEICULO = VEI.IDVEICULO
+WHERE S.STATUSSERVICO = 'ATIVO'; 
+
+/* Calcula o total de horas e preço da estadia no estacionamento... */
 SELECT
     CLI.NOMECLIENTE AS CLIENTE,
     VEI.PLACAVEICULO AS PLACA,
     VEI.MODELOVEICULO AS MODELO,
- /* -- TIMESTAMPDIFF: função que calcula a diferença entre dois valores de data, hora ou carimbo de data/hora (timestamp);
+/* TIMESTAMPDIFF: função que calcula a diferença entre dois valores de data, hora ou carimbo de data/hora (timestamp);
     Retorna em um valor de intervalo de tempo horas, minutos, segundos, etc... */
-    -- CONCAT: Concatena Strings, nesse caso está combinando DATE e TIME para formar um DATATIME.
+/* CONCAT: Concatena Strings, nesse caso está combinando DATE e TIME para formar um DATATIME. */
     TIMESTAMPDIFF(MINUTE,
-        CONCAT(S.DATAFINAL, ' ', S.HORAENTRADA),
-        CONCAT(S.DATAINICIAL, ' ', S.HORASAIDA)
+        CONCAT(S.DATAINICIAL, ' ', S.HORAENTRADA),
+        CONCAT(S.DATAFINAL, ' ', S.HORASAIDA)
     )/60 AS DURACAO_EM_HORAS,
-    -- calcula o custo Total: duração (em horas) * preço por hora
-    CASE
-    	WHEN
+/* calcula o custo Total: duração (em horas) * preço por hora */
     (TIMESTAMPDIFF(MINUTE,
-        CONCAT(S.DATAFINAL, ' ', S.HORAENTRADA),
-        CONCAT(S.DATAINICIAL, ' ', S.HORASAIDA)
-    )/60) < 1
+        CONCAT(S.DATAINICIAL, ' ', S.HORAENTRADA),
+        CONCAT(S.DATAFINAL, ' ', S.HORASAIDA)
+    )/60) AS DURACAO_MINUTOS_TOTAL,
+    CASE
+        WHEN (TIMESTAMPDIFF(MINUTE,
+        CONCAT(S.DATAINICIAL, ' ', S.HORAENTRADA),
+        CONCAT(S.DATAFINAL, ' ', S.HORASAIDA)
+        )/60) <= 1
     THEN CAT.PRECO_PRIMEIRA_HORA
-	 
+     
     ELSE
-     CAT.PRECO_PRIMEIRA_HORA + CAT.PRECO_HORAS_ADICIONAIS*(TIMESTAMPDIFF(MINUTE,
-        CONCAT(S.DATAFINAL, ' ', S.HORAENTRADA),
-        CONCAT(S.DATAINICIAL, ' ', S.HORASAIDA)
-    )/60)
+     CAT.PRECO_PRIMEIRA_HORA + CAT.PRECO_HORAS_ADICIONAIS*(CEIL((TIMESTAMPDIFF(MINUTE,
+        CONCAT(S.DATAINICIAL, ' ', S.HORAENTRADA),
+        CONCAT(S.DATAFINAL, ' ', S.HORASAIDA)
+    )/60)-1))
     END AS PRECO_TOTAL
 FROM
     tbservico S
@@ -184,6 +170,9 @@ INNER JOIN
     tbveiculo VEI ON VEI.IDVEICULO = S.CODVEICULO
 INNER JOIN
     tbcliente CLI ON VEI.CODCLIENTE = CLI.IDCLIENTE
+WHERE
+/* Filtra apenas por serviços finalizados para cálculo de preço */
+    S.STATUSSERVICO = 'FINALIZADO' 
 ORDER BY 
     S.IDSERVICO ASC;
    

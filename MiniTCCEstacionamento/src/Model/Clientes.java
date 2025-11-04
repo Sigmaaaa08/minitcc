@@ -11,6 +11,20 @@ package Model;
 public class Clientes {
 
     /**
+     * @return the credencial
+     */
+    public Boolean getCredencial() {
+        return credencial;
+    }
+
+    /**
+     * @param credencial the credencial to set
+     */
+    public void setCredencial(Boolean credencial) {
+        this.credencial = credencial;
+    }
+
+    /**
      * @return the codigo
      */
     public int getCodigo() {
@@ -70,4 +84,5 @@ public class Clientes {
     private String nome;
     private String telefone;
     private String cpf;
+    private Boolean credencial;
 }
