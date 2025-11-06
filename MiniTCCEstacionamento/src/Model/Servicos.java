@@ -3,6 +3,62 @@ package Model;
 public class Servicos {
 
     /**
+     * @return the codfuncionario_entrada
+     */
+    public int getCodfuncionario_entrada() {
+        return codfuncionario_entrada;
+    }
+
+    /**
+     * @param codfuncionario_entrada the codfuncionario_entrada to set
+     */
+    public void setCodfuncionario_entrada(int codfuncionario_entrada) {
+        this.codfuncionario_entrada = codfuncionario_entrada;
+    }
+
+    /**
+     * @return the codfuncionario_saida
+     */
+    public int getCodfuncionario_saida() {
+        return codfuncionario_saida;
+    }
+
+    /**
+     * @param codfuncionario_saida the codfuncionario_saida to set
+     */
+    public void setCodfuncionario_saida(int codfuncionario_saida) {
+        this.codfuncionario_saida = codfuncionario_saida;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * @return the valorTotal
+     */
+    public double getValorTotal() {
+        return valorTotal;
+    }
+
+    /**
+     * @param valorTotal the valorTotal to set
+     */
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    /**
      * @return the codigo
      */
     public int getCodigo() {
@@ -19,15 +75,15 @@ public class Servicos {
     /**
      * @return the codvaga
      */
-    public int getCodvaga() {
-        return codvaga;
+    public int getCodCat() {
+        return codCat;
     }
 
     /**
-     * @param codvaga the codvaga to set
+     * @param codCat the codvaga to set
      */
-    public void setCodvaga(int codvaga) {
-        this.codvaga = codvaga;
+    public void setCodCat(int codCat) {
+        this.codCat = codCat;
     }
 
     /**
@@ -42,20 +98,6 @@ public class Servicos {
      */
     public void setCodveiculo(int codveiculo) {
         this.codveiculo = codveiculo;
-    }
-
-    /**
-     * @return the codfuncionario
-     */
-    public int getCodfuncionario() {
-        return codfuncionario;
-    }
-
-    /**
-     * @param codfuncionario the codfuncionario to set
-     */
-    public void setCodfuncionario(int codfuncionario) {
-        this.codfuncionario = codfuncionario;
     }
 
     /**
@@ -114,12 +156,14 @@ public class Servicos {
         this.horasaida = horasaida;
     }
     private int codigo;
-    private int codvaga;
+    private int codCat;
     private int codveiculo;
-    private int codfuncionario;
+    private int codfuncionario_entrada;
+    private int codfuncionario_saida;
     private String datafinal;
     private String datainicial;
     private String horaentrada;
     private String horasaida;
-    
+    private String status;
+    private double valorTotal;
 }

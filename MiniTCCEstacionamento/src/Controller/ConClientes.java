@@ -66,11 +66,11 @@ public class ConClientes {
         return lista;
     }
 
-    public Clientes pesquisar(String idcliente) {
+    public Clientes pesquisar(int idcliente) {
         String sql = "Select * from TBCLIENTE where idcliente = ?";
         try {
             PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
-            pstmt.setString(1, idcliente);
+            pstmt.setInt(1, idcliente);
             ResultSet rs = pstmt.executeQuery();
 
             Clientes cliente = new Clientes();
