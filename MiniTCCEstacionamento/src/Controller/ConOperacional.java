@@ -49,7 +49,6 @@ public class ConOperacional {
             psmt.setString(1, String.valueOf(operacional.getPrecoPrimeiraHora()));
             psmt.setString(2, String.valueOf(operacional.getPrecoHorasAdicionais()));
             psmt.setString(3, String.valueOf(operacional.getPrecoDiaria()));
-            psmt.executeUpdate();
             conexao.desconectar();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um ERRO:" + ex);

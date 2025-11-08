@@ -96,6 +96,8 @@ INSERT INTO TBSERVICO (CODCAT,CODVEICULO,CODFUNCI_ENTRADA,CODFUNCI_SAIDA,DATAFIN
 (1, 9, 3, 1, "2025-09-03", "2025-09-04", "23:03:05", "00:04:57", "FINALIZADO"),
 (1, 10, 1, 1, "2025-09-04", "2025-09-05", "17:59:17", "10:08:32", "FINALIZADO");
 
+-- VOLTA O DELIMITADOR AO PADRÃO
+
 /*Consultar o nome do funcionário de ID=3 e quantidade de serviços feitos por ele no mês de setembro*/
 SELECT F.NOMEFUNCI, COUNT(S.DATAINICIAL)
 FROM tbfuncionario F

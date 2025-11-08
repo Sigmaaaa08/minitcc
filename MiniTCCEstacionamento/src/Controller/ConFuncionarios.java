@@ -133,7 +133,7 @@ public class ConFuncionarios {
 
             Funcionarios funcionario = new Funcionarios();
             //percorre os resultados obtidos na consulta sql
-            while (rs.next()) {
+            if (rs.next()) {
                 funcionario.setCodigo(rs.getInt("idfunci"));
                 funcionario.setNome(rs.getString("nomefunci"));
                 funcionario.setCpf(rs.getString("cpffunci"));
@@ -141,15 +141,17 @@ public class ConFuncionarios {
                 funcionario.setEmail(rs.getString("emailfunci"));
                 funcionario.setSenha(rs.getString("senhafunci"));
                 funcionario.setStatus(rs.getString("STATUSFUNCI"));
-            }
             return funcionario;
+            }else{
+                return null;
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
             return null;
         }
     }
           
-          public void editar(Funcionarios funcionario) {
+          public boolean editar(Funcionarios funcionario) {
         String sql = "UPDATE TBFUNCIONARIO set nomefunci=?,cpffunci=?,telefonefunci=?,senhafunci=?,emailfunci=?, statusfunci=?"
                 + " where idfunci = ?";
         try {
@@ -161,10 +163,12 @@ public class ConFuncionarios {
             psmt.setString(5, funcionario.getEmail());
             psmt.setString(6, funcionario.getStatus());
             psmt.setInt(7, funcionario.getCodigo());
-            psmt.executeUpdate();
+            int linhasAfetadas = psmt.executeUpdate();
             conexao.desconectar();
+            return linhasAfetadas > 0;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um ERRO:" + ex);
+            return false;
         }
     }
           

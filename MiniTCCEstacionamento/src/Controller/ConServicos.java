@@ -152,9 +152,10 @@ public class ConServicos {
                 servico.setCodveiculo(rs.getInt("codveiculo"));
                 servico.setStatus(rs.getString("StatusServico"));
                 servico.setValorTotal(rs.getDouble("valortotal"));
-            }
             return servico;
-
+            }else{
+             return null;   
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
             return null;

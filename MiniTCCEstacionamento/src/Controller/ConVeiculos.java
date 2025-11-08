@@ -118,7 +118,8 @@ public class ConVeiculos {
         Vector lista = new Vector();
         String sql = "Select c.idcliente, v.idveiculo, v.codcliente, c.nomecliente, c.cpfcliente, c.telefonecliente, v.placaveiculo, v.modeloveiculo, v.tipoveiculo"
                 + " From tbcliente c Inner Join tbveiculo v "
-                + "on v.codcliente=c.idcliente";
+                + "on v.codcliente=c.idcliente"
+                + " Order by v.idveiculo desc";
         try{
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
             ResultSet rs = psmt.executeQuery();
@@ -156,7 +157,7 @@ public class ConVeiculos {
         return lista;
     }
     
-    public Veiculos pesquisar (String placa){
+    public Veiculos pesquisar(String placa){
         String sql = "Select * from TBVEICULO where PLACAVEICULO = ?";
          
         try{
@@ -166,24 +167,24 @@ public class ConVeiculos {
             
            Veiculos veiculo = new Veiculos();
             
-           while(rs.next()){
+           if(rs.next()){
                veiculo.setCodigo(rs.getInt("idveiculo"));
                veiculo.setCodcliente(rs.getInt("codcliente"));
                veiculo.setPlaca(rs.getString("placaveiculo"));
                veiculo.setModelo(rs.getString("modeloveiculo"));
                veiculo.setTipo(rs.getString("tipoveiculo"));
-            }
-           
            return veiculo;
+            }else{
+               return null;
            }
-        catch(SQLException ex){
+        }catch(SQLException ex){
            JOptionPane.showMessageDialog(null, ex);
            return null;
         }
     }
     
     public Veiculos pesquisarVeiculoServico (int codVeiculo){
-        String sql = "Select * from TBVEICULO where idveiculo = ?";
+        String sql = "Select * from TBVEICULO where idveiculo = ? order by idveiculo desc";
          
         try{
            PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
@@ -198,17 +199,17 @@ public class ConVeiculos {
                veiculo.setPlaca(rs.getString("placaveiculo"));
                veiculo.setModelo(rs.getString("modeloveiculo"));
                veiculo.setTipo(rs.getString("tipoveiculo"));
-            }
-           
            return veiculo;
+            }else{
+           return null;
            }
-        catch(SQLException ex){
+        }catch(SQLException ex){
            JOptionPane.showMessageDialog(null, ex);
            return null;
         }
     }
     
-    public void editar(Veiculos veiculo){
+    public boolean editar(Veiculos veiculo){
         String sql = "UPDATE TBVEICULO set codcliente=?, placaveiculo=?, modeloveiculo=?, tipoveiculo=?"
                 + " where idveiculo=?";
         
@@ -220,11 +221,12 @@ public class ConVeiculos {
             psmt.setString(3, veiculo.getModelo());
             psmt.setString(4, veiculo.getTipo());
             psmt.setInt(5, veiculo.getCodigo());
-            psmt.executeUpdate();
+            int linhasAfetadas = psmt.executeUpdate();
             conexao.desconectar();
-            
+            return linhasAfetadas > 0;
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null,"Ocorreu um ERRO:"+ex);
+            return false;
         }
     }
     public void excluir(int codigo){
