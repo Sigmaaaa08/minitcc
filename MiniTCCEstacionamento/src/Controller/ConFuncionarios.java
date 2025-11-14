@@ -112,14 +112,6 @@ public class ConFuncionarios {
         return lista;
     }
          
-<<<<<<< HEAD
-          public Funcionarios logar(String senha, String usuario) {
-        String sql = "Select * from TBFUNCIONARIO where senhafunci = ? and emailfunci = ?";
-        try {
-            PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
-            pstmt.setString(1, senha);
-            pstmt.setString(2, usuario);
-=======
 	          public Funcionarios logar(String senha) {
 	        // Aplica o hashing na senha fornecida para comparação
 	        String hashedPassword = PasswordHasher.hashPassword(senha);
@@ -127,7 +119,6 @@ public class ConFuncionarios {
 	        try {
 	            PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
 	            pstmt.setString(1, hashedPassword);
->>>>>>> 2a5ce542793eb2407bae2328d15dd10690fcd171
             ResultSet rs = pstmt.executeQuery();
 
             //percorre os resultados obtidos na consulta sql
@@ -198,7 +189,7 @@ public class ConFuncionarios {
             JOptionPane.showMessageDialog(null, "Ocorreu um ERRO:" + ex);
         }
     }
-          
+  
           public void excluir(int codigo) {
         String sql = "DELETE from TBFUNCIONARIO where idfunci = ?";
         try {
