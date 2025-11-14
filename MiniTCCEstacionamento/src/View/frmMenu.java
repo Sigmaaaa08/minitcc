@@ -1988,13 +1988,10 @@ public class frmMenu extends javax.swing.JFrame {
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel24Layout.createSequentialGroup()
                 .addContainerGap()
-<<<<<<< HEAD
                 .addComponent(txtNomeFuncionarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
-=======
                 .addComponent(txtNomeFuncionarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
->>>>>>> 2a5ce542793eb2407bae2328d15dd10690fcd171
                 .addComponent(bntDialogClienteVeiculo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bntDialogFuncionario)
@@ -3167,11 +3164,8 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JButton bntPesquisarServico1;
     private javax.swing.JButton bntPesquisarVeiculo;
     private javax.swing.JButton bntSair;
-<<<<<<< HEAD
     private javax.swing.JButton bntSairLogin;
-=======
     private javax.swing.JButton bntSalvarCliente;
->>>>>>> 2a5ce542793eb2407bae2328d15dd10690fcd171
     private javax.swing.JButton bntSalvarCliente1;
     private javax.swing.JButton bntSalvarFuncionario;
     private javax.swing.JButton bntSalvarServico1;
