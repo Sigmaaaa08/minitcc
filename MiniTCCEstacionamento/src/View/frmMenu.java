@@ -118,6 +118,7 @@ public class frmMenu extends javax.swing.JFrame {
         Vector dados = conVeiculo.listarSourcePlaca(placa);
         tableSourcePlaca.setModel(new DefaultTableModel(dados, cabecalhoVeiculo));
     }
+    
 
     @Override
     public void insertUpdate(DocumentEvent e) {
@@ -675,7 +676,7 @@ public class frmMenu extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Usuário:");
+        jLabel3.setText("Email:");
 
         bntCancelarLogin.setText("Cancelar");
         bntCancelarLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -2083,7 +2084,8 @@ public class frmMenu extends javax.swing.JFrame {
         try {
             ConFuncionarios conFunci = new ConFuncionarios();
             
-            String usuario = txtUsuarioLogin.getText();
+            String usuario = txtUsuarioLogin.getText().toUpperCase();
+            
             char[] senhaChar = passwordLoginSenhaFuncionario.getPassword();
             String senha = new String(senhaChar);
             Arrays.fill(senhaChar, '\0');
