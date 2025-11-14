@@ -12,6 +12,10 @@ public class ConVeiculos {
     Conexao conexao = new Conexao();
     
     public void cadastrar (Veiculos veiculo){
+        if (!veiculo.isValid()) {
+            JOptionPane.showMessageDialog(null, "Todos os campos obrigatórios devem ser preenchidos.");
+            return;
+        }
             String sql = "INSERT INTO TBVEICULO(placaveiculo, modeloveiculo, tipoveiculo, codcliente)"
                         + "VALUES (?,?,?,?);";
             
@@ -58,68 +62,11 @@ public class ConVeiculos {
         return lista;
     }
     
-    public Vector listarSourcePlaca(){
-        Vector lista = new Vector();
-        String sql = "Select placaveiculo, modeloveiculo from TBVEICULO";
-        try{
-            PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
-            ResultSet rs = psmt.executeQuery();
-            //percorre os resultados obtidos na consulta sql
-            while(rs.next()){
-                Veiculos veiculo = new Veiculos();
-                veiculo.setPlaca(rs.getString("placaveiculo"));
-                veiculo.setModelo(rs.getString("modeloveiculo"));
-                //Cada Linha será um veiculo encontrado
-                Vector novalinha = new Vector();
-                novalinha.addElement(veiculo.getPlaca());
-                novalinha.addElement(veiculo.getModelo());
-                
-                lista.add(novalinha);
-            }
-            psmt.close();
-            rs.close();
-            conexao.desconectar();
-        }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, ex);
-        }
-        return lista;
-    }
-    
-    public Vector listarSourcePlaca(String Placa){
-        Vector lista = new Vector();
-        String sql = "Select placaveiculo, modeloveiculo from TBVEICULO" +
-                " Where placaveiculo like ?";
-        try{
-            PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
-            psmt.setString(1, "%" + Placa + "%");
-            ResultSet rs = psmt.executeQuery();
-            //percorre os resultados obtidos na consulta sql
-            while(rs.next()){
-                Veiculos veiculo = new Veiculos();
-                veiculo.setPlaca(rs.getString("placaveiculo"));
-                veiculo.setModelo(rs.getString("modeloveiculo"));
-                //Cada Linha será um veiculo encontrado
-                Vector novalinha = new Vector();
-                novalinha.addElement(veiculo.getPlaca());
-                novalinha.addElement(veiculo.getModelo());
-                
-                lista.add(novalinha);
-            }
-            psmt.close();
-            rs.close();
-            conexao.desconectar();
-        }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, ex);
-        }
-        return lista;
-    }
-    
     public Vector listarVeiculoCliente(){
         Vector lista = new Vector();
         String sql = "Select c.idcliente, v.idveiculo, v.codcliente, c.nomecliente, c.cpfcliente, c.telefonecliente, v.placaveiculo, v.modeloveiculo, v.tipoveiculo"
                 + " From tbcliente c Inner Join tbveiculo v "
-                + "on v.codcliente=c.idcliente"
-                + " Order by v.idveiculo desc";
+                + "on v.codcliente=c.idcliente";
         try{
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
             ResultSet rs = psmt.executeQuery();
@@ -157,7 +104,7 @@ public class ConVeiculos {
         return lista;
     }
     
-    public Veiculos pesquisar(String placa){
+    public Veiculos pesquisar (String placa){
         String sql = "Select * from TBVEICULO where PLACAVEICULO = ?";
          
         try{
@@ -167,49 +114,26 @@ public class ConVeiculos {
             
            Veiculos veiculo = new Veiculos();
             
-           if(rs.next()){
+           while(rs.next()){
                veiculo.setCodigo(rs.getInt("idveiculo"));
                veiculo.setCodcliente(rs.getInt("codcliente"));
                veiculo.setPlaca(rs.getString("placaveiculo"));
                veiculo.setModelo(rs.getString("modeloveiculo"));
                veiculo.setTipo(rs.getString("tipoveiculo"));
+            }
+           
            return veiculo;
-            }else{
-               return null;
            }
-        }catch(SQLException ex){
+        catch(SQLException ex){
            JOptionPane.showMessageDialog(null, ex);
            return null;
         }
     }
-    
-    public Veiculos pesquisarVeiculoServico (int codVeiculo){
-        String sql = "Select * from TBVEICULO where idveiculo = ? order by idveiculo desc";
-         
-        try{
-           PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
-           pstmt.setInt(1, codVeiculo);
-           ResultSet rs = pstmt.executeQuery();
-            
-           Veiculos veiculo = new Veiculos();
-            
-           if (rs.next()){
-               veiculo.setCodigo(rs.getInt("idveiculo"));
-               veiculo.setCodcliente(rs.getInt("codcliente"));
-               veiculo.setPlaca(rs.getString("placaveiculo"));
-               veiculo.setModelo(rs.getString("modeloveiculo"));
-               veiculo.setTipo(rs.getString("tipoveiculo"));
-           return veiculo;
-            }else{
-           return null;
-           }
-        }catch(SQLException ex){
-           JOptionPane.showMessageDialog(null, ex);
-           return null;
+    public void editar(Veiculos veiculo){
+        if (!veiculo.isValid()) {
+            JOptionPane.showMessageDialog(null, "Todos os campos obrigatórios devem ser preenchidos.");
+            return;
         }
-    }
-    
-    public boolean editar(Veiculos veiculo){
         String sql = "UPDATE TBVEICULO set codcliente=?, placaveiculo=?, modeloveiculo=?, tipoveiculo=?"
                 + " where idveiculo=?";
         
@@ -221,12 +145,11 @@ public class ConVeiculos {
             psmt.setString(3, veiculo.getModelo());
             psmt.setString(4, veiculo.getTipo());
             psmt.setInt(5, veiculo.getCodigo());
-            int linhasAfetadas = psmt.executeUpdate();
+            psmt.executeUpdate();
             conexao.desconectar();
-            return linhasAfetadas > 0;
+            
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null,"Ocorreu um ERRO:"+ex);
-            return false;
         }
     }
     public void excluir(int codigo){

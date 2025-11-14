@@ -42,6 +42,10 @@ public class ConOperacional {
         }
     }
     public void editar(Operacional operacional) {
+        if (!operacional.isValid()) {
+            JOptionPane.showMessageDialog(null, "Todos os preços devem ser maiores que zero.");
+            return;
+        }
         String sql = "UPDATE TBCATEGORIA set PRECO_PRIMEIRA_HORA=?,PRECO_HORAS_ADICIONAIS=?,PRECO_DIARIA=?"
                 + " where idcat = 1";
         try {
@@ -49,6 +53,7 @@ public class ConOperacional {
             psmt.setString(1, String.valueOf(operacional.getPrecoPrimeiraHora()));
             psmt.setString(2, String.valueOf(operacional.getPrecoHorasAdicionais()));
             psmt.setString(3, String.valueOf(operacional.getPrecoDiaria()));
+            psmt.executeUpdate();
             conexao.desconectar();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um ERRO:" + ex);

@@ -69,6 +69,12 @@ public class Operacional {
     private double precoPrimeiraHora;
     private double precoHorasAdicionais;
     private double precoDiaria;
+
+    public boolean isValid() {
+        return precoPrimeiraHora > 0 &&
+               precoHorasAdicionais > 0 &&
+               precoDiaria > 0;
+    }
     
     
 }
