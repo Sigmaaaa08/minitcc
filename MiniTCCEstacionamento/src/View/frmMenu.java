@@ -4,22 +4,18 @@
  */
 package View;
 
-import javax.swing.event.ListSelectionListener;
 import Controller.ConClientes;
 import Controller.ConFuncionarios;
 import Controller.ConOperacional;
-import Controller.ConServicos;
 import Controller.ConVeiculos;
 import Model.Clientes;
 import Model.Funcionarios;
 import Model.Operacional;
-import Model.Servicos;
 import Model.Veiculos;
 import java.util.Arrays;
 import java.util.Vector;
+import java.util.function.IntBinaryOperator;
 import javax.swing.JOptionPane;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,93 +23,32 @@ import javax.swing.table.DefaultTableModel;
  * @author LABINFO
  */
 public class frmMenu extends javax.swing.JFrame {
-
     int codigo1;
     int codigo2;
     int codFuncionarioLogado;
-
     /**
      * Creates new form frmMenu
      */
     public frmMenu() {
-        initComponents();
-    
-    // Adiciona o listener NA tabela correta
-tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
-    @Override
-    public void mouseClicked(java.awt.event.MouseEvent evt) {
-        if (evt.getClickCount() == 1) { // clique simples
-            int linha = tableSourcePlaca.getSelectedRow(); // pega a linha clicada
-
-            if (linha >= 0) { // garante que há uma linha selecionada
-                try {
-                    // Pega a placa da linha clicada
-                    String placa = tableSourcePlaca.getValueAt(linha, 0).toString();
-                    System.out.println("Placa selecionada: " + placa);
-
-                    // Busca o veículo no banco
-                    ConVeiculos conVeiculo = new ConVeiculos();
-                    Veiculos veiculo = conVeiculo.pesquisar(placa); // método deve receber a placa
-
-                    if (veiculo != null) {
-                        // Busca o cliente relacionado
-                        ConClientes conCliente = new ConClientes();
-                        Clientes cliente = conCliente.pesquisar(veiculo.getCodcliente());
-
-                        // Preenche os campos da tela
-                        txtPlacaVeiculoServico.setText(veiculo.getPlaca());
-                        txtModeloVeiculoServico.setText(veiculo.getModelo());
-
-                        if (cliente != null) {
-                            txtNomeClienteServico.setText(cliente.getNome());
-                        } else {
-                            txtNomeClienteServico.setText("Cliente não encontrado");
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Veículo não encontrado!");
-                    }
-
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Erro ao buscar dados: " + e.getMessage());
-                    e.printStackTrace();
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
                 }
             }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(frmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(frmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(frmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(frmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    }
-});
-
-    
-    txtNumPlaca.getDocument().addDocumentListener(new DocumentListener() {
-    private void atualizarTabela() {
-        ConVeiculos conVeiculo = new ConVeiculos();
-        String placa = txtNumPlaca.getText();
-
-        Vector cabecalhoVeiculo = new Vector();
-        cabecalhoVeiculo.addElement("Placa");
-        cabecalhoVeiculo.addElement("Modelo");
-
-        Vector dados = conVeiculo.listarSourcePlaca(placa);
-        tableSourcePlaca.setModel(new DefaultTableModel(dados, cabecalhoVeiculo));
+        initComponents();
     }
 
-    @Override
-    public void insertUpdate(DocumentEvent e) {
-        atualizarTabela(); // quando o usuário digita
-    }
-
-    @Override
-    public void removeUpdate(DocumentEvent e) {
-        atualizarTabela(); // quando o usuário apaga
-    }
-
-    @Override
-    public void changedUpdate(DocumentEvent e) {
-        atualizarTabela(); // quando muda algum estilo (raramente usado)
-    }
-        });
-    }
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -130,33 +65,49 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
+        dialogCadastroCliente = new javax.swing.JDialog();
+        jTabbedPane4 = new javax.swing.JTabbedPane();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        bntVoltarCliente = new javax.swing.JButton();
+        bntExcluirCliente = new javax.swing.JButton();
+        bntEditarCliente = new javax.swing.JButton();
+        bntPesquisarCliente = new javax.swing.JButton();
+        bntSalvarCliente = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        txtTelefoneCliente = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtCpfCliente = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtNomeCliente = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel28 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tableListarCliente = new javax.swing.JTable();
+        bntListarCliente = new javax.swing.JButton();
         dialogCadastroFuncionario = new javax.swing.JDialog();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel10 = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
-        bntEditarFuncionario = new javax.swing.JButton();
-        bntSalvarFuncionario = new javax.swing.JButton();
-        bntExcluirFuncionario = new javax.swing.JButton();
-        bntCancelarFuncionario = new javax.swing.JButton();
-        jPanel25 = new javax.swing.JPanel();
-        bntPesquisarFuncionario = new javax.swing.JButton();
-        jLabel33 = new javax.swing.JLabel();
-        txtCpfFuncionarioPesquisar = new javax.swing.JTextField();
         jPanel13 = new javax.swing.JPanel();
+        txtSenhaFuncionario = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
         txtEmailFuncionario = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
         txtNomeFuncionario = new javax.swing.JTextField();
+        txtCpfFuncionario = new javax.swing.JTextField();
         jLabel36 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         txtTelefoneFuncionario = new javax.swing.JTextField();
         cbStatusFuncionario = new javax.swing.JComboBox<>();
         jLabel37 = new javax.swing.JLabel();
-        chbsenhafunci = new javax.swing.JCheckBox();
-        txtSenhaFuncionario = new javax.swing.JPasswordField();
-        txtCpfFuncionario = new javax.swing.JTextField();
-        jLabel35 = new javax.swing.JLabel();
-        bntNovoFuncionario = new javax.swing.JButton();
+        jPanel14 = new javax.swing.JPanel();
+        bntEditarFuncionario = new javax.swing.JButton();
+        bntSalvarFuncionario = new javax.swing.JButton();
+        bntPesquisarFuncionario = new javax.swing.JButton();
+        bntExcluirFuncionario = new javax.swing.JButton();
+        bntCancelarFuncionario = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         bntListarFuncionario = new javax.swing.JButton();
@@ -170,7 +121,6 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         passwordLoginSenhaFuncionario = new javax.swing.JPasswordField();
         bntLogar = new javax.swing.JButton();
         bntCancelarLogin = new javax.swing.JButton();
-        chbSenhaFunciLogar = new javax.swing.JCheckBox();
         dialogOperacional = new javax.swing.JDialog();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -208,21 +158,15 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         bntVoltarCliente1 = new javax.swing.JButton();
         bntExcluirCliente1 = new javax.swing.JButton();
         bntEditarCliente1 = new javax.swing.JButton();
-        bntSalvarCliente1 = new javax.swing.JButton();
-        bntNovoCliente = new javax.swing.JButton();
-        jPanel35 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
         bntPesquisarCliente1 = new javax.swing.JButton();
-        txtPlacaClientePesquisa1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        bntSalvarCliente1 = new javax.swing.JButton();
         jPanel31 = new javax.swing.JPanel();
         txtTelefoneCliente1 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        txtCpfCliente1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
         txtNomeCliente1 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        txtCpfCliente1 = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jPanel34 = new javax.swing.JPanel();
         cbTipoVeiculo1 = new javax.swing.JComboBox<>();
         txtPlacaVeiculo1 = new javax.swing.JTextField();
@@ -230,6 +174,8 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel32 = new javax.swing.JPanel();
         jPanel33 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -240,6 +186,7 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         jPanel16 = new javax.swing.JPanel();
         bntNovo1 = new javax.swing.JButton();
         bntSalvarServico1 = new javax.swing.JButton();
+        bntCancelarServico1 = new javax.swing.JButton();
         bntExcluirServico1 = new javax.swing.JButton();
         bntEditarServico1 = new javax.swing.JButton();
         bntOperacional1 = new javax.swing.JButton();
@@ -279,13 +226,13 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         txtValorTotal = new javax.swing.JTextField();
         jPanel21 = new javax.swing.JPanel();
         jLabel47 = new javax.swing.JLabel();
-        txtNumPlaca = new javax.swing.JTextField();
+        txtNumPlaca1 = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tableSourcePlaca = new javax.swing.JTable();
+        tableSourcePlaca1 = new javax.swing.JTable();
         jPanel22 = new javax.swing.JPanel();
         jPanel23 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        tableServico = new javax.swing.JTable();
+        jTable4 = new javax.swing.JTable();
         jLabel48 = new javax.swing.JLabel();
         cbStatusServico1 = new javax.swing.JComboBox<>();
         bntListarServico1 = new javax.swing.JButton();
@@ -305,6 +252,298 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
 
         jMenuItem2.setText("jMenuItem2");
 
+        bntVoltarCliente.setText("Cancelar");
+        bntVoltarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntVoltarClienteActionPerformed(evt);
+            }
+        });
+
+        bntExcluirCliente.setText("Excluir");
+        bntExcluirCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntExcluirClienteActionPerformed(evt);
+            }
+        });
+
+        bntEditarCliente.setText("Editar");
+        bntEditarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntEditarClienteActionPerformed(evt);
+            }
+        });
+
+        bntPesquisarCliente.setText("Pesquisar");
+        bntPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntPesquisarClienteActionPerformed(evt);
+            }
+        });
+
+        bntSalvarCliente.setText("Salvar");
+        bntSalvarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntSalvarClienteActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(bntSalvarCliente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bntPesquisarCliente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bntEditarCliente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bntExcluirCliente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bntVoltarCliente))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntSalvarCliente)
+                    .addComponent(bntExcluirCliente)
+                    .addComponent(bntEditarCliente)
+                    .addComponent(bntVoltarCliente)
+                    .addComponent(bntPesquisarCliente))
+                .addGap(34, 34, 34))
+        );
+
+        jLabel5.setText("Telefone:");
+
+        jLabel4.setText("CPF:");
+
+        txtNomeCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeClienteActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Nome:");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCpfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTelefoneCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(txtTelefoneCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCpfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel3))))
+        );
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(128, Short.MAX_VALUE))
+        );
+
+        jTabbedPane4.addTab("Cadastro", jPanel8);
+
+        tableListarCliente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tableListarCliente);
+
+        bntListarCliente.setText("Listar");
+        bntListarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntListarClienteActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
+        jPanel28.setLayout(jPanel28Layout);
+        jPanel28Layout.setHorizontalGroup(
+            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel28Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel28Layout.createSequentialGroup()
+                .addContainerGap(390, Short.MAX_VALUE)
+                .addComponent(bntListarCliente)
+                .addContainerGap())
+        );
+        jPanel28Layout.setVerticalGroup(
+            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel28Layout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bntListarCliente))
+        );
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
+        jTabbedPane4.addTab("Consulta", jPanel9);
+
+        javax.swing.GroupLayout dialogCadastroClienteLayout = new javax.swing.GroupLayout(dialogCadastroCliente.getContentPane());
+        dialogCadastroCliente.getContentPane().setLayout(dialogCadastroClienteLayout);
+        dialogCadastroClienteLayout.setHorizontalGroup(
+            dialogCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogCadastroClienteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        dialogCadastroClienteLayout.setVerticalGroup(
+            dialogCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogCadastroClienteLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jLabel34.setText("Nome:");
+
+        jLabel33.setText("CPF:");
+
+        jLabel32.setText("Email:");
+
+        txtNomeFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeFuncionarioActionPerformed(evt);
+            }
+        });
+
+        jLabel36.setText("Telefone:");
+
+        jLabel29.setText("Senha:");
+
+        cbStatusFuncionario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
+
+        jLabel37.setText("Status");
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEmailFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(154, 154, 154)
+                        .addComponent(jLabel37)
+                        .addGap(37, 37, 37))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                        .addComponent(jLabel29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbStatusFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addComponent(jLabel34)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel36)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTelefoneFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addComponent(jLabel33)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel34)
+                    .addComponent(txtNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel36)
+                    .addComponent(txtTelefoneFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel33)
+                    .addComponent(txtCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel32)
+                            .addComponent(txtEmailFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel37))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel29)
+                            .addComponent(txtSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                        .addComponent(cbStatusFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+        );
+
         bntEditarFuncionario.setText("Editar");
         bntEditarFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -316,6 +555,13 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         bntSalvarFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntSalvarFuncionarioActionPerformed(evt);
+            }
+        });
+
+        bntPesquisarFuncionario.setText("Pesquisar");
+        bntPesquisarFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntPesquisarFuncionarioActionPerformed(evt);
             }
         });
 
@@ -333,175 +579,21 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
             }
         });
 
-        bntPesquisarFuncionario.setText("Pesquisar");
-        bntPesquisarFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntPesquisarFuncionarioActionPerformed(evt);
-            }
-        });
-
-        jLabel33.setText("CPF:");
-
-        javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
-        jPanel25.setLayout(jPanel25Layout);
-        jPanel25Layout.setHorizontalGroup(
-            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel25Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel33)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCpfFuncionarioPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bntPesquisarFuncionario)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel25Layout.setVerticalGroup(
-            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel25Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel33)
-                    .addComponent(txtCpfFuncionarioPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntPesquisarFuncionario))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel34.setText("Nome:");
-
-        txtEmailFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailFuncionarioActionPerformed(evt);
-            }
-        });
-
-        jLabel32.setText("Email:");
-
-        txtNomeFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeFuncionarioActionPerformed(evt);
-            }
-        });
-
-        jLabel36.setText("Telefone:");
-
-        jLabel29.setText("Senha:");
-
-        txtTelefoneFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefoneFuncionarioActionPerformed(evt);
-            }
-        });
-
-        cbStatusFuncionario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
-
-        jLabel37.setText("Status");
-
-        chbsenhafunci.setText("Exibir senha");
-        chbsenhafunci.setContentAreaFilled(false);
-        chbsenhafunci.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chbsenhafunciActionPerformed(evt);
-            }
-        });
-
-        txtSenhaFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSenhaFuncionarioActionPerformed(evt);
-            }
-        });
-
-        jLabel35.setText("CPF:");
-
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jLabel34)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel36)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTelefoneFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel35)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel32)
-                            .addComponent(jLabel29))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtEmailFuncionario)
-                            .addComponent(txtSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(chbsenhafunci, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel37)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbStatusFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTelefoneFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel36)
-                    .addComponent(jLabel34)
-                    .addComponent(txtNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel35))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel37)
-                        .addComponent(cbStatusFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel32)
-                            .addComponent(txtEmailFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel29)
-                            .addComponent(txtSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(chbsenhafunci)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        bntNovoFuncionario.setText("Novo");
-        bntNovoFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntNovoFuncionarioActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bntNovoFuncionario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bntSalvarFuncionario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bntEditarFuncionario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bntExcluirFuncionario)
-                        .addGap(75, 75, 75)
-                        .addComponent(bntCancelarFuncionario))
-                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(bntSalvarFuncionario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bntEditarFuncionario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bntPesquisarFuncionario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bntExcluirFuncionario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bntCancelarFuncionario)
                 .addContainerGap())
         );
         jPanel14Layout.setVerticalGroup(
@@ -509,31 +601,36 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(bntSalvarFuncionario)
-                        .addComponent(bntNovoFuncionario))
+                    .addComponent(bntSalvarFuncionario)
                     .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(bntEditarFuncionario)
+                        .addComponent(bntPesquisarFuncionario)
                         .addComponent(bntExcluirFuncionario)
                         .addComponent(bntCancelarFuncionario)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel25, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Cadastro", jPanel10);
@@ -567,15 +664,15 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel25)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbConsultarStatusFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(217, 217, 217)
-                        .addComponent(bntListarFuncionario))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jLabel25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbConsultarStatusFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bntListarFuncionario)
+                .addGap(39, 39, 39))
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
@@ -614,15 +711,14 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         dialogCadastroFuncionario.getContentPane().setLayout(dialogCadastroFuncionarioLayout);
         dialogCadastroFuncionarioLayout.setHorizontalGroup(
             dialogCadastroFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogCadastroFuncionarioLayout.createSequentialGroup()
+            .addGroup(dialogCadastroFuncionarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane2))
         );
         dialogCadastroFuncionarioLayout.setVerticalGroup(
             dialogCadastroFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogCadastroFuncionarioLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(dialogCadastroFuncionarioLayout.createSequentialGroup()
+                .addComponent(jTabbedPane2)
                 .addContainerGap())
         );
 
@@ -642,32 +738,22 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
             }
         });
 
-        chbSenhaFunciLogar.setText("Exibir senha");
-        chbSenhaFunciLogar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chbSenhaFunciLogarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(bntLogar)
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel24)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bntCancelarLogin))
+                        .addComponent(passwordLoginSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chbSenhaFunciLogar)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel24)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(passwordLoginSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(bntLogar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bntCancelarLogin)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -677,13 +763,11 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
                     .addComponent(passwordLoginSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(chbSenhaFunciLogar)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntLogar)
                     .addComponent(bntCancelarLogin))
-                .addContainerGap())
+                .addGap(17, 17, 17))
         );
 
         javax.swing.GroupLayout dialogLoginLayout = new javax.swing.GroupLayout(dialogLogin.getContentPane());
@@ -691,16 +775,16 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         dialogLoginLayout.setHorizontalGroup(
             dialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogLoginLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(31, 31, 31)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         dialogLoginLayout.setVerticalGroup(
             dialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogLoginLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jLabel20.setText("Valor 1ª Hora");
@@ -1031,17 +1115,17 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
             }
         });
 
+        bntPesquisarCliente1.setText("Pesquisar");
+        bntPesquisarCliente1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntPesquisarCliente1ActionPerformed(evt);
+            }
+        });
+
         bntSalvarCliente1.setText("Salvar");
         bntSalvarCliente1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntSalvarCliente1ActionPerformed(evt);
-            }
-        });
-
-        bntNovoCliente.setText("Novo");
-        bntNovoCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntNovoClienteActionPerformed(evt);
             }
         });
 
@@ -1050,15 +1134,14 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         jPanel30Layout.setHorizontalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel30Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bntNovoCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bntSalvarCliente1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bntPesquisarCliente1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bntEditarCliente1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bntExcluirCliente1)
-                .addGap(73, 73, 73)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(bntVoltarCliente1))
         );
         jPanel30Layout.setVerticalGroup(
@@ -1070,53 +1153,13 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
                     .addComponent(bntExcluirCliente1)
                     .addComponent(bntEditarCliente1)
                     .addComponent(bntVoltarCliente1)
-                    .addComponent(bntNovoCliente))
+                    .addComponent(bntPesquisarCliente1))
                 .addGap(34, 34, 34))
         );
 
-        jLabel10.setText("Placa:");
-
-        bntPesquisarCliente1.setText("Pesquisar");
-        bntPesquisarCliente1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntPesquisarCliente1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel35Layout = new javax.swing.GroupLayout(jPanel35);
-        jPanel35.setLayout(jPanel35Layout);
-        jPanel35Layout.setHorizontalGroup(
-            jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel35Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel10)
-                .addGap(125, 125, 125)
-                .addComponent(bntPesquisarCliente1)
-                .addContainerGap(214, Short.MAX_VALUE))
-            .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel35Layout.createSequentialGroup()
-                    .addGap(53, 53, 53)
-                    .addComponent(txtPlacaClientePesquisa1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(303, Short.MAX_VALUE)))
-        );
-        jPanel35Layout.setVerticalGroup(
-            jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel35Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(bntPesquisarCliente1))
-                .addContainerGap())
-            .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel35Layout.createSequentialGroup()
-                    .addContainerGap(7, Short.MAX_VALUE)
-                    .addComponent(txtPlacaClientePesquisa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
-        );
-
-        jLabel1.setText("Cliente");
-
         jLabel9.setText("Telefone:");
+
+        jLabel10.setText("CPF:");
 
         txtNomeCliente1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1125,8 +1168,6 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         });
 
         jLabel11.setText("Nome:");
-
-        jLabel15.setText("CPF:");
 
         javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
         jPanel31.setLayout(jPanel31Layout);
@@ -1137,11 +1178,11 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNomeCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCpfCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTelefoneCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1153,17 +1194,14 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCpfCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel15))
-                    .addGroup(jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel9)
                         .addComponent(txtTelefoneCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtNomeCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCpfCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10)
                         .addComponent(jLabel11))))
         );
-
-        jLabel2.setText("Veículo");
 
         cbTipoVeiculo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pequeno", "Médio", "Grande" }));
         cbTipoVeiculo1.addActionListener(new java.awt.event.ActionListener() {
@@ -1225,29 +1263,29 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel1.setText("Cliente");
+
+        jLabel2.setText("Veículo");
+
         javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
         jPanel29.setLayout(jPanel29Layout);
         jPanel29Layout.setHorizontalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel29Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel29Layout.createSequentialGroup()
-                                    .addGap(212, 212, 212)
-                                    .addComponent(jLabel2)
-                                    .addGap(205, 205, 205))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel29Layout.createSequentialGroup()
-                                        .addGap(206, 206, 206)
-                                        .addComponent(jLabel1)))
-                                .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addGap(212, 212, 212)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addGap(212, 212, 212)
+                        .addComponent(jLabel2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel29Layout.setVerticalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1255,16 +1293,14 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
                 .addContainerGap()
                 .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel35, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(5, 5, 5)
                 .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Cadastro", jPanel29);
@@ -1332,15 +1368,14 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
             dialogCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogCadastroCliente1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         dialogCadastroCliente1Layout.setVerticalGroup(
             dialogCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogCadastroCliente1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1353,25 +1388,12 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         });
 
         bntSalvarServico1.setText("Salvar");
-        bntSalvarServico1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntSalvarServico1ActionPerformed(evt);
-            }
-        });
+
+        bntCancelarServico1.setText("Cancelar");
 
         bntExcluirServico1.setText("Excluir");
-        bntExcluirServico1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntExcluirServico1ActionPerformed(evt);
-            }
-        });
 
         bntEditarServico1.setText("Editar");
-        bntEditarServico1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntEditarServico1ActionPerformed(evt);
-            }
-        });
 
         bntOperacional1.setText("Operacional");
         bntOperacional1.addActionListener(new java.awt.event.ActionListener() {
@@ -1390,6 +1412,8 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bntSalvarServico1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bntCancelarServico1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bntExcluirServico1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bntEditarServico1)
@@ -1404,6 +1428,7 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntSalvarServico1)
                     .addComponent(bntNovo1)
+                    .addComponent(bntCancelarServico1)
                     .addComponent(bntExcluirServico1)
                     .addComponent(bntEditarServico1)
                     .addComponent(bntOperacional1))
@@ -1431,18 +1456,8 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         jLabel30.setText("Cliente");
 
         bntPesquisarServico1.setText("?");
-        bntPesquisarServico1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntPesquisarServico1ActionPerformed(evt);
-            }
-        });
 
         bntNewCliente.setText("+");
-        bntNewCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntNewClienteActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -1451,17 +1466,15 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
                         .addComponent(txtNumEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bntPesquisarServico1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)))
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPlacaVeiculoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(bntPesquisarServico1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtPlacaVeiculoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtModeloVeiculoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1657,15 +1670,10 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
 
         jLabel47.setText("Localizar Veículo");
 
-        txtNumPlaca.setToolTipText("Nº da Placa");
-        txtNumPlaca.setName(""); // NOI18N
-        txtNumPlaca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNumPlacaActionPerformed(evt);
-            }
-        });
+        txtNumPlaca1.setToolTipText("Nº da Placa");
+        txtNumPlaca1.setName(""); // NOI18N
 
-        tableSourcePlaca.setModel(new javax.swing.table.DefaultTableModel(
+        tableSourcePlaca1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1676,22 +1684,18 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tableSourcePlaca.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane4.setViewportView(tableSourcePlaca);
+        jScrollPane4.setViewportView(tableSourcePlaca1);
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
             .addGroup(jPanel21Layout.createSequentialGroup()
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNumPlaca)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(txtNumPlaca1)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(jPanel21Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel47)
-                .addContainerGap(63, Short.MAX_VALUE))
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1699,13 +1703,13 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
                 .addContainerGap()
                 .addComponent(jLabel47)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNumPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNumPlaca1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        txtNumPlaca.getAccessibleContext().setAccessibleName("");
+        txtNumPlaca1.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -1713,7 +1717,7 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1727,9 +1731,9 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
                                         .addGap(36, 36, 36)
                                         .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1753,7 +1757,7 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
 
         jTabbedPane3.addTab("Cadastro", jPanel15);
 
-        tableServico.setModel(new javax.swing.table.DefaultTableModel(
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1764,18 +1768,13 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane6.setViewportView(tableServico);
+        jScrollPane6.setViewportView(jTable4);
 
         jLabel48.setText("Status");
 
         cbStatusServico1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Pendente", "Finalizado" }));
 
         bntListarServico1.setText("Listar");
-        bntListarServico1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntListarServico1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
@@ -1785,7 +1784,7 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
                 .addContainerGap()
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel23Layout.createSequentialGroup()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel23Layout.createSequentialGroup()
                         .addComponent(jLabel48)
@@ -1852,7 +1851,7 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
             .addGroup(jPanel24Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtNomeFuncionarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bntDialogClienteVeiculo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bntDialogFuncionario)
@@ -1883,9 +1882,8 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane3)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1898,6 +1896,127 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bntPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPesquisarClienteActionPerformed
+        // TODO add your handling code here:
+        try {
+            Clientes cliente = new Clientes();
+            ConClientes conCliente = new ConClientes();
+
+            if (txtCpfCliente.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha o CPF para realizar a pesquisa");
+            } else {
+                cliente.setCpf(txtCpfCliente.getText());
+                cliente = conCliente.pesquisar(cliente.getCpf());
+
+                this.codigo1 = cliente.getCodigo();
+                txtCpfCliente.setText(cliente.getCpf());
+                txtNomeCliente.setText(cliente.getNome());
+                txtTelefoneCliente.setText(cliente.getTelefone());
+                
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
+        }
+    }//GEN-LAST:event_bntPesquisarClienteActionPerformed
+
+    private void bntVoltarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVoltarClienteActionPerformed
+        // TODO add your handling code here:
+        this.dialogCadastroCliente.dispose();
+        this.codigo1=0;
+    }//GEN-LAST:event_bntVoltarClienteActionPerformed
+
+    private void bntExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirClienteActionPerformed
+        // TODO add your handling code here:
+        try{
+            ConClientes conCliente = new ConClientes();
+            if (this.codigo1==0) {
+                JOptionPane.showMessageDialog(null, "Pesquise os campos do funcionárioa a ser excluido");
+            } else {
+                if (JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir?", "Confirme exclusão", JOptionPane.YES_NO_OPTION) != 1) {
+                    conCliente.excluir(this.codigo1);
+                    JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso!");
+                }
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
+        }
+    }//GEN-LAST:event_bntExcluirClienteActionPerformed
+
+    private void bntEditarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarClienteActionPerformed
+        // TODO add your handling code here:
+        try {
+            Clientes cliente = new Clientes();
+            ConClientes conCliente = new ConClientes();
+
+            if (txtNomeCliente.getText().isEmpty()
+                || txtCpfCliente.getText().isEmpty()
+                || txtTelefoneCliente.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
+            } else {
+                
+                cliente.setNome(txtNomeCliente.getText());
+                cliente.setTelefone(txtTelefoneCliente.getText());
+                cliente.setCpf(txtCpfCliente.getText());
+                cliente.setCodigo(this.codigo1);
+
+                conCliente.editar(cliente);
+                JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso!");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
+        }
+    }//GEN-LAST:event_bntEditarClienteActionPerformed
+
+    private void bntSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarClienteActionPerformed
+        // TODO add your handling code here:
+        try {
+            Clientes cliente = new Clientes();
+            ConClientes conCliente = new ConClientes();
+
+            if (txtNomeCliente.getText().isEmpty()
+                || txtCpfCliente.getText().isEmpty()
+                || txtTelefoneCliente.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
+            } else {
+                cliente.setNome(txtNomeCliente.getText());
+                cliente.setTelefone(txtTelefoneCliente.getText());
+                cliente.setCpf(txtCpfCliente.getText());
+
+                conCliente.cadastrar(cliente);
+                JOptionPane.showMessageDialog(null, "registro cadastrado com sucesso!");
+            }
+            this.codigo1=0;
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
+        }
+    }//GEN-LAST:event_bntSalvarClienteActionPerformed
+
+    private void txtNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeClienteActionPerformed
+
+    private void bntListarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntListarClienteActionPerformed
+        // TODO add your handling code here:
+        Vector cabecalhoClienete = new Vector();
+
+        try {
+            //cabecalho.addElement("Código"); //0
+            cabecalhoClienete.addElement("Código"); // 1
+            cabecalhoClienete.addElement("Nome"); // 2
+            cabecalhoClienete.addElement("Telefone"); // 3
+            cabecalhoClienete.addElement("CPF"); // 4
+            cabecalhoClienete.addElement("Credencial"); // 5
+
+            ConClientes conClientes = new ConClientes();
+            tableListarCliente.setModel(new DefaultTableModel(
+                conClientes.listar(), cabecalhoClienete));
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante a exibição de dados");
+        }
+    }//GEN-LAST:event_bntListarClienteActionPerformed
+
     private void txtNomeFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeFuncionarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeFuncionarioActionPerformed
@@ -1905,7 +2024,7 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
     private void bntListarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntListarFuncionarioActionPerformed
         // TODO add your handling code here:
         Vector cabecalhoFuncionario = new Vector();
-        try {
+        try{
             cabecalhoFuncionario.addElement("Código");
             cabecalhoFuncionario.addElement("Nome");
             cabecalhoFuncionario.addElement("CPF");
@@ -1913,57 +2032,41 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
             cabecalhoFuncionario.addElement("Email");
             cabecalhoFuncionario.addElement("Senha");
             cabecalhoFuncionario.addElement("Status");
-
-            if (!cbConsultarStatusFuncionario.getSelectedItem().equals("...")) {
-                ConFuncionarios conFuncionario = new ConFuncionarios();
-                this.tableListarFuncionario.setModel(new DefaultTableModel(
-                        conFuncionario.listar(cbConsultarStatusFuncionario.getSelectedItem().toString()), cabecalhoFuncionario));
-            } else {
-                ConFuncionarios conFuncionario = new ConFuncionarios();
-                this.tableListarFuncionario.setModel(new DefaultTableModel(
-                        conFuncionario.listar(), cabecalhoFuncionario));
+            
+            if(!cbConsultarStatusFuncionario.getSelectedItem().equals("...")){
+            ConFuncionarios conFuncionario = new ConFuncionarios();
+            this.tableListarFuncionario.setModel(new DefaultTableModel(
+            conFuncionario.listar(cbConsultarStatusFuncionario.getSelectedItem().toString()),cabecalhoFuncionario));  
+            }else{
+            ConFuncionarios conFuncionario = new ConFuncionarios();
+            this.tableListarFuncionario.setModel(new DefaultTableModel(
+                conFuncionario.listar(),cabecalhoFuncionario));
             }
-        } catch (Exception ex) {
+        }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante "
-                    + "a exibição de dados");
+                + "a exibição de dados");
         }
     }//GEN-LAST:event_bntListarFuncionarioActionPerformed
 
     private void bntSalvarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarFuncionarioActionPerformed
         // TODO add your handling code here:
-        try {
+        try{
             Funcionarios funcionario = new Funcionarios();
             ConFuncionarios conFuncionario = new ConFuncionarios();
-            
-            if(!txtNomeFuncionario.getText().trim().isEmpty()
-               || !txtCpfFuncionario.getText().trim().isEmpty()
-               || !txtTelefoneFuncionario.getText().trim().isEmpty()
-               || !txtEmailFuncionario.getText().trim().isEmpty()
-               || txtSenhaFuncionario.getPassword().length > 0){
-                
+
             funcionario.setNome(txtNomeFuncionario.getText());
             funcionario.setCpf(txtCpfFuncionario.getText());
             funcionario.setTelefone(txtTelefoneFuncionario.getText());
             funcionario.setEmail(txtEmailFuncionario.getText());
-                char[] senhaChar = txtSenhaFuncionario.getPassword();
-                String senha = new String(senhaChar);
-                funcionario.setSenha(senha);
-                Arrays.fill(senhaChar, ' ');
+            funcionario.setSenha(txtSenhaFuncionario.getText());
             funcionario.setStatus(cbStatusFuncionario.getSelectedItem().toString().toUpperCase());
-            
-            if(conFuncionario.pesquisar(funcionario.getCpf()) == null)
+
             conFuncionario.cadastrar(funcionario);
-            else{
-                JOptionPane.showMessageDialog(null, "Este funcionário já existe");
-                return;
-            } 
+            this.codigo1=0;
+
             JOptionPane.showMessageDialog(null, "registro cadastrado com sucesso!");
-            this.codigo1 = 0;
-            }else{
-                JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
         }
     }//GEN-LAST:event_bntSalvarFuncionarioActionPerformed
 
@@ -1973,17 +2076,13 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
             Funcionarios funcionario = new Funcionarios();
             ConFuncionarios conFuncionario = new ConFuncionarios();
 
-            if (txtCpfFuncionarioPesquisar.getText().trim().isEmpty()) {
+            if (txtCpfFuncionario.getText().isEmpty() || txtCpfFuncionario == null) {
                 JOptionPane.showMessageDialog(null, "Preencha o CPF para realizar a pesquisa");
             } else {
-                funcionario.setCpf(txtCpfFuncionarioPesquisar.getText());
-                if(conFuncionario.pesquisar(funcionario.getCpf())!=null)
+                funcionario.setCpf(txtCpfFuncionario.getText());
                 funcionario = conFuncionario.pesquisar(funcionario.getCpf());
-                else{
-                JOptionPane.showMessageDialog(null, "Funcionário inválido ou não encontrado"); 
-                return;
-                } 
-
+                
+                
                 this.txtCpfFuncionario.setText(funcionario.getCpf());
                 this.txtNomeFuncionario.setText(funcionario.getNome());
                 this.txtTelefoneFuncionario.setText(funcionario.getTelefone());
@@ -1994,7 +2093,7 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
                 } else {
                     cbStatusFuncionario.setSelectedIndex(1);
                 }
-                this.codigo1 = funcionario.getCodigo();
+                codigo1 = funcionario.getCodigo();
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
@@ -2011,165 +2110,146 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
 
     private void bntSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSairActionPerformed
         // TODO add your handling code here:
-        try {
-            this.dispose();
-
-            this.dialogLogin.setSize(250, 200);
-            this.dialogLogin.setLocationRelativeTo(null);
-            this.dialogLogin.setVisible(true);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
-        }
+        try{
+        this.dispose();
+        
+        this.dialogLogin.setSize(250, 200);
+        this.dialogLogin.setLocationRelativeTo(null);
+        this.dialogLogin.setVisible(true);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
+        } 
     }//GEN-LAST:event_bntSairActionPerformed
 
     private void bntCancelarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarLoginActionPerformed
         // TODO add your handling code here:
-        try {
-            System.exit(0);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
-        }
+        try{
+        System.exit(0);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
+        } 
     }//GEN-LAST:event_bntCancelarLoginActionPerformed
 
-    private void bntLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLogarActionPerformed
-        // TODO add your handling code here:
-        try {
-            ConFuncionarios conFunci = new ConFuncionarios();
+	    private void bntLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLogarActionPerformed
+	        // TODO add your handling code here:
+	        try{
+	        ConFuncionarios conFunci = new ConFuncionarios(); 
+	        
+	        char[] senhaChar = passwordLoginSenhaFuncionario.getPassword();
+	        String senha = new String(senhaChar);
+	        Arrays.fill(senhaChar, '\0');
+	        
+	        if (senha.isEmpty()) {
+	            JOptionPane.showMessageDialog(null, "O campo senha não pode estar vazio.");
+	            return;
+	        }
+	        
+	        Funcionarios funcionario = conFunci.logar(senha);
+	         
+	        if(funcionario!=null){
+        frmMenu menu = new frmMenu();
+            menu.setVisible(true);
+            menu.setSize(700, 450);
+            menu.setLocationRelativeTo(null);
+            
+            menu.txtNomeFuncionarioLogado.setText(funcionario.getNome());
+            this.codFuncionarioLogado = funcionario.getCodigo();
+            
+            ConOperacional conOperacional = new ConOperacional();
+            Operacional operacional = conOperacional.precos();
+            
+            menu.txtDataEntrada.setText(conOperacional.getDate());
+            menu.txtHoraEntrada.setText(conOperacional.getTime());
 
-            char[] senhaChar = passwordLoginSenhaFuncionario.getPassword();
-            String senha = new String(senhaChar);
-            Arrays.fill(senhaChar, '\0');
-            Funcionarios funcionario = conFunci.logar(senha);
-
-            if (funcionario != null) {
-                frmMenu menu = new frmMenu();
-                menu.setVisible(true);
-                menu.setSize(780, 450);
-                menu.setLocationRelativeTo(null);              
-
-                menu.txtNomeFuncionarioLogado.setText(funcionario.getNome());
-                this.codFuncionarioLogado = funcionario.getCodigo();
-
-                ConOperacional conOperacional = new ConOperacional();
-                Operacional operacional = conOperacional.precos();
-
-                menu.txtDataEntrada.setText(conOperacional.getDate());
-                menu.txtHoraEntrada.setText(conOperacional.getTime());
-
-                menu.txtPrimeiraHoraMenu.setText(String.valueOf(operacional.getPrecoPrimeiraHora()));
-                menu.txtValorHorasMenu.setText(String.valueOf(operacional.getPrecoHorasAdicionais()));
-                menu.txtValorDiariaMenu.setText(String.valueOf(operacional.getPrecoDiaria()));
-                
-                Vector cabecalhoVeiculo = new Vector();
-                ConVeiculos conVeiculo = new ConVeiculos();
-           
-                cabecalhoVeiculo.addElement("Placa"); // 1
-                cabecalhoVeiculo.addElement("Modelo"); // 2
-
-                menu.tableSourcePlaca.setModel(new DefaultTableModel(
-                conVeiculo.listarSourcePlaca(), cabecalhoVeiculo));
-                
-                Vector cabecalhoServico = new Vector();
-                ConServicos conServico = new ConServicos();
-                
-                cabecalhoServico.addElement("Nº Entrada"); // 1
-                cabecalhoServico.addElement("Veículo"); // 1
-                cabecalhoServico.addElement("Cliente"); // 1
-                cabecalhoServico.addElement("D. Entrada"); // 1
-                cabecalhoServico.addElement("D. Saída"); // 1
-                cabecalhoServico.addElement("H. Entrada"); // 1
-                cabecalhoServico.addElement("H. Saída"); // 1
-                cabecalhoServico.addElement("Status"); // 1
-                cabecalhoServico.addElement("Valor Total"); // 1
-                
-                menu.tableServico.setModel(new DefaultTableModel(
-                conServico.listar(), cabecalhoServico));
-                
-                this.dialogLogin.dispose();
-                this.dialogLogin.setVisible(false);
-            } else {
-                JOptionPane.showMessageDialog(null, "Senha inválida");
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
+            menu.txtPrimeiraHoraMenu.setText(String.valueOf(operacional.getPrecoPrimeiraHora()));
+            menu.txtValorHorasMenu.setText(String.valueOf(operacional.getPrecoHorasAdicionais()));
+            menu.txtValorDiariaMenu.setText(String.valueOf(operacional.getPrecoDiaria()));
+            
+            this.dialogLogin.dispose();
+            this.dialogLogin.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(null, "Senha inválida");
         }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
+        } 
     }//GEN-LAST:event_bntLogarActionPerformed
 
     private void bntDialogFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDialogFuncionarioActionPerformed
         // TODO add your handling code here:
-        try {
+        try{
             this.dialogCadastroFuncionario.setVisible(true);
             this.dialogCadastroFuncionario.setSize(600, 400);
             this.dialogCadastroFuncionario.setLocationRelativeTo(null);
-
+            
             Vector cabecalhoFuncionario = new Vector();
-            try {
-                cabecalhoFuncionario.addElement("Código");
-                cabecalhoFuncionario.addElement("Nome");
-                cabecalhoFuncionario.addElement("CPF");
-                cabecalhoFuncionario.addElement("Telefone");
-                cabecalhoFuncionario.addElement("Email");
-                cabecalhoFuncionario.addElement("Senha");
-                cabecalhoFuncionario.addElement("Status");
-
-                ConFuncionarios conFuncionario = new ConFuncionarios();
-                tableListarFuncionario.setModel(new DefaultTableModel(
-                        conFuncionario.listar(), cabecalhoFuncionario));
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante a exibição de dados");
+            try{
+            cabecalhoFuncionario.addElement("Código");
+            cabecalhoFuncionario.addElement("Nome");
+            cabecalhoFuncionario.addElement("CPF");
+            cabecalhoFuncionario.addElement("Telefone");
+            cabecalhoFuncionario.addElement("Email");
+            cabecalhoFuncionario.addElement("Senha");
+            cabecalhoFuncionario.addElement("Status");
+            
+            ConFuncionarios conFuncionario = new ConFuncionarios();
+            tableListarFuncionario.setModel(new DefaultTableModel(
+                                                  conFuncionario.listar(),cabecalhoFuncionario));
+            }catch(Exception ex){
+             JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante a exibição de dados");
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
         }
     }//GEN-LAST:event_bntDialogFuncionarioActionPerformed
 
     private void bntOperacional1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntOperacional1ActionPerformed
         // TODO add your handling code here:
-        try {
+        try{
             this.dialogOperacional.setVisible(true);
             this.dialogOperacional.setSize(600, 400);
             this.dialogOperacional.setLocationRelativeTo(null);
-
+            
             ConOperacional conOperacional = new ConOperacional();
             Operacional operacional = conOperacional.precos();
-
+            
             this.txtValorPrimeiraHoraOperacional.setText(String.valueOf(operacional.getPrecoPrimeiraHora()));
             this.txtValorHorasOperacional.setText(String.valueOf(operacional.getPrecoHorasAdicionais()));
             this.txtValorDiariaOperacional.setText(String.valueOf(operacional.getPrecoDiaria()));
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
         }
     }//GEN-LAST:event_bntOperacional1ActionPerformed
 
     private void bntCancelarOperacionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarOperacionalActionPerformed
         // TODO add your handling code here:
-        try {
+        try{
             this.dialogOperacional.dispose();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
         }
     }//GEN-LAST:event_bntCancelarOperacionalActionPerformed
 
     private void bntEditarOperacionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarOperacionalActionPerformed
         // TODO add your handling code here:
-        try {
+         try {
             Operacional operacional = new Operacional();
             ConOperacional conOperacional = new ConOperacional();
 
-            if (txtValorDiariaOperacional.getText().trim().isEmpty() || txtValorHorasOperacional.getText().trim().isEmpty()
-                    || txtValorPrimeiraHoraOperacional.getText().trim().isEmpty()) {
+            if (txtValorDiariaOperacional.getText().isEmpty() || txtValorHorasOperacional.getText().isEmpty()
+                || txtValorPrimeiraHoraOperacional.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
-            } else{
+            } else {
                 operacional.setPrecoPrimeiraHora(Double.parseDouble(txtValorPrimeiraHoraOperacional.getText()));
                 operacional.setPrecoHorasAdicionais(Double.parseDouble(txtValorHorasOperacional.getText()));
                 operacional.setPrecoDiaria(Double.parseDouble(txtValorDiariaOperacional.getText()));
-
+                
                 conOperacional.editar(operacional);
                 JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso!");
 
-                operacional = conOperacional.precos();
-
+                operacional = conOperacional.precos();           
+                
                 this.txtPrimeiraHoraMenu.setText(String.valueOf(operacional.getPrecoPrimeiraHora()));
                 this.txtValorHorasMenu.setText(String.valueOf(operacional.getPrecoHorasAdicionais()));
                 this.txtValorDiariaMenu.setText(String.valueOf(operacional.getPrecoDiaria()));
@@ -2193,20 +2273,20 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
 
     private void bntSalvarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarVeiculoActionPerformed
         // TODO add your handling code here:
-        try {
+        try{
             Veiculos veiculo = new Veiculos();
             ConVeiculos conVeiculo = new ConVeiculos();
 
             veiculo.setPlaca(txtPlacaVeiculo.getText());
-            veiculo.setModelo(txtModeloVeiculo.getText());
-            veiculo.setModelo(cbTipoVeiculo.getSelectedItem().toString().toUpperCase());
+	            veiculo.setModelo(txtModeloVeiculo.getText());
+	            veiculo.setTipo(cbTipoVeiculo.getSelectedItem().toString().toUpperCase());
 
             conVeiculo.cadastrar(veiculo);
-            this.codigo1 = 0;
-
+            this.codigo1=0;
+            
             JOptionPane.showMessageDialog(null, "registro cadastrado com sucesso!");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
         }
     }//GEN-LAST:event_bntSalvarVeiculoActionPerformed
 
@@ -2216,21 +2296,18 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
             Veiculos veiculo = new Veiculos();
             ConVeiculos conVeiculos = new ConVeiculos();
 
-            if (txtCpfFuncionarioPesquisar.getText().isEmpty() || txtCpfFuncionarioPesquisar == null) {
-                JOptionPane.showMessageDialog(null, "Preencha o CPF para realizar a pesquisa");
-            } else {
-                veiculo.setPlaca(txtPlacaVeiculo.getText());
-                veiculo = conVeiculos.pesquisar(veiculo.getPlaca());
-
+	            if (txtPlacaVeiculo.getText().isEmpty()) {
+	                JOptionPane.showMessageDialog(null, "Preencha a Placa para realizar a pesquisa");
+	            } else {
+	                veiculo = conVeiculos.pesquisar(txtPlacaVeiculo.getText());
+                
+                
                 this.txtPlacaVeiculo.setText(veiculo.getPlaca());
                 this.txtModeloVeiculo.setText(veiculo.getModelo());
                 switch (veiculo.getTipo()) {
-                    case "PEQUENO" ->
-                        cbTipoVeiculo.setSelectedIndex(0);
-                    case "MÉDIO" ->
-                        cbTipoVeiculo.setSelectedIndex(1);
-                    case "GRANDE" ->
-                        cbTipoVeiculo.setSelectedIndex(2);
+                    case "PEQUENO" -> cbTipoVeiculo.setSelectedIndex(0);
+                    case "MÉDIO" -> cbTipoVeiculo.setSelectedIndex(1);
+                    case "GRANDE" -> cbTipoVeiculo.setSelectedIndex(2);
                 }
                 this.codigo1 = veiculo.getCodigo();
             }
@@ -2243,7 +2320,7 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         // TODO add your handling code here:
         Vector cabecalhoVeiculo = new Vector();
 
-        try {
+        try{
             //cabecalho.addElement("Código"); //0
             cabecalhoVeiculo.addElement("Código"); // 1
             cabecalhoVeiculo.addElement("Cód. Cliente"); // 2
@@ -2253,11 +2330,11 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
 
             ConVeiculos conVeiculo = new ConVeiculos();
             tableListarVeiculo.setModel(new DefaultTableModel(
-                    conVeiculo.listar(), cabecalhoVeiculo));
+                conVeiculo.listar(),cabecalhoVeiculo));
 
-        } catch (Exception ex) {
+        }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante "
-                    + "a exibição de dados");
+                + "a exibição de dados");
         }
     }//GEN-LAST:event_bntListarVeiculoActionPerformed
 
@@ -2267,14 +2344,14 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
             Funcionarios funcionario = new Funcionarios();
             ConFuncionarios conFuncionario = new ConFuncionarios();
 
-            if (txtNomeFuncionario.getText().trim().isEmpty()
-                    || txtCpfFuncionario.getText().trim().isEmpty()
-                    || txtTelefoneFuncionario.getText().trim().isEmpty()
-                    || txtEmailFuncionario.getText().trim().isEmpty()
-                    || txtSenhaFuncionario.getPassword().length == 0) {
+            if (txtNomeFuncionario.getText().isEmpty()
+                    || txtCpfFuncionario.getText().isEmpty()
+                    || txtTelefoneFuncionario.getText().isEmpty()
+                    || txtEmailFuncionario.getText().isEmpty()
+                    || txtSenhaFuncionario.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
             } else {
-
+                
                 funcionario.setNome(txtNomeFuncionario.getText());
                 funcionario.setTelefone(txtTelefoneFuncionario.getText());
                 funcionario.setCpf(txtCpfFuncionario.getText());
@@ -2283,13 +2360,10 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
                 funcionario.setStatus(cbStatusFuncionario.getSelectedItem().toString().toUpperCase());
                 funcionario.setCodigo(this.codigo1);
 
-                boolean funcionarioAtualizado = conFuncionario.editar(funcionario);
-                if (funcionarioAtualizado) {
-            JOptionPane.showMessageDialog(null, "Registro alterado com sucesso!");
-        } else {
-            JOptionPane.showMessageDialog(null, "Nenhum registro foi alterado.");
-       }
+                conFuncionario.editar(funcionario);
+                JOptionPane.showMessageDialog(null, "registro alterado com sucesso!");
             }
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
         }
@@ -2297,27 +2371,15 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
 
     private void bntExcluirFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirFuncionarioActionPerformed
         // TODO add your handling code here:
-        try {
+        try{
             ConFuncionarios conFuncionario = new ConFuncionarios();
-            if (this.codigo1 == 0) {
+            if (this.codigo1==0) {
                 JOptionPane.showMessageDialog(null, "Pesquise os campos do funcionárioa a ser excluido");
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir?", "Confirme exclusão", JOptionPane.YES_NO_OPTION) != 1) {
                     conFuncionario.excluir(codigo1);
                     JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso!");
-                    this.codigo1 = 0;
-                    
                 }
-            txtNomeFuncionario.setText("");
-            txtCpfFuncionario.setText("");
-            txtTelefoneFuncionario.setText("");
-            txtEmailFuncionario.setText("");
-            txtSenhaFuncionario.setText("");
-            txtCpfFuncionarioPesquisar.setText("");
-            
-            chbsenhafunci.setSelected(false);
-            
-            cbStatusFuncionario.setSelectedIndex(0);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
@@ -2326,40 +2388,36 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
 
     private void bntCancelarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarFuncionarioActionPerformed
         // TODO add your handling code here:
-        try{
         this.dialogCadastroFuncionario.dispose();
-        this.codigo1 = 0;
-        }catch(Exception ex){
-           JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex); 
-        }
+        this.codigo1=0;
     }//GEN-LAST:event_bntCancelarFuncionarioActionPerformed
 
     private void bntDialogClienteVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDialogClienteVeiculoActionPerformed
         // TODO add your handling code here:
-        try {
+        try{
             this.dialogCadastroCliente1.setVisible(true);
             this.dialogCadastroCliente1.setSize(600, 400);
             this.dialogCadastroCliente1.setLocationRelativeTo(null);
-
+            
             Vector cabecalhoVeiculo = new Vector();
-            try {
-                //cabecalho.addElement("Código"); //0
-                cabecalhoVeiculo.addElement("Nome"); // 2
-                cabecalhoVeiculo.addElement("CPF"); // 2
-                cabecalhoVeiculo.addElement("Telefone"); // 2
-                cabecalhoVeiculo.addElement("Veículo"); // 3
-                cabecalhoVeiculo.addElement("Modelo"); // 4
-                cabecalhoVeiculo.addElement("Tipo"); // 5
+        try {
+            //cabecalho.addElement("Código"); //0
+            cabecalhoVeiculo.addElement("Nome"); // 2
+            cabecalhoVeiculo.addElement("CPF"); // 2
+            cabecalhoVeiculo.addElement("Telefone"); // 2
+            cabecalhoVeiculo.addElement("Veículo"); // 3
+            cabecalhoVeiculo.addElement("Modelo"); // 4
+            cabecalhoVeiculo.addElement("Tipo"); // 5
 
-                ConVeiculos conVeiculo = new ConVeiculos();
-                tableListarCliente1.setModel(new DefaultTableModel(
-                        conVeiculo.listarVeiculoCliente(), cabecalhoVeiculo));
+            ConVeiculos conVeiculo = new ConVeiculos();
+            tableListarCliente1.setModel(new DefaultTableModel(
+                conVeiculo.listarVeiculoCliente(),cabecalhoVeiculo));
 
-            } catch (Exception error) {
-                JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante a exibição de dados: " + error);
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante a exibição de dados: " +error);
+        }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
         }
     }//GEN-LAST:event_bntDialogClienteVeiculoActionPerformed
 
@@ -2373,10 +2431,10 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
                     || txtModeloVeiculo.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
             } else {
-
+                
                 veiculo.setPlaca(txtPlacaVeiculo.getText());
-                veiculo.setModelo(txtModeloVeiculo.getText());
-                veiculo.setModelo(cbTipoVeiculo.getSelectedItem().toString().toUpperCase());
+	                veiculo.setModelo(txtModeloVeiculo.getText());
+	                veiculo.setTipo(cbTipoVeiculo.getSelectedItem().toString().toUpperCase());
                 veiculo.setCodigo(this.codigo1);
 
                 conVeiculo.editar(veiculo);
@@ -2390,9 +2448,9 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
 
     private void bntExcluirVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirVeiculoActionPerformed
         // TODO add your handling code here:
-        try {
+        try{
             ConVeiculos conVeiculo = new ConVeiculos();
-            if (this.codigo1 == 0) {
+            if (this.codigo1==0) {
                 JOptionPane.showMessageDialog(null, "Pesquise os campos do funcionárioa a ser excluido");
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir?", "Confirme exclusão", JOptionPane.YES_NO_OPTION) != 1) {
@@ -2408,85 +2466,50 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
     private void bntCancelarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarVeiculoActionPerformed
         // TODO add your handling code here:
         this.dialogCadastroVeiculo.dispose();
-        this.codigo1 = 0;
+        this.codigo1=0;
     }//GEN-LAST:event_bntCancelarVeiculoActionPerformed
 
     private void bntNovo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntNovo1ActionPerformed
         // TODO add your handling code here:
-        try {
+        try{
             ConOperacional conOperacional = new ConOperacional();
             Operacional operacional = conOperacional.precos();
-
+            
             this.txtDataEntrada.setText(conOperacional.getDate());
             this.txtHoraEntrada.setText(conOperacional.getTime());
 
             this.txtPrimeiraHoraMenu.setText(String.valueOf(operacional.getPrecoPrimeiraHora()));
             this.txtValorHorasMenu.setText(String.valueOf(operacional.getPrecoHorasAdicionais()));
             this.txtValorDiariaMenu.setText(String.valueOf(operacional.getPrecoDiaria()));
-
+           
             this.txtPlacaVeiculoServico.setText("");
             this.txtNumEntrada.setText("");
-            this.txtModeloVeiculoServico.setText("");
+            this.txtModeloVeiculo.setText("");
             this.txtNomeClienteServico.setText("");
             this.txtValorTotal.setText("");
             this.txtDataSaida.setText("");
             this.txtHoraSaida.setText("");
-            
-            Vector cabecalhoVeiculo = new Vector();
-                ConVeiculos conVeiculo = new ConVeiculos();
-           
-            cabecalhoVeiculo.addElement("Placa"); // 1
-            cabecalhoVeiculo.addElement("Modelo"); // 2
-
-            tableSourcePlaca.setModel(new DefaultTableModel(
-                    conVeiculo.listarSourcePlaca(), cabecalhoVeiculo));
-        } catch (Exception ex) {
+        }catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
         }
     }//GEN-LAST:event_bntNovo1ActionPerformed
 
     private void bntVoltarCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVoltarCliente1ActionPerformed
         // TODO add your handling code here:
-        try{
         this.dialogCadastroCliente1.dispose();
         this.codigo1 = 0;
-        this.codigo2 = 0;
-        
-        Vector cabecalhoVeiculo = new Vector();
-                ConVeiculos conVeiculo = new ConVeiculos();
-           
-            cabecalhoVeiculo.addElement("Placa"); // 1
-            cabecalhoVeiculo.addElement("Modelo"); // 2
-
-            tableSourcePlaca.setModel(new DefaultTableModel(
-                    conVeiculo.listarSourcePlaca(), cabecalhoVeiculo));
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
-        }
     }//GEN-LAST:event_bntVoltarCliente1ActionPerformed
 
     private void bntExcluirCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirCliente1ActionPerformed
         // TODO add your handling code here:
-        try {
+        try{
             ConVeiculos conVeiculo = new ConVeiculos();
-            if (this.codigo2 == 0) {
+            if (this.codigo1==0) {
                 JOptionPane.showMessageDialog(null, "Pesquise os campos do funcionárioa a ser excluido");
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir?", "Confirme exclusão", JOptionPane.YES_NO_OPTION) != 1) {
-                    conVeiculo.excluir(this.codigo2);
+                    conVeiculo.excluir(this.codigo1);
                     JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso!");
-                    this.codigo2 = 0;
-                    this.codigo1 = 0;
-                    
-            txtPlacaClientePesquisa1.setText("");
-            txtNomeCliente1.setText("");
-            txtTelefoneCliente1.setText("");
-            txtCpfCliente1.setText("");
-            txtPlacaVeiculo1.setText("");
-            txtModeloVeiculo1.setText("");
-            
-            cbTipoVeiculo1.setSelectedIndex(0);
-            
                 }
             }
         } catch (Exception ex) {
@@ -2499,45 +2522,35 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         try {
             Clientes cliente = new Clientes();
             ConClientes conCliente = new ConClientes();
-
+            
             Veiculos veiculo = new Veiculos();
             ConVeiculos conVeiculo = new ConVeiculos();
 
-            if (txtPlacaVeiculo1.getText().trim().isEmpty()
-                    || txtModeloVeiculo1.getText().trim().isEmpty()
-                    || txtNomeCliente1.getText().trim().isEmpty()
-                    || txtCpfCliente1.getText().trim().isEmpty()
-                    || txtTelefoneCliente1.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Preencha os campos a partir da pesquisa");
+            if (txtPlacaVeiculo1.getText().isEmpty()
+                || txtModeloVeiculo1.getText().isEmpty()
+                || txtNomeCliente1.getText().isEmpty()
+                || txtCpfCliente1.getText().isEmpty()
+                || txtTelefoneCliente1.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
             } else {
+                
                 cliente.setNome(txtNomeCliente1.getText());
                 cliente.setTelefone(txtTelefoneCliente1.getText());
                 cliente.setCpf(txtCpfCliente1.getText());
                 cliente.setCodigo(this.codigo1);
 
-                boolean clienteAtualizado = conCliente.editar(cliente);
-
+                conCliente.editar(cliente);
+                
                 veiculo.setPlaca(txtPlacaVeiculo1.getText());
                 veiculo.setModelo(txtModeloVeiculo1.getText());
                 veiculo.setTipo(cbTipoVeiculo1.getSelectedItem().toString().toUpperCase());
                 veiculo.setCodcliente(this.codigo1);
                 veiculo.setCodigo(this.codigo2);
 
-                boolean veiculoAtualizado = conVeiculo.editar(veiculo);
-                
-                if (clienteAtualizado && veiculoAtualizado) {
-    JOptionPane.showMessageDialog(null, "Registro alterado com sucesso!");
-        } else {
-    JOptionPane.showMessageDialog(null, "Nenhum registro foi alterado.");
-       }
-                
-            Vector<String> cabecalho = new Vector<>();
-            cabecalho.add("Placa");
-            cabecalho.add("Modelo");
-
-            tableSourcePlaca.setModel(new DefaultTableModel(
-            conVeiculo.listarSourcePlaca(), cabecalho));
+                conVeiculo.editar(veiculo);
+                JOptionPane.showMessageDialog(null, "registro alterado com sucesso!");
             }
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
         }
@@ -2551,43 +2564,31 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
 
             Veiculos veiculo = new Veiculos();
             ConVeiculos conVeiculo = new ConVeiculos();
-            
-            if(!txtPlacaClientePesquisa1.getText().trim().isEmpty()) {
-                veiculo.setPlaca(txtPlacaClientePesquisa1.getText());
-                if(conVeiculo.pesquisar(veiculo.getPlaca())!=null)
+
+            if (txtPlacaVeiculo1.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha a PLACA para realizar a pesquisa");
+            } else {
+                veiculo.setPlaca(txtPlacaVeiculo1.getText());
                 veiculo = conVeiculo.pesquisar(veiculo.getPlaca());
-                else{
-                JOptionPane.showMessageDialog(null, "Placa inválida ou não encontrada"); 
-                return;
-                }
-                    
-                cliente.setCodigo(veiculo.getCodcliente());
-                cliente = conCliente.pesquisar(cliente.getCodigo());
                 
-                if(cliente!=null){
+                cliente.setCodigo(veiculo.getCodcliente());
+                cliente = conCliente.pesquisar(String.valueOf(veiculo.getCodcliente()));
+
                 this.codigo1 = cliente.getCodigo();
                 this.codigo2 = veiculo.getCodigo();
-
+                
                 txtCpfCliente1.setText(cliente.getCpf());
                 txtNomeCliente1.setText(cliente.getNome());
                 txtTelefoneCliente1.setText(cliente.getTelefone());
-
+                
                 txtPlacaVeiculo1.setText(veiculo.getPlaca());
                 txtModeloVeiculo1.setText(veiculo.getModelo());
                 switch (veiculo.getTipo()) {
-                    case "PEQUENO" ->
-                        cbTipoVeiculo1.setSelectedIndex(0);
-                    case "MÉDIO" ->
-                        cbTipoVeiculo1.setSelectedIndex(1);
-                    case "GRANDE" ->
-                        cbTipoVeiculo1.setSelectedIndex(2);
+                    case "PEQUENO" -> cbTipoVeiculo1.setSelectedIndex(0);
+                    case "MÉDIO" -> cbTipoVeiculo1.setSelectedIndex(1);
+                    case "GRANDE" -> cbTipoVeiculo1.setSelectedIndex(2);
                 }
-               }else{
-                   JOptionPane.showMessageDialog(null, "Placa inválida ou não encontrada"); 
-                }
-            }else{
-             JOptionPane.showMessageDialog(null, "Preencha a PLACA para realizar a pesquisa");   
-            }          
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
         }
@@ -2595,60 +2596,38 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
 
     private void bntSalvarCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarCliente1ActionPerformed
         // TODO add your handling code here:
-        try {
+        try{
             Clientes cliente = new Clientes();
             ConClientes conCliente = new ConClientes();
-
+            
             Veiculos veiculo = new Veiculos();
             ConVeiculos conVeiculo = new ConVeiculos();
 
-            if (txtNomeCliente1.getText().trim().isEmpty()
-                    || txtCpfCliente1.getText().trim().isEmpty()
-                    || txtTelefoneCliente1.getText().trim().isEmpty()
-                    || txtPlacaVeiculo1.getText().trim().isEmpty()
-                    || txtModeloVeiculo1.getText().trim().isEmpty()) {
+            if (txtNomeCliente1.getText().isEmpty()
+                || txtCpfCliente1.getText().isEmpty()
+                || txtTelefoneCliente1.getText().isEmpty()
+                || txtPlacaVeiculo1.getText().isEmpty()
+                || txtModeloVeiculo1.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
             } else {
-                
-                cliente.setNome(txtNomeCliente1.getText().trim());
-                cliente.setTelefone(txtTelefoneCliente1.getText().trim());
-                cliente.setCpf(txtCpfCliente1.getText().trim());
-                
-                if(conCliente.pesquisar(cliente.getCpf()) == null){
-                    conCliente.cadastrar(cliente);
-                    veiculo.setCodcliente(conCliente.IDCliente());
-                }else{
-                    cliente = conCliente.pesquisar(cliente.getCpf());
-                    veiculo.setCodcliente(cliente.getCodigo());
-                    txtNomeCliente1.setText(cliente.getNome());
-                    txtTelefoneCliente1.setText(cliente.getTelefone());
-                }
+                cliente.setNome(txtNomeCliente1.getText());
+                cliente.setTelefone(txtTelefoneCliente1.getText());
+                cliente.setCpf(txtCpfCliente1.getText());
 
-                veiculo.setPlaca(txtPlacaVeiculo1.getText().trim());
-                veiculo.setModelo(txtModeloVeiculo1.getText().trim());
-                veiculo.setTipo(cbTipoVeiculo1.getSelectedItem().toString().toUpperCase());
+                conCliente.cadastrar(cliente);
                 
-                if (conVeiculo.pesquisar(veiculo.getPlaca()) != null) {
-                JOptionPane.showMessageDialog(null, "Esta placa já está cadastrada!");
-                return;
-                }
+                veiculo.setCodcliente(conCliente.IDCliente());
+                veiculo.setPlaca(txtPlacaVeiculo1.getText());
+                veiculo.setModelo(txtModeloVeiculo1.getText());
+                veiculo.setTipo(cbTipoVeiculo1.getSelectedItem().toString().toUpperCase());
                 
                 conVeiculo.cadastrar(veiculo);
                 
-                //Atualizando a tabela de pesquisa de placa na tela principal
-                Vector cabecalhoVeiculo = new Vector();
-           
-                cabecalhoVeiculo.addElement("Placa"); // 1
-                cabecalhoVeiculo.addElement("Modelo"); // 2
-
-                tableSourcePlaca.setModel(new DefaultTableModel(
-                    conVeiculo.listarSourcePlaca(), cabecalhoVeiculo));
-
                 JOptionPane.showMessageDialog(null, "registro cadastrado com sucesso!");
             }
-            this.codigo1 = 0;
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
+            this.codigo1=0;          
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
         }
     }//GEN-LAST:event_bntSalvarCliente1ActionPerformed
 
@@ -2670,10 +2649,10 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
 
             ConVeiculos conVeiculo = new ConVeiculos();
             tableListarCliente1.setModel(new DefaultTableModel(
-                    conVeiculo.listarVeiculoCliente(), cabecalhoVeiculo));
+                conVeiculo.listarVeiculoCliente(),cabecalhoVeiculo));
 
         } catch (Exception error) {
-            JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante a exibição de dados: " + error);
+            JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante a exibição de dados: " +error);
         }
     }//GEN-LAST:event_bntListarCliente1ActionPerformed
 
@@ -2688,205 +2667,6 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
     private void txtModeloVeiculo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModeloVeiculo1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtModeloVeiculo1ActionPerformed
-
-    private void chbsenhafunciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbsenhafunciActionPerformed
-
-        if (chbsenhafunci.isSelected()) {
-            txtSenhaFuncionario.setEchoChar((char) 0);
-            chbsenhafunci.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/hide.png")));
-
-        } else {
-            txtSenhaFuncionario.setEchoChar('*');
-            chbsenhafunci.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/view.png")));
-        }
-    }//GEN-LAST:event_chbsenhafunciActionPerformed
-
-    private void txtSenhaFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaFuncionarioActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_txtSenhaFuncionarioActionPerformed
-
-    private void txtEmailFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailFuncionarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailFuncionarioActionPerformed
-
-    private void bntNewClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntNewClienteActionPerformed
-        // TODO add your handling code here:
-            this.dialogCadastroCliente1.setVisible(true);
-            
-            Vector cabecalhoVeiculo = new Vector();
-                ConVeiculos conVeiculo = new ConVeiculos();
-           
-            cabecalhoVeiculo.addElement("Placa"); // 1
-            cabecalhoVeiculo.addElement("Modelo"); // 2
-
-            tableSourcePlaca.setModel(new DefaultTableModel(
-                    conVeiculo.listarSourcePlaca(), cabecalhoVeiculo));
-    }//GEN-LAST:event_bntNewClienteActionPerformed
-
-    private void bntSalvarServico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarServico1ActionPerformed
-        // TODO add your handling code here:
-        try{
-            Vector cabecalhoVeiculo = new Vector();
-            ConVeiculos conVeiculo = new ConVeiculos();
-           
-            cabecalhoVeiculo.addElement("Placa"); // 1
-            cabecalhoVeiculo.addElement("Modelo"); // 2
-
-            tableSourcePlaca.setModel(new DefaultTableModel(
-            conVeiculo.listarSourcePlaca(), cabecalhoVeiculo));
-            
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
-        }
-    }//GEN-LAST:event_bntSalvarServico1ActionPerformed
-
-    private void bntEditarServico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarServico1ActionPerformed
-        // TODO add your handling code here:
-        
-        Vector cabecalhoVeiculo = new Vector();
-                ConVeiculos conVeiculo = new ConVeiculos();
-           
-            cabecalhoVeiculo.addElement("Placa"); // 1
-            cabecalhoVeiculo.addElement("Modelo"); // 2
-
-            tableSourcePlaca.setModel(new DefaultTableModel(
-                    conVeiculo.listarSourcePlaca(), cabecalhoVeiculo));
-    }//GEN-LAST:event_bntEditarServico1ActionPerformed
-
-    private void bntExcluirServico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirServico1ActionPerformed
-        // TODO add your handling code here:
-        Vector cabecalhoVeiculo = new Vector();
-                ConVeiculos conVeiculo = new ConVeiculos();
-           
-            cabecalhoVeiculo.addElement("Placa"); // 1
-            cabecalhoVeiculo.addElement("Modelo"); // 2
-
-            tableSourcePlaca.setModel(new DefaultTableModel(
-                    conVeiculo.listarSourcePlaca(), cabecalhoVeiculo));
-    }//GEN-LAST:event_bntExcluirServico1ActionPerformed
-
-    private void txtNumPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumPlacaActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_txtNumPlacaActionPerformed
-
-    private void bntListarServico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntListarServico1ActionPerformed
-        // TODO add your handling code here:
-        
-                Vector cabecalhoServico = new Vector();
-                ConServicos conServico = new ConServicos();
-                
-                cabecalhoServico.addElement("Nº Entrada"); // 1
-                cabecalhoServico.addElement("Veículo"); // 1
-                cabecalhoServico.addElement("Cliente"); // 1
-                cabecalhoServico.addElement("D. Entrada"); // 1
-                cabecalhoServico.addElement("D. Saída"); // 1
-                cabecalhoServico.addElement("H. Entrada"); // 1
-                cabecalhoServico.addElement("H. Saída"); // 1
-                cabecalhoServico.addElement("Status"); // 1
-                cabecalhoServico.addElement("Valor Total"); // 1
-                
-                if(!cbStatusServico1.getSelectedItem().equals("...")){
-                this.tableServico.setModel(new DefaultTableModel(
-                conServico.listar(cbStatusServico1.getSelectedItem().toString()), cabecalhoServico));
-                } else{
-                this.tableServico.setModel(new DefaultTableModel(
-                conServico.listar(), cabecalhoServico));    
-                }
-                
-    }//GEN-LAST:event_bntListarServico1ActionPerformed
-
-    private void bntPesquisarServico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPesquisarServico1ActionPerformed
-        // TODO add your handling code here:
-        try {
-            Servicos servico = new Servicos();
-            ConServicos conServico = new ConServicos();
-
-            Veiculos veiculo = new Veiculos();
-            ConVeiculos conVeiculo = new ConVeiculos();
-            
-            Clientes cliente = new Clientes();
-            ConClientes conCliente = new ConClientes(); 
-
-            if (txtNumEntrada.getText().isEmpty() || txtNumEntrada == null) {
-                JOptionPane.showMessageDialog(null, "Preencha o Nº de Entrada para realizar a pesquisa");
-            } else {
-                servico.setCodigo(Integer.parseInt(txtNumEntrada.getText()));
-                servico = conServico.pesquisar(servico.getCodigo());
-                
-                veiculo.setCodigo(servico.getCodveiculo());
-                veiculo = conVeiculo.pesquisarVeiculoServico(veiculo.getCodigo());
-                
-                cliente.setCodigo(veiculo.getCodcliente());
-                cliente = conCliente.pesquisar(cliente.getCodigo());
-
-                this.txtModeloVeiculoServico.setText(veiculo.getModelo());
-                this.txtPlacaVeiculoServico.setText(veiculo.getPlaca());
-                this.txtNomeClienteServico.setText(cliente.getNome());
-                this.txtDataEntrada.setText(servico.getDatainicial());
-                this.txtDataSaida.setText(servico.getDatafinal());
-                this.txtHoraEntrada.setText(servico.getHoraentrada());
-                this.txtHoraSaida.setText(servico.getHorasaida());
-                this.txtValorTotal.setText(String.valueOf(servico.getValorTotal()));
-            }   
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
-        }
-    }//GEN-LAST:event_bntPesquisarServico1ActionPerformed
-
-    private void txtTelefoneFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefoneFuncionarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefoneFuncionarioActionPerformed
-
-    private void bntNovoFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntNovoFuncionarioActionPerformed
-        // TODO add your handling code here:
-        try{
-            txtNomeFuncionario.setText("");
-            txtCpfFuncionario.setText("");
-            txtTelefoneFuncionario.setText("");
-            txtEmailFuncionario.setText("");
-            txtSenhaFuncionario.setText("");
-            txtCpfFuncionarioPesquisar.setText("");
-            
-            chbsenhafunci.setSelected(false);
-            
-            cbStatusFuncionario.setSelectedIndex(0);
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
-        }
-    }//GEN-LAST:event_bntNovoFuncionarioActionPerformed
-
-    private void bntNovoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntNovoClienteActionPerformed
-        // TODO add your handling code here:
-        try{
-            txtPlacaClientePesquisa1.setText("");
-            txtNomeCliente1.setText("");
-            txtTelefoneCliente1.setText("");
-            txtCpfCliente1.setText("");
-            txtPlacaVeiculo1.setText("");
-            txtModeloVeiculo1.setText("");
-            
-            cbTipoVeiculo1.setSelectedIndex(0);
-            
-            this.codigo1 = 0;
-            this.codigo2 = 0;
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
-        }
-    }//GEN-LAST:event_bntNovoClienteActionPerformed
-
-    private void chbSenhaFunciLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbSenhaFunciLogarActionPerformed
-        // TODO add your handling code here:
-        if (chbSenhaFunciLogar.isSelected()) {
-            passwordLoginSenhaFuncionario.setEchoChar((char) 0);
-            chbSenhaFunciLogar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/hide.png")));
-
-        } else {
-            passwordLoginSenhaFuncionario.setEchoChar('*');
-            chbSenhaFunciLogar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/view.png")));
-        }
-    }//GEN-LAST:event_chbSenhaFunciLogarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2919,11 +2699,11 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 frmMenu menu = new frmMenu();
-
-                if (!menu.isVisible()) {
-                    menu.dialogLogin.setSize(250, 200);
-                    menu.dialogLogin.setLocationRelativeTo(null);
-                    menu.dialogLogin.setVisible(true);
+                
+                if(!menu.isVisible()){
+                menu.dialogLogin.setSize(250, 200);
+                menu.dialogLogin.setLocationRelativeTo(null);
+                menu.dialogLogin.setVisible(true); 
                 }
             }
         });
@@ -2933,18 +2713,22 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
     private javax.swing.JButton bntCancelarFuncionario;
     private javax.swing.JButton bntCancelarLogin;
     private javax.swing.JButton bntCancelarOperacional;
+    private javax.swing.JButton bntCancelarServico1;
     private javax.swing.JButton bntCancelarVeiculo;
     private javax.swing.JButton bntDialogClienteVeiculo;
     private javax.swing.JButton bntDialogFuncionario;
+    private javax.swing.JButton bntEditarCliente;
     private javax.swing.JButton bntEditarCliente1;
     private javax.swing.JButton bntEditarFuncionario;
     private javax.swing.JButton bntEditarOperacional;
     private javax.swing.JButton bntEditarServico1;
     private javax.swing.JButton bntEditarVeiculo;
+    private javax.swing.JButton bntExcluirCliente;
     private javax.swing.JButton bntExcluirCliente1;
     private javax.swing.JButton bntExcluirFuncionario;
     private javax.swing.JButton bntExcluirServico1;
     private javax.swing.JButton bntExcluirVeiculo;
+    private javax.swing.JButton bntListarCliente;
     private javax.swing.JButton bntListarCliente1;
     private javax.swing.JButton bntListarFuncionario;
     private javax.swing.JButton bntListarServico1;
@@ -2952,26 +2736,26 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
     private javax.swing.JButton bntLogar;
     private javax.swing.JButton bntNewCliente;
     private javax.swing.JButton bntNovo1;
-    private javax.swing.JButton bntNovoCliente;
-    private javax.swing.JButton bntNovoFuncionario;
     private javax.swing.JButton bntOperacional1;
+    private javax.swing.JButton bntPesquisarCliente;
     private javax.swing.JButton bntPesquisarCliente1;
     private javax.swing.JButton bntPesquisarFuncionario;
     private javax.swing.JButton bntPesquisarServico1;
     private javax.swing.JButton bntPesquisarVeiculo;
     private javax.swing.JButton bntSair;
+    private javax.swing.JButton bntSalvarCliente;
     private javax.swing.JButton bntSalvarCliente1;
     private javax.swing.JButton bntSalvarFuncionario;
     private javax.swing.JButton bntSalvarServico1;
     private javax.swing.JButton bntSalvarVeiculo;
+    private javax.swing.JButton bntVoltarCliente;
     private javax.swing.JButton bntVoltarCliente1;
     private javax.swing.JComboBox<String> cbConsultarStatusFuncionario;
     private javax.swing.JComboBox<String> cbStatusFuncionario;
     private javax.swing.JComboBox<String> cbStatusServico1;
     private javax.swing.JComboBox<String> cbTipoVeiculo;
     private javax.swing.JComboBox<String> cbTipoVeiculo1;
-    private javax.swing.JCheckBox chbSenhaFunciLogar;
-    private javax.swing.JCheckBox chbsenhafunci;
+    private javax.swing.JDialog dialogCadastroCliente;
     private javax.swing.JDialog dialogCadastroCliente1;
     private javax.swing.JDialog dialogCadastroFuncionario;
     private javax.swing.JDialog dialogCadastroVeiculo;
@@ -2984,7 +2768,6 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -2995,16 +2778,17 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
@@ -3014,6 +2798,7 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -3037,8 +2822,8 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
-    private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel27;
+    private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
@@ -3046,11 +2831,15 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
     private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
     private javax.swing.JPanel jPanel34;
-    private javax.swing.JPanel jPanel35;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
@@ -3061,16 +2850,18 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
+    private javax.swing.JTable jTable4;
     private javax.swing.JPasswordField passwordLoginSenhaFuncionario;
+    private javax.swing.JTable tableListarCliente;
     private javax.swing.JTable tableListarCliente1;
     private javax.swing.JTable tableListarFuncionario;
     private javax.swing.JTable tableListarVeiculo;
-    private javax.swing.JTable tableServico;
-    private javax.swing.JTable tableSourcePlaca;
+    private javax.swing.JTable tableSourcePlaca1;
+    private javax.swing.JTextField txtCpfCliente;
     private javax.swing.JTextField txtCpfCliente1;
     private javax.swing.JTextField txtCpfFuncionario;
-    private javax.swing.JTextField txtCpfFuncionarioPesquisar;
     private javax.swing.JFormattedTextField txtDataEntrada;
     private javax.swing.JFormattedTextField txtDataSaida;
     private javax.swing.JTextField txtEmailFuncionario;
@@ -3079,20 +2870,21 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
     private javax.swing.JTextField txtModeloVeiculo;
     private javax.swing.JTextField txtModeloVeiculo1;
     private javax.swing.JTextField txtModeloVeiculoServico;
+    private javax.swing.JTextField txtNomeCliente;
     private javax.swing.JTextField txtNomeCliente1;
     private javax.swing.JTextField txtNomeClienteServico;
     private javax.swing.JTextField txtNomeFuncionario;
     private javax.swing.JLabel txtNomeFuncionarioLogado;
     private javax.swing.JTextField txtNumEntrada;
-    private javax.swing.JTextField txtNumPlaca;
-    private javax.swing.JTextField txtPlacaClientePesquisa1;
+    private javax.swing.JTextField txtNumPlaca1;
     private javax.swing.JTextField txtPlacaVeiculo;
     private javax.swing.JTextField txtPlacaVeiculo1;
     private javax.swing.JTextField txtPlacaVeiculoServico;
     private javax.swing.JTextField txtPrimeiraHoraMenu;
     private javax.swing.JTextField txtQtdDias1;
     private javax.swing.JTextField txtQtdHoras1;
-    private javax.swing.JPasswordField txtSenhaFuncionario;
+    private javax.swing.JTextField txtSenhaFuncionario;
+    private javax.swing.JTextField txtTelefoneCliente;
     private javax.swing.JTextField txtTelefoneCliente1;
     private javax.swing.JTextField txtTelefoneFuncionario;
     private javax.swing.JTextField txtValorDiariaMenu;

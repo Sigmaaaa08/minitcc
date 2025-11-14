@@ -47,4 +47,11 @@ public class Veiculos {
     private String placa;
     private String modelo;
     private String tipo;
+
+    public boolean isValid() {
+        return placa != null && !placa.trim().isEmpty() &&
+               modelo != null && !modelo.trim().isEmpty() &&
+               tipo != null && !tipo.trim().isEmpty() &&
+               codcliente > 0;
+    }
 }

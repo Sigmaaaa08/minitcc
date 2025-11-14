@@ -134,4 +134,14 @@ public class Funcionarios {
     private String status;
     private String datacont;
    
+    public boolean isValid() {
+        return nome != null && !nome.trim().isEmpty() &&
+               senha != null && !senha.trim().isEmpty() &&
+               telefone != null && !telefone.trim().isEmpty() &&
+               email != null && !email.trim().isEmpty() &&
+               cpf != null && !cpf.trim().isEmpty() &&
+               status != null && !status.trim().isEmpty() &&
+               datacont != null && !datacont.trim().isEmpty();
+    }
+   
 }

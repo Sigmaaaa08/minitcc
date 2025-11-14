@@ -13,14 +13,14 @@ public class Clientes {
     /**
      * @return the credencial
      */
-    public Boolean getCredencial() {
+    public String getCredencial() {
         return credencial;
     }
 
     /**
      * @param credencial the credencial to set
      */
-    public void setCredencial(Boolean credencial) {
+    public void setCredencial(String credencial) {
         this.credencial = credencial;
     }
 
@@ -80,9 +80,16 @@ public class Clientes {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+    
     private int codigo;
     private String nome;
     private String telefone;
     private String cpf;
-    private Boolean credencial;
+    private String credencial;
+
+    public boolean isValid() {
+        return nome != null && !nome.trim().isEmpty() &&
+               telefone != null && !telefone.trim().isEmpty() &&
+               cpf != null && !cpf.trim().isEmpty();
+    }
 }
