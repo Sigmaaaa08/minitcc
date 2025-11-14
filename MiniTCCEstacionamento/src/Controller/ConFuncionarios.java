@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Conexao;
 import Model.Funcionarios;
+import Model.PasswordHasher;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,17 +13,24 @@ public class ConFuncionarios {
     Conexao conexao = new Conexao();
     
     public void cadastrar (Funcionarios funcionario){
-            String sql = "INSERT INTO TBFUNCIONARIO(senhafunci,telefonefunci,emailfunci,nomefunci,cpffunci,statusfunci)"
-                        + "VALUES (?,?,?,?,?,?);";
+        if (!funcionario.isValid()) {
+            JOptionPane.showMessageDialog(null, "Todos os campos obrigatórios devem ser preenchidos.");
+            return;
+        }
+            String sql = "INSERT INTO TBFUNCIONARIO(senhafunci,telefonefunci,emailfunci,nomefunci,cpffunci,statusfunci,datacontfunci)"
+                        + "VALUES (?,?,?,?,?,?,?);";
             
                         try {
                 PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
-                psmt.setString(1, funcionario.getSenha());
+                // Aplica o hashing na senha antes de salvar
+                String hashedPassword = PasswordHasher.hashPassword(funcionario.getSenha());
+                psmt.setString(1, hashedPassword);
                 psmt.setString(2, funcionario.getTelefone());
                 psmt.setString(3, funcionario.getEmail());
                 psmt.setString(4, funcionario.getNome());
                 psmt.setString(5, funcionario.getCpf());
                 psmt.setString(6, funcionario.getStatus());
+                psmt.setString(7, funcionario.getDatacont());
                 psmt.executeUpdate();
                           
                 conexao.desconectar();
@@ -32,7 +40,7 @@ public class ConFuncionarios {
         }
          public Vector listar(){
         Vector lista = new Vector();
-        String sql = "Select idfunci, senhafunci, telefonefunci, emailfunci, cpffunci, nomefunci, statusfunci from TBFUNCIONARIO";
+        String sql = "Select idfunci, senhafunci, telefonefunci, emailfunci, cpffunci, nomefunci, statusfunci, datacontfunci from TBFUNCIONARIO";
         try{
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
             ResultSet rs = psmt.executeQuery();
@@ -46,6 +54,7 @@ public class ConFuncionarios {
                 funcionario.setEmail(rs.getString("emailfunci"));
                 funcionario.setSenha(rs.getString("senhafunci"));
                 funcionario.setStatus(rs.getString("statusfunci"));
+                funcionario.setDatacont(rs.getString("datacontfunci"));
                 //Cada Linha será um veiculo encontrado
                 Vector novalinha = new Vector();
                 novalinha.addElement(funcionario.getCodigo());
@@ -55,6 +64,7 @@ public class ConFuncionarios {
                 novalinha.addElement(funcionario.getEmail());
                 novalinha.addElement(funcionario.getSenha());
                 novalinha.addElement(funcionario.getStatus());
+                novalinha.addElement(funcionario.getDatacont());
                 
                 lista.add(novalinha);
             }
@@ -66,7 +76,7 @@ public class ConFuncionarios {
          
     public Vector listar(String status){
         Vector lista = new Vector();
-        String sql = "Select idfunci, senhafunci, telefonefunci, emailfunci, cpffunci, nomefunci, statusfunci from TBFUNCIONARIO" +
+        String sql = "Select idfunci, senhafunci, telefonefunci, emailfunci, cpffunci, nomefunci, statusfunci, datacontfunci from TBFUNCIONARIO" +
                 " Where statusfunci=?";
         try{
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
@@ -82,6 +92,7 @@ public class ConFuncionarios {
                 funcionario.setEmail(rs.getString("emailfunci"));
                 funcionario.setSenha(rs.getString("senhafunci"));
                 funcionario.setStatus(rs.getString("statusfunci"));
+                funcionario.setDatacont(rs.getString("datacontfunci"));
                 //Cada Linha será um veiculo encontrado
                 Vector novalinha = new Vector();
                 novalinha.addElement(funcionario.getCodigo());
@@ -91,6 +102,7 @@ public class ConFuncionarios {
                 novalinha.addElement(funcionario.getEmail());
                 novalinha.addElement(funcionario.getSenha());
                 novalinha.addElement(funcionario.getStatus());
+                novalinha.addElement(funcionario.getDatacont());
                 
                 lista.add(novalinha);
             }
@@ -100,12 +112,22 @@ public class ConFuncionarios {
         return lista;
     }
          
+<<<<<<< HEAD
           public Funcionarios logar(String senha, String usuario) {
         String sql = "Select * from TBFUNCIONARIO where senhafunci = ? and emailfunci = ?";
         try {
             PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
             pstmt.setString(1, senha);
             pstmt.setString(2, usuario);
+=======
+	          public Funcionarios logar(String senha) {
+	        // Aplica o hashing na senha fornecida para comparação
+	        String hashedPassword = PasswordHasher.hashPassword(senha);
+	        String sql = "Select * from TBFUNCIONARIO where senhafunci = ?";
+	        try {
+	            PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
+	            pstmt.setString(1, hashedPassword);
+>>>>>>> 2a5ce542793eb2407bae2328d15dd10690fcd171
             ResultSet rs = pstmt.executeQuery();
 
             //percorre os resultados obtidos na consulta sql
@@ -125,8 +147,8 @@ public class ConFuncionarios {
         }
     }
     
-          public Funcionarios pesquisar(String cpf) {
-        String sql = "Select * from TBFUNCIONARIO where cpffunci = ?";
+	          public Funcionarios pesquisar(String cpf) {
+	        String sql = "Select idfunci, senhafunci, telefonefunci, emailfunci, cpffunci, nomefunci, statusfunci, datacontfunci from TBFUNCIONARIO where cpffunci = ?";
         try {
             PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
             pstmt.setString(1, cpf);
@@ -134,7 +156,7 @@ public class ConFuncionarios {
 
             Funcionarios funcionario = new Funcionarios();
             //percorre os resultados obtidos na consulta sql
-            if (rs.next()) {
+            while (rs.next()) {
                 funcionario.setCodigo(rs.getInt("idfunci"));
                 funcionario.setNome(rs.getString("nomefunci"));
                 funcionario.setCpf(rs.getString("cpffunci"));
@@ -142,34 +164,38 @@ public class ConFuncionarios {
                 funcionario.setEmail(rs.getString("emailfunci"));
                 funcionario.setSenha(rs.getString("senhafunci"));
                 funcionario.setStatus(rs.getString("STATUSFUNCI"));
-            return funcionario;
-            }else{
-                return null;
+                funcionario.setDatacont(rs.getString("datacontfunci"));
             }
+            return funcionario;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
             return null;
         }
     }
           
-          public boolean editar(Funcionarios funcionario) {
-        String sql = "UPDATE TBFUNCIONARIO set nomefunci=?,cpffunci=?,telefonefunci=?,senhafunci=?,emailfunci=?, statusfunci=?"
-                + " where idfunci = ?";
-        try {
-            PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
-            psmt.setString(1, funcionario.getNome());
-            psmt.setString(2, funcionario.getCpf());
-            psmt.setString(3, funcionario.getTelefone());
-            psmt.setString(4, funcionario.getSenha());
-            psmt.setString(5, funcionario.getEmail());
-            psmt.setString(6, funcionario.getStatus());
-            psmt.setInt(7, funcionario.getCodigo());
-            int linhasAfetadas = psmt.executeUpdate();
+	          public void editar(Funcionarios funcionario) {
+	        if (!funcionario.isValid()) {
+	            JOptionPane.showMessageDialog(null, "Todos os campos obrigatórios devem ser preenchidos.");
+	            return;
+	        }
+	        String sql = "UPDATE TBFUNCIONARIO set nomefunci=?,cpffunci=?,telefonefunci=?,senhafunci=?,emailfunci=?, statusfunci=?, datacontfunci=?"
+	                + " where idfunci = ?";
+	        try {
+	            PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
+	            psmt.setString(1, funcionario.getNome());
+	            psmt.setString(2, funcionario.getCpf());
+	            psmt.setString(3, funcionario.getTelefone());
+	            // Aplica o hashing na senha antes de salvar
+	            String hashedPassword = PasswordHasher.hashPassword(funcionario.getSenha());
+	            psmt.setString(4, hashedPassword);
+	            psmt.setString(5, funcionario.getEmail());
+	            psmt.setString(6, funcionario.getStatus());
+	            psmt.setString(7, funcionario.getDatacont());
+	            psmt.setInt(8, funcionario.getCodigo());
+	            psmt.executeUpdate();
             conexao.desconectar();
-            return linhasAfetadas > 0;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um ERRO:" + ex);
-            return false;
         }
     }
           
