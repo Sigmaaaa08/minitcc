@@ -31,7 +31,7 @@ public class frmMenu extends javax.swing.JFrame {
      * Creates new form frmMenu
      */
     public frmMenu() {
-<<<<<<< HEAD
+
         initComponents();
     
         //Init dialogLogin
@@ -95,13 +95,13 @@ public class frmMenu extends javax.swing.JFrame {
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Erro ao buscar dados: " + e.getMessage());
                     e.printStackTrace();
-=======
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
->>>>>>> 2a5ce542793eb2407bae2328d15dd10690fcd171
+
                 }
             }
         } catch (ClassNotFoundException ex) {
@@ -2265,7 +2265,6 @@ public class frmMenu extends javax.swing.JFrame {
 
     private void bntSairLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSairLoginActionPerformed
         // TODO add your handling code here:
-<<<<<<< HEAD
         try {
             System.exit(0);
         } catch (Exception ex) {
@@ -2273,7 +2272,7 @@ public class frmMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bntSairLoginActionPerformed
 
-    private void bntLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLogarActionPerformed
+    private void bntLogarActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         try {
             ConFuncionarios conFunci = new ConFuncionarios();
@@ -2335,13 +2334,13 @@ public class frmMenu extends javax.swing.JFrame {
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
-=======
+
         try{
         System.exit(0);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
         } 
-    }//GEN-LAST:event_bntCancelarLoginActionPerformed
+    }                                                
 
 	    private void bntLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLogarActionPerformed
 	        // TODO add your handling code here:
@@ -2382,7 +2381,7 @@ public class frmMenu extends javax.swing.JFrame {
             this.dialogLogin.setVisible(false);
         }else{
             JOptionPane.showMessageDialog(null, "Senha inválida");
->>>>>>> 2a5ce542793eb2407bae2328d15dd10690fcd171
+
         }
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
@@ -2882,7 +2881,6 @@ public class frmMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtModeloVeiculo1ActionPerformed
 
-<<<<<<< HEAD
     private void chbsenhafunciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbsenhafunciActionPerformed
 
         if (chbsenhafunci.isSelected()) {
@@ -3092,8 +3090,6 @@ public class frmMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bntCancelarLoginActionPerformed
 
-=======
->>>>>>> 2a5ce542793eb2407bae2328d15dd10690fcd171
     /**
      * @param args the command line arguments
      */
