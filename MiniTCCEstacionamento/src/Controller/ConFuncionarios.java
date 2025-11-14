@@ -100,11 +100,12 @@ public class ConFuncionarios {
         return lista;
     }
          
-          public Funcionarios logar(String senha) {
-        String sql = "Select * from TBFUNCIONARIO where senhafunci = ?";
+          public Funcionarios logar(String senha, String usuario) {
+        String sql = "Select * from TBFUNCIONARIO where senhafunci = ? and emailfunci = ?";
         try {
             PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
             pstmt.setString(1, senha);
+            pstmt.setString(2, usuario);
             ResultSet rs = pstmt.executeQuery();
 
             //percorre os resultados obtidos na consulta sql

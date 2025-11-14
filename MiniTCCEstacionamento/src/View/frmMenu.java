@@ -4,7 +4,6 @@
  */
 package View;
 
-import javax.swing.event.ListSelectionListener;
 import Controller.ConClientes;
 import Controller.ConFuncionarios;
 import Controller.ConOperacional;
@@ -21,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import jdk.jfr.Event;
 
 /**
  *
@@ -38,8 +38,31 @@ public class frmMenu extends javax.swing.JFrame {
     public frmMenu() {
         initComponents();
     
-    // Adiciona o listener NA tabela correta
-tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
+        //Init dialogLogin
+        dialogLogin.setTitle("Login");
+        //Foca no campo Senha
+        passwordLoginSenhaFuncionario.requestFocus();
+        //
+        passwordLoginSenhaFuncionario.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyPressed(java.awt.event.KeyEvent evt){
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        bntLogar.doClick();
+        }
+    }
+    });
+        //Init dialogCliente1
+        dialogCadastroCliente1.setTitle("Cadastro do Cliente");
+        
+        //Init dialog
+        dialogCadastroVeiculo.setTitle("Cadastro do Veículo");
+        
+        //Init dialogOperacional
+        dialogOperacional.setTitle("Sistema operacional de preços");
+        
+        //Init dialog
+        dialogCadastroFuncionario.setTitle("Cadastro do Funcionário");
+        
+    tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
     @Override
     public void mouseClicked(java.awt.event.MouseEvent evt) {
         if (evt.getClickCount() == 1) { // clique simples
@@ -169,8 +192,11 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         jLabel24 = new javax.swing.JLabel();
         passwordLoginSenhaFuncionario = new javax.swing.JPasswordField();
         bntLogar = new javax.swing.JButton();
-        bntCancelarLogin = new javax.swing.JButton();
+        bntSairLogin = new javax.swing.JButton();
         chbSenhaFunciLogar = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
+        txtUsuarioLogin = new javax.swing.JTextField();
+        bntCancelarLogin = new javax.swing.JButton();
         dialogOperacional = new javax.swing.JDialog();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -635,10 +661,10 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
             }
         });
 
-        bntCancelarLogin.setText("Cancelar");
-        bntCancelarLogin.addActionListener(new java.awt.event.ActionListener() {
+        bntSairLogin.setText("Sair");
+        bntSairLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntCancelarLoginActionPerformed(evt);
+                bntSairLoginActionPerformed(evt);
             }
         });
 
@@ -649,39 +675,61 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
             }
         });
 
+        jLabel3.setText("Usuário:");
+
+        bntCancelarLogin.setText("Cancelar");
+        bntCancelarLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntCancelarLoginActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(bntLogar)
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel24)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bntCancelarLogin))
+                        .addComponent(passwordLoginSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chbSenhaFunciLogar)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel24)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(passwordLoginSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtUsuarioLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(chbSenhaFunciLogar)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(bntLogar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bntCancelarLogin)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bntSairLogin)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtUsuarioLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
                     .addComponent(passwordLoginSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chbSenhaFunciLogar)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntLogar)
+                    .addComponent(bntSairLogin)
                     .addComponent(bntCancelarLogin))
                 .addContainerGap())
         );
@@ -690,17 +738,16 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         dialogLogin.getContentPane().setLayout(dialogLoginLayout);
         dialogLoginLayout.setHorizontalGroup(
             dialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dialogLoginLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogLoginLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         dialogLoginLayout.setVerticalGroup(
             dialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogLoginLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel20.setText("Valor 1ª Hora");
@@ -1851,8 +1898,8 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel24Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtNomeFuncionarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
+                .addComponent(txtNomeFuncionarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
                 .addComponent(bntDialogClienteVeiculo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bntDialogFuncionario)
@@ -2022,24 +2069,25 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         }
     }//GEN-LAST:event_bntSairActionPerformed
 
-    private void bntCancelarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarLoginActionPerformed
+    private void bntSairLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSairLoginActionPerformed
         // TODO add your handling code here:
         try {
             System.exit(0);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
         }
-    }//GEN-LAST:event_bntCancelarLoginActionPerformed
+    }//GEN-LAST:event_bntSairLoginActionPerformed
 
     private void bntLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLogarActionPerformed
         // TODO add your handling code here:
         try {
             ConFuncionarios conFunci = new ConFuncionarios();
-
+            
+            String usuario = txtUsuarioLogin.getText();
             char[] senhaChar = passwordLoginSenhaFuncionario.getPassword();
             String senha = new String(senhaChar);
             Arrays.fill(senhaChar, '\0');
-            Funcionarios funcionario = conFunci.logar(senha);
+            Funcionarios funcionario = conFunci.logar(senha, usuario);
 
             if (funcionario != null) {
                 frmMenu menu = new frmMenu();
@@ -2088,7 +2136,7 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
                 this.dialogLogin.dispose();
                 this.dialogLogin.setVisible(false);
             } else {
-                JOptionPane.showMessageDialog(null, "Senha inválida");
+                JOptionPane.showMessageDialog(null, "Senha ou usuário inválido");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
@@ -2888,6 +2936,16 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
         }
     }//GEN-LAST:event_chbSenhaFunciLogarActionPerformed
 
+    private void bntCancelarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarLoginActionPerformed
+        // TODO add your handling code here:
+        try {
+            txtUsuarioLogin.setText("");
+            passwordLoginSenhaFuncionario.setText("");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
+        }
+    }//GEN-LAST:event_bntCancelarLoginActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2960,6 +3018,7 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
     private javax.swing.JButton bntPesquisarServico1;
     private javax.swing.JButton bntPesquisarVeiculo;
     private javax.swing.JButton bntSair;
+    private javax.swing.JButton bntSairLogin;
     private javax.swing.JButton bntSalvarCliente1;
     private javax.swing.JButton bntSalvarFuncionario;
     private javax.swing.JButton bntSalvarServico1;
@@ -2995,6 +3054,7 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
@@ -3095,6 +3155,7 @@ tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
     private javax.swing.JPasswordField txtSenhaFuncionario;
     private javax.swing.JTextField txtTelefoneCliente1;
     private javax.swing.JTextField txtTelefoneFuncionario;
+    private javax.swing.JTextField txtUsuarioLogin;
     private javax.swing.JTextField txtValorDiariaMenu;
     private javax.swing.JFormattedTextField txtValorDiariaOperacional;
     private javax.swing.JTextField txtValorHorasMenu;
