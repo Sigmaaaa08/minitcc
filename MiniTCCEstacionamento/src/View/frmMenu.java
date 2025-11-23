@@ -8,24 +8,31 @@ import Controller.ConClientes;
 import Controller.ConFuncionarios;
 import Controller.ConOperacional;
 import Controller.ConVeiculos;
+import Controller.ConServicos;
 import Model.Clientes;
 import Model.Funcionarios;
 import Model.Operacional;
+import Model.Servicos;
 import Model.Veiculos;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Vector;
 import java.util.function.IntBinaryOperator;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
  * @author LABINFO
  */
 public class frmMenu extends javax.swing.JFrame {
+
     int codigo1;
     int codigo2;
     int codFuncionarioLogado;
+
     /**
      * Creates new form frmMenu
      */
@@ -1388,12 +1395,32 @@ public class frmMenu extends javax.swing.JFrame {
         });
 
         bntSalvarServico1.setText("Salvar");
+        bntSalvarServico1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntSalvarServico1ActionPerformed(evt);
+            }
+        });
 
         bntCancelarServico1.setText("Cancelar");
+        bntCancelarServico1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntCancelarServico1ActionPerformed(evt);
+            }
+        });
 
         bntExcluirServico1.setText("Excluir");
+        bntExcluirServico1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntExcluirServico1ActionPerformed(evt);
+            }
+        });
 
         bntEditarServico1.setText("Editar");
+        bntEditarServico1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntEditarServico1ActionPerformed(evt);
+            }
+        });
 
         bntOperacional1.setText("Operacional");
         bntOperacional1.addActionListener(new java.awt.event.ActionListener() {
@@ -1912,7 +1939,7 @@ public class frmMenu extends javax.swing.JFrame {
                 txtCpfCliente.setText(cliente.getCpf());
                 txtNomeCliente.setText(cliente.getNome());
                 txtTelefoneCliente.setText(cliente.getTelefone());
-                
+
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
@@ -1922,14 +1949,14 @@ public class frmMenu extends javax.swing.JFrame {
     private void bntVoltarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVoltarClienteActionPerformed
         // TODO add your handling code here:
         this.dialogCadastroCliente.dispose();
-        this.codigo1=0;
+        this.codigo1 = 0;
     }//GEN-LAST:event_bntVoltarClienteActionPerformed
 
     private void bntExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirClienteActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             ConClientes conCliente = new ConClientes();
-            if (this.codigo1==0) {
+            if (this.codigo1 == 0) {
                 JOptionPane.showMessageDialog(null, "Pesquise os campos do funcionárioa a ser excluido");
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir?", "Confirme exclusão", JOptionPane.YES_NO_OPTION) != 1) {
@@ -1949,11 +1976,11 @@ public class frmMenu extends javax.swing.JFrame {
             ConClientes conCliente = new ConClientes();
 
             if (txtNomeCliente.getText().isEmpty()
-                || txtCpfCliente.getText().isEmpty()
-                || txtTelefoneCliente.getText().isEmpty()) {
+                    || txtCpfCliente.getText().isEmpty()
+                    || txtTelefoneCliente.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
             } else {
-                
+
                 cliente.setNome(txtNomeCliente.getText());
                 cliente.setTelefone(txtTelefoneCliente.getText());
                 cliente.setCpf(txtCpfCliente.getText());
@@ -1974,8 +2001,8 @@ public class frmMenu extends javax.swing.JFrame {
             ConClientes conCliente = new ConClientes();
 
             if (txtNomeCliente.getText().isEmpty()
-                || txtCpfCliente.getText().isEmpty()
-                || txtTelefoneCliente.getText().isEmpty()) {
+                    || txtCpfCliente.getText().isEmpty()
+                    || txtTelefoneCliente.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
             } else {
                 cliente.setNome(txtNomeCliente.getText());
@@ -1985,7 +2012,7 @@ public class frmMenu extends javax.swing.JFrame {
                 conCliente.cadastrar(cliente);
                 JOptionPane.showMessageDialog(null, "registro cadastrado com sucesso!");
             }
-            this.codigo1=0;
+            this.codigo1 = 0;
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
@@ -2010,7 +2037,7 @@ public class frmMenu extends javax.swing.JFrame {
 
             ConClientes conClientes = new ConClientes();
             tableListarCliente.setModel(new DefaultTableModel(
-                conClientes.listar(), cabecalhoClienete));
+                    conClientes.listar(), cabecalhoClienete));
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante a exibição de dados");
@@ -2024,7 +2051,7 @@ public class frmMenu extends javax.swing.JFrame {
     private void bntListarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntListarFuncionarioActionPerformed
         // TODO add your handling code here:
         Vector cabecalhoFuncionario = new Vector();
-        try{
+        try {
             cabecalhoFuncionario.addElement("Código");
             cabecalhoFuncionario.addElement("Nome");
             cabecalhoFuncionario.addElement("CPF");
@@ -2032,25 +2059,25 @@ public class frmMenu extends javax.swing.JFrame {
             cabecalhoFuncionario.addElement("Email");
             cabecalhoFuncionario.addElement("Senha");
             cabecalhoFuncionario.addElement("Status");
-            
-            if(!cbConsultarStatusFuncionario.getSelectedItem().equals("...")){
-            ConFuncionarios conFuncionario = new ConFuncionarios();
-            this.tableListarFuncionario.setModel(new DefaultTableModel(
-            conFuncionario.listar(cbConsultarStatusFuncionario.getSelectedItem().toString()),cabecalhoFuncionario));  
-            }else{
-            ConFuncionarios conFuncionario = new ConFuncionarios();
-            this.tableListarFuncionario.setModel(new DefaultTableModel(
-                conFuncionario.listar(),cabecalhoFuncionario));
+
+            if (!cbConsultarStatusFuncionario.getSelectedItem().equals("...")) {
+                ConFuncionarios conFuncionario = new ConFuncionarios();
+                this.tableListarFuncionario.setModel(new DefaultTableModel(
+                        conFuncionario.listar(cbConsultarStatusFuncionario.getSelectedItem().toString()), cabecalhoFuncionario));
+            } else {
+                ConFuncionarios conFuncionario = new ConFuncionarios();
+                this.tableListarFuncionario.setModel(new DefaultTableModel(
+                        conFuncionario.listar(), cabecalhoFuncionario));
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante "
-                + "a exibição de dados");
+                    + "a exibição de dados");
         }
     }//GEN-LAST:event_bntListarFuncionarioActionPerformed
 
     private void bntSalvarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarFuncionarioActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             Funcionarios funcionario = new Funcionarios();
             ConFuncionarios conFuncionario = new ConFuncionarios();
 
@@ -2062,11 +2089,11 @@ public class frmMenu extends javax.swing.JFrame {
             funcionario.setStatus(cbStatusFuncionario.getSelectedItem().toString().toUpperCase());
 
             conFuncionario.cadastrar(funcionario);
-            this.codigo1=0;
+            this.codigo1 = 0;
 
             JOptionPane.showMessageDialog(null, "registro cadastrado com sucesso!");
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
         }
     }//GEN-LAST:event_bntSalvarFuncionarioActionPerformed
 
@@ -2081,8 +2108,7 @@ public class frmMenu extends javax.swing.JFrame {
             } else {
                 funcionario.setCpf(txtCpfFuncionario.getText());
                 funcionario = conFuncionario.pesquisar(funcionario.getCpf());
-                
-                
+
                 this.txtCpfFuncionario.setText(funcionario.getCpf());
                 this.txtNomeFuncionario.setText(funcionario.getNome());
                 this.txtTelefoneFuncionario.setText(funcionario.getTelefone());
@@ -2110,146 +2136,146 @@ public class frmMenu extends javax.swing.JFrame {
 
     private void bntSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSairActionPerformed
         // TODO add your handling code here:
-        try{
-        this.dispose();
-        
-        this.dialogLogin.setSize(250, 200);
-        this.dialogLogin.setLocationRelativeTo(null);
-        this.dialogLogin.setVisible(true);
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
-        } 
+        try {
+            this.dispose();
+
+            this.dialogLogin.setSize(250, 200);
+            this.dialogLogin.setLocationRelativeTo(null);
+            this.dialogLogin.setVisible(true);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
+        }
     }//GEN-LAST:event_bntSairActionPerformed
 
     private void bntCancelarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarLoginActionPerformed
         // TODO add your handling code here:
-        try{
-        System.exit(0);
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
-        } 
+        try {
+            System.exit(0);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
+        }
     }//GEN-LAST:event_bntCancelarLoginActionPerformed
 
 	    private void bntLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLogarActionPerformed
-	        // TODO add your handling code here:
-	        try{
-	        ConFuncionarios conFunci = new ConFuncionarios(); 
-	        
-	        char[] senhaChar = passwordLoginSenhaFuncionario.getPassword();
-	        String senha = new String(senhaChar);
-	        Arrays.fill(senhaChar, '\0');
-	        
-	        if (senha.isEmpty()) {
-	            JOptionPane.showMessageDialog(null, "O campo senha não pode estar vazio.");
-	            return;
-	        }
-	        
-	        Funcionarios funcionario = conFunci.logar(senha);
-	         
-	        if(funcionario!=null){
-        frmMenu menu = new frmMenu();
-            menu.setVisible(true);
-            menu.setSize(700, 450);
-            menu.setLocationRelativeTo(null);
-            
-            menu.txtNomeFuncionarioLogado.setText(funcionario.getNome());
-            this.codFuncionarioLogado = funcionario.getCodigo();
-            
-            ConOperacional conOperacional = new ConOperacional();
-            Operacional operacional = conOperacional.precos();
-            
-            menu.txtDataEntrada.setText(conOperacional.getDate());
-            menu.txtHoraEntrada.setText(conOperacional.getTime());
+                // TODO add your handling code here:
+                try {
+                    ConFuncionarios conFunci = new ConFuncionarios();
 
-            menu.txtPrimeiraHoraMenu.setText(String.valueOf(operacional.getPrecoPrimeiraHora()));
-            menu.txtValorHorasMenu.setText(String.valueOf(operacional.getPrecoHorasAdicionais()));
-            menu.txtValorDiariaMenu.setText(String.valueOf(operacional.getPrecoDiaria()));
-            
-            this.dialogLogin.dispose();
-            this.dialogLogin.setVisible(false);
-        }else{
-            JOptionPane.showMessageDialog(null, "Senha inválida");
-        }
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
-        } 
+                    char[] senhaChar = passwordLoginSenhaFuncionario.getPassword();
+                    String senha = new String(senhaChar);
+                    Arrays.fill(senhaChar, '\0');
+
+                    if (senha.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "O campo senha não pode estar vazio.");
+                        return;
+                    }
+
+                    Funcionarios funcionario = conFunci.logar(senha);
+
+                    if (funcionario != null) {
+                        frmMenu menu = new frmMenu();
+                        menu.setVisible(true);
+                        menu.setSize(700, 450);
+                        menu.setLocationRelativeTo(null);
+
+                        menu.txtNomeFuncionarioLogado.setText(funcionario.getNome());
+                        this.codFuncionarioLogado = funcionario.getCodigo();
+
+                        ConOperacional conOperacional = new ConOperacional();
+                        Operacional operacional = conOperacional.precos();
+
+                        menu.txtDataEntrada.setText(conOperacional.getDate());
+                        menu.txtHoraEntrada.setText(conOperacional.getTime());
+
+                        menu.txtPrimeiraHoraMenu.setText(String.valueOf(operacional.getPrecoPrimeiraHora()));
+                        menu.txtValorHorasMenu.setText(String.valueOf(operacional.getPrecoHorasAdicionais()));
+                        menu.txtValorDiariaMenu.setText(String.valueOf(operacional.getPrecoDiaria()));
+
+                        this.dialogLogin.dispose();
+                        this.dialogLogin.setVisible(false);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Senha inválida");
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
+                }
     }//GEN-LAST:event_bntLogarActionPerformed
 
     private void bntDialogFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDialogFuncionarioActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             this.dialogCadastroFuncionario.setVisible(true);
             this.dialogCadastroFuncionario.setSize(600, 400);
             this.dialogCadastroFuncionario.setLocationRelativeTo(null);
-            
+
             Vector cabecalhoFuncionario = new Vector();
-            try{
-            cabecalhoFuncionario.addElement("Código");
-            cabecalhoFuncionario.addElement("Nome");
-            cabecalhoFuncionario.addElement("CPF");
-            cabecalhoFuncionario.addElement("Telefone");
-            cabecalhoFuncionario.addElement("Email");
-            cabecalhoFuncionario.addElement("Senha");
-            cabecalhoFuncionario.addElement("Status");
-            
-            ConFuncionarios conFuncionario = new ConFuncionarios();
-            tableListarFuncionario.setModel(new DefaultTableModel(
-                                                  conFuncionario.listar(),cabecalhoFuncionario));
-            }catch(Exception ex){
-             JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante a exibição de dados");
+            try {
+                cabecalhoFuncionario.addElement("Código");
+                cabecalhoFuncionario.addElement("Nome");
+                cabecalhoFuncionario.addElement("CPF");
+                cabecalhoFuncionario.addElement("Telefone");
+                cabecalhoFuncionario.addElement("Email");
+                cabecalhoFuncionario.addElement("Senha");
+                cabecalhoFuncionario.addElement("Status");
+
+                ConFuncionarios conFuncionario = new ConFuncionarios();
+                tableListarFuncionario.setModel(new DefaultTableModel(
+                        conFuncionario.listar(), cabecalhoFuncionario));
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante a exibição de dados");
             }
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
         }
     }//GEN-LAST:event_bntDialogFuncionarioActionPerformed
 
     private void bntOperacional1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntOperacional1ActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             this.dialogOperacional.setVisible(true);
             this.dialogOperacional.setSize(600, 400);
             this.dialogOperacional.setLocationRelativeTo(null);
-            
+
             ConOperacional conOperacional = new ConOperacional();
             Operacional operacional = conOperacional.precos();
-            
+
             this.txtValorPrimeiraHoraOperacional.setText(String.valueOf(operacional.getPrecoPrimeiraHora()));
             this.txtValorHorasOperacional.setText(String.valueOf(operacional.getPrecoHorasAdicionais()));
             this.txtValorDiariaOperacional.setText(String.valueOf(operacional.getPrecoDiaria()));
-            
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
         }
     }//GEN-LAST:event_bntOperacional1ActionPerformed
 
     private void bntCancelarOperacionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarOperacionalActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             this.dialogOperacional.dispose();
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
         }
     }//GEN-LAST:event_bntCancelarOperacionalActionPerformed
 
     private void bntEditarOperacionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarOperacionalActionPerformed
         // TODO add your handling code here:
-         try {
+        try {
             Operacional operacional = new Operacional();
             ConOperacional conOperacional = new ConOperacional();
 
             if (txtValorDiariaOperacional.getText().isEmpty() || txtValorHorasOperacional.getText().isEmpty()
-                || txtValorPrimeiraHoraOperacional.getText().isEmpty()) {
+                    || txtValorPrimeiraHoraOperacional.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
             } else {
                 operacional.setPrecoPrimeiraHora(Double.parseDouble(txtValorPrimeiraHoraOperacional.getText()));
                 operacional.setPrecoHorasAdicionais(Double.parseDouble(txtValorHorasOperacional.getText()));
                 operacional.setPrecoDiaria(Double.parseDouble(txtValorDiariaOperacional.getText()));
-                
+
                 conOperacional.editar(operacional);
                 JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso!");
 
-                operacional = conOperacional.precos();           
-                
+                operacional = conOperacional.precos();
+
                 this.txtPrimeiraHoraMenu.setText(String.valueOf(operacional.getPrecoPrimeiraHora()));
                 this.txtValorHorasMenu.setText(String.valueOf(operacional.getPrecoHorasAdicionais()));
                 this.txtValorDiariaMenu.setText(String.valueOf(operacional.getPrecoDiaria()));
@@ -2273,20 +2299,20 @@ public class frmMenu extends javax.swing.JFrame {
 
     private void bntSalvarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarVeiculoActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             Veiculos veiculo = new Veiculos();
             ConVeiculos conVeiculo = new ConVeiculos();
 
             veiculo.setPlaca(txtPlacaVeiculo.getText());
-	            veiculo.setModelo(txtModeloVeiculo.getText());
-	            veiculo.setTipo(cbTipoVeiculo.getSelectedItem().toString().toUpperCase());
+            veiculo.setModelo(txtModeloVeiculo.getText());
+            veiculo.setTipo(cbTipoVeiculo.getSelectedItem().toString().toUpperCase());
 
             conVeiculo.cadastrar(veiculo);
-            this.codigo1=0;
-            
+            this.codigo1 = 0;
+
             JOptionPane.showMessageDialog(null, "registro cadastrado com sucesso!");
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
         }
     }//GEN-LAST:event_bntSalvarVeiculoActionPerformed
 
@@ -2296,18 +2322,20 @@ public class frmMenu extends javax.swing.JFrame {
             Veiculos veiculo = new Veiculos();
             ConVeiculos conVeiculos = new ConVeiculos();
 
-	            if (txtPlacaVeiculo.getText().isEmpty()) {
-	                JOptionPane.showMessageDialog(null, "Preencha a Placa para realizar a pesquisa");
-	            } else {
-	                veiculo = conVeiculos.pesquisar(txtPlacaVeiculo.getText());
-                
-                
+            if (txtPlacaVeiculo.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha a Placa para realizar a pesquisa");
+            } else {
+                veiculo = conVeiculos.pesquisar(txtPlacaVeiculo.getText());
+
                 this.txtPlacaVeiculo.setText(veiculo.getPlaca());
                 this.txtModeloVeiculo.setText(veiculo.getModelo());
                 switch (veiculo.getTipo()) {
-                    case "PEQUENO" -> cbTipoVeiculo.setSelectedIndex(0);
-                    case "MÉDIO" -> cbTipoVeiculo.setSelectedIndex(1);
-                    case "GRANDE" -> cbTipoVeiculo.setSelectedIndex(2);
+                    case "PEQUENO" ->
+                        cbTipoVeiculo.setSelectedIndex(0);
+                    case "MÉDIO" ->
+                        cbTipoVeiculo.setSelectedIndex(1);
+                    case "GRANDE" ->
+                        cbTipoVeiculo.setSelectedIndex(2);
                 }
                 this.codigo1 = veiculo.getCodigo();
             }
@@ -2320,7 +2348,7 @@ public class frmMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         Vector cabecalhoVeiculo = new Vector();
 
-        try{
+        try {
             //cabecalho.addElement("Código"); //0
             cabecalhoVeiculo.addElement("Código"); // 1
             cabecalhoVeiculo.addElement("Cód. Cliente"); // 2
@@ -2330,11 +2358,11 @@ public class frmMenu extends javax.swing.JFrame {
 
             ConVeiculos conVeiculo = new ConVeiculos();
             tableListarVeiculo.setModel(new DefaultTableModel(
-                conVeiculo.listar(),cabecalhoVeiculo));
+                    conVeiculo.listar(), cabecalhoVeiculo));
 
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante "
-                + "a exibição de dados");
+                    + "a exibição de dados");
         }
     }//GEN-LAST:event_bntListarVeiculoActionPerformed
 
@@ -2351,7 +2379,7 @@ public class frmMenu extends javax.swing.JFrame {
                     || txtSenhaFuncionario.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
             } else {
-                
+
                 funcionario.setNome(txtNomeFuncionario.getText());
                 funcionario.setTelefone(txtTelefoneFuncionario.getText());
                 funcionario.setCpf(txtCpfFuncionario.getText());
@@ -2371,9 +2399,9 @@ public class frmMenu extends javax.swing.JFrame {
 
     private void bntExcluirFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirFuncionarioActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             ConFuncionarios conFuncionario = new ConFuncionarios();
-            if (this.codigo1==0) {
+            if (this.codigo1 == 0) {
                 JOptionPane.showMessageDialog(null, "Pesquise os campos do funcionárioa a ser excluido");
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir?", "Confirme exclusão", JOptionPane.YES_NO_OPTION) != 1) {
@@ -2389,35 +2417,35 @@ public class frmMenu extends javax.swing.JFrame {
     private void bntCancelarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarFuncionarioActionPerformed
         // TODO add your handling code here:
         this.dialogCadastroFuncionario.dispose();
-        this.codigo1=0;
+        this.codigo1 = 0;
     }//GEN-LAST:event_bntCancelarFuncionarioActionPerformed
 
     private void bntDialogClienteVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDialogClienteVeiculoActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             this.dialogCadastroCliente1.setVisible(true);
             this.dialogCadastroCliente1.setSize(600, 400);
             this.dialogCadastroCliente1.setLocationRelativeTo(null);
-            
+
             Vector cabecalhoVeiculo = new Vector();
-        try {
-            //cabecalho.addElement("Código"); //0
-            cabecalhoVeiculo.addElement("Nome"); // 2
-            cabecalhoVeiculo.addElement("CPF"); // 2
-            cabecalhoVeiculo.addElement("Telefone"); // 2
-            cabecalhoVeiculo.addElement("Veículo"); // 3
-            cabecalhoVeiculo.addElement("Modelo"); // 4
-            cabecalhoVeiculo.addElement("Tipo"); // 5
+            try {
+                //cabecalho.addElement("Código"); //0
+                cabecalhoVeiculo.addElement("Nome"); // 2
+                cabecalhoVeiculo.addElement("CPF"); // 2
+                cabecalhoVeiculo.addElement("Telefone"); // 2
+                cabecalhoVeiculo.addElement("Veículo"); // 3
+                cabecalhoVeiculo.addElement("Modelo"); // 4
+                cabecalhoVeiculo.addElement("Tipo"); // 5
 
-            ConVeiculos conVeiculo = new ConVeiculos();
-            tableListarCliente1.setModel(new DefaultTableModel(
-                conVeiculo.listarVeiculoCliente(),cabecalhoVeiculo));
+                ConVeiculos conVeiculo = new ConVeiculos();
+                tableListarCliente1.setModel(new DefaultTableModel(
+                        conVeiculo.listarVeiculoCliente(), cabecalhoVeiculo));
 
-        } catch (Exception error) {
-            JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante a exibição de dados: " +error);
-        }
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
+            } catch (Exception error) {
+                JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante a exibição de dados: " + error);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
         }
     }//GEN-LAST:event_bntDialogClienteVeiculoActionPerformed
 
@@ -2431,10 +2459,10 @@ public class frmMenu extends javax.swing.JFrame {
                     || txtModeloVeiculo.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
             } else {
-                
+
                 veiculo.setPlaca(txtPlacaVeiculo.getText());
-	                veiculo.setModelo(txtModeloVeiculo.getText());
-	                veiculo.setTipo(cbTipoVeiculo.getSelectedItem().toString().toUpperCase());
+                veiculo.setModelo(txtModeloVeiculo.getText());
+                veiculo.setTipo(cbTipoVeiculo.getSelectedItem().toString().toUpperCase());
                 veiculo.setCodigo(this.codigo1);
 
                 conVeiculo.editar(veiculo);
@@ -2448,9 +2476,9 @@ public class frmMenu extends javax.swing.JFrame {
 
     private void bntExcluirVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirVeiculoActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             ConVeiculos conVeiculo = new ConVeiculos();
-            if (this.codigo1==0) {
+            if (this.codigo1 == 0) {
                 JOptionPane.showMessageDialog(null, "Pesquise os campos do funcionárioa a ser excluido");
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir?", "Confirme exclusão", JOptionPane.YES_NO_OPTION) != 1) {
@@ -2466,22 +2494,22 @@ public class frmMenu extends javax.swing.JFrame {
     private void bntCancelarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarVeiculoActionPerformed
         // TODO add your handling code here:
         this.dialogCadastroVeiculo.dispose();
-        this.codigo1=0;
+        this.codigo1 = 0;
     }//GEN-LAST:event_bntCancelarVeiculoActionPerformed
 
     private void bntNovo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntNovo1ActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             ConOperacional conOperacional = new ConOperacional();
             Operacional operacional = conOperacional.precos();
-            
+
             this.txtDataEntrada.setText(conOperacional.getDate());
             this.txtHoraEntrada.setText(conOperacional.getTime());
 
             this.txtPrimeiraHoraMenu.setText(String.valueOf(operacional.getPrecoPrimeiraHora()));
             this.txtValorHorasMenu.setText(String.valueOf(operacional.getPrecoHorasAdicionais()));
             this.txtValorDiariaMenu.setText(String.valueOf(operacional.getPrecoDiaria()));
-           
+
             this.txtPlacaVeiculoServico.setText("");
             this.txtNumEntrada.setText("");
             this.txtModeloVeiculo.setText("");
@@ -2489,7 +2517,7 @@ public class frmMenu extends javax.swing.JFrame {
             this.txtValorTotal.setText("");
             this.txtDataSaida.setText("");
             this.txtHoraSaida.setText("");
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
         }
     }//GEN-LAST:event_bntNovo1ActionPerformed
@@ -2502,9 +2530,9 @@ public class frmMenu extends javax.swing.JFrame {
 
     private void bntExcluirCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirCliente1ActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             ConVeiculos conVeiculo = new ConVeiculos();
-            if (this.codigo1==0) {
+            if (this.codigo1 == 0) {
                 JOptionPane.showMessageDialog(null, "Pesquise os campos do funcionárioa a ser excluido");
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir?", "Confirme exclusão", JOptionPane.YES_NO_OPTION) != 1) {
@@ -2522,25 +2550,25 @@ public class frmMenu extends javax.swing.JFrame {
         try {
             Clientes cliente = new Clientes();
             ConClientes conCliente = new ConClientes();
-            
+
             Veiculos veiculo = new Veiculos();
             ConVeiculos conVeiculo = new ConVeiculos();
 
             if (txtPlacaVeiculo1.getText().isEmpty()
-                || txtModeloVeiculo1.getText().isEmpty()
-                || txtNomeCliente1.getText().isEmpty()
-                || txtCpfCliente1.getText().isEmpty()
-                || txtTelefoneCliente1.getText().isEmpty()) {
+                    || txtModeloVeiculo1.getText().isEmpty()
+                    || txtNomeCliente1.getText().isEmpty()
+                    || txtCpfCliente1.getText().isEmpty()
+                    || txtTelefoneCliente1.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
             } else {
-                
+
                 cliente.setNome(txtNomeCliente1.getText());
                 cliente.setTelefone(txtTelefoneCliente1.getText());
                 cliente.setCpf(txtCpfCliente1.getText());
                 cliente.setCodigo(this.codigo1);
 
                 conCliente.editar(cliente);
-                
+
                 veiculo.setPlaca(txtPlacaVeiculo1.getText());
                 veiculo.setModelo(txtModeloVeiculo1.getText());
                 veiculo.setTipo(cbTipoVeiculo1.getSelectedItem().toString().toUpperCase());
@@ -2570,23 +2598,26 @@ public class frmMenu extends javax.swing.JFrame {
             } else {
                 veiculo.setPlaca(txtPlacaVeiculo1.getText());
                 veiculo = conVeiculo.pesquisar(veiculo.getPlaca());
-                
+
                 cliente.setCodigo(veiculo.getCodcliente());
                 cliente = conCliente.pesquisar(String.valueOf(veiculo.getCodcliente()));
 
                 this.codigo1 = cliente.getCodigo();
                 this.codigo2 = veiculo.getCodigo();
-                
+
                 txtCpfCliente1.setText(cliente.getCpf());
                 txtNomeCliente1.setText(cliente.getNome());
                 txtTelefoneCliente1.setText(cliente.getTelefone());
-                
+
                 txtPlacaVeiculo1.setText(veiculo.getPlaca());
                 txtModeloVeiculo1.setText(veiculo.getModelo());
                 switch (veiculo.getTipo()) {
-                    case "PEQUENO" -> cbTipoVeiculo1.setSelectedIndex(0);
-                    case "MÉDIO" -> cbTipoVeiculo1.setSelectedIndex(1);
-                    case "GRANDE" -> cbTipoVeiculo1.setSelectedIndex(2);
+                    case "PEQUENO" ->
+                        cbTipoVeiculo1.setSelectedIndex(0);
+                    case "MÉDIO" ->
+                        cbTipoVeiculo1.setSelectedIndex(1);
+                    case "GRANDE" ->
+                        cbTipoVeiculo1.setSelectedIndex(2);
                 }
             }
         } catch (Exception ex) {
@@ -2596,18 +2627,18 @@ public class frmMenu extends javax.swing.JFrame {
 
     private void bntSalvarCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarCliente1ActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             Clientes cliente = new Clientes();
             ConClientes conCliente = new ConClientes();
-            
+
             Veiculos veiculo = new Veiculos();
             ConVeiculos conVeiculo = new ConVeiculos();
 
             if (txtNomeCliente1.getText().isEmpty()
-                || txtCpfCliente1.getText().isEmpty()
-                || txtTelefoneCliente1.getText().isEmpty()
-                || txtPlacaVeiculo1.getText().isEmpty()
-                || txtModeloVeiculo1.getText().isEmpty()){
+                    || txtCpfCliente1.getText().isEmpty()
+                    || txtTelefoneCliente1.getText().isEmpty()
+                    || txtPlacaVeiculo1.getText().isEmpty()
+                    || txtModeloVeiculo1.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
             } else {
                 cliente.setNome(txtNomeCliente1.getText());
@@ -2615,19 +2646,19 @@ public class frmMenu extends javax.swing.JFrame {
                 cliente.setCpf(txtCpfCliente1.getText());
 
                 conCliente.cadastrar(cliente);
-                
+
                 veiculo.setCodcliente(conCliente.IDCliente());
                 veiculo.setPlaca(txtPlacaVeiculo1.getText());
                 veiculo.setModelo(txtModeloVeiculo1.getText());
                 veiculo.setTipo(cbTipoVeiculo1.getSelectedItem().toString().toUpperCase());
-                
+
                 conVeiculo.cadastrar(veiculo);
-                
+
                 JOptionPane.showMessageDialog(null, "registro cadastrado com sucesso!");
             }
-            this.codigo1=0;          
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
+            this.codigo1 = 0;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
         }
     }//GEN-LAST:event_bntSalvarCliente1ActionPerformed
 
@@ -2649,10 +2680,10 @@ public class frmMenu extends javax.swing.JFrame {
 
             ConVeiculos conVeiculo = new ConVeiculos();
             tableListarCliente1.setModel(new DefaultTableModel(
-                conVeiculo.listarVeiculoCliente(),cabecalhoVeiculo));
+                    conVeiculo.listarVeiculoCliente(), cabecalhoVeiculo));
 
         } catch (Exception error) {
-            JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante a exibição de dados: " +error);
+            JOptionPane.showMessageDialog(null, "Ocorreu uma falha durante a exibição de dados: " + error);
         }
     }//GEN-LAST:event_bntListarCliente1ActionPerformed
 
@@ -2667,6 +2698,145 @@ public class frmMenu extends javax.swing.JFrame {
     private void txtModeloVeiculo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModeloVeiculo1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtModeloVeiculo1ActionPerformed
+
+    private void bntSalvarServico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarServico1ActionPerformed
+        try {
+            Servicos servico = new Servicos();
+            ConServicos conServico = new ConServicos();
+
+            String numEntradaStr = txtNumEntrada.getText().trim();
+            String dataEntrada = txtDataEntrada.getText().trim();
+            String horaEntrada = txtHoraEntrada.getText().trim();
+            String dataSaida = txtDataSaida.getText().trim();
+            String horaSaida = txtHoraSaida.getText().trim();
+
+            if (numEntradaStr.isEmpty()) {
+
+                JOptionPane.showMessageDialog(null, "Para salvar um novo serviço, use o fluxo de pesquisa de veículo/vaga e certifique-se de que todos os dados de entrada estão preenchidos.");
+                return;
+            }
+
+            int idServico = Integer.parseInt(numEntradaStr);
+
+            servico.setCodigo(idServico);
+            servico.setDatafinal(dataSaida);
+            servico.setHorasaida(horaSaida);
+
+            conServico.editar(servico);
+
+            bntNovo1ActionPerformed(evt);
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Erro no formato do número de entrada do serviço: " + ex.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao salvar o serviço: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_bntSalvarServico1ActionPerformed
+    private void aplicarMascaras() {
+        try {
+            MaskFormatter cpfMask = new MaskFormatter("###.###.###-##");
+            cpfMask.install((JFormattedTextField) txtCpfCliente);
+            cpfMask.install((JFormattedTextField) txtCpfFuncionario);
+            cpfMask.install((JFormattedTextField) txtCpfCliente1);
+
+            MaskFormatter telMask = new MaskFormatter("(##) #####-####");
+            telMask.install((JFormattedTextField) txtTelefoneCliente);
+            telMask.install((JFormattedTextField) txtTelefoneFuncionario);
+            telMask.install((JFormattedTextField) txtTelefoneCliente1);
+
+            MaskFormatter dateMask = new MaskFormatter("##/##/####");
+            dateMask.install(txtDataEntrada);
+            dateMask.install(txtDataSaida);
+
+            MaskFormatter timeMask = new MaskFormatter("##:##");
+            timeMask.install(txtHoraEntrada);
+            timeMask.install(txtHoraSaida);
+
+            MaskFormatter placaMask = new MaskFormatter("UUU-####");
+            placaMask.install((JFormattedTextField) txtPlacaVeiculo);
+            placaMask.install((JFormattedTextField) txtPlacaVeiculo1);
+            placaMask.install((JFormattedTextField) txtPlacaVeiculoServico);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+    private void bntCancelarServico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarServico1ActionPerformed
+        // TODO add your handling code here:
+        try {
+            bntNovo1ActionPerformed(evt);
+            JOptionPane.showMessageDialog(null, "Operação de serviço cancelada. Campos limpos.");
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao cancelar o serviço: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_bntCancelarServico1ActionPerformed
+
+    private void bntExcluirServico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirServico1ActionPerformed
+        // TODO add your handling code here:
+        if (txtNumEntrada.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Pesquise ou informe o código (Número de Entrada) do serviço a ser excluído.");
+            return;
+        }
+
+        try {
+            // Obtém o ID do serviço da caixa de texto (txtNumEntrada)
+            int codigoServico = Integer.parseInt(txtNumEntrada.getText());
+
+            // 1. Confirmação da Exclusão
+            int resposta = JOptionPane.showConfirmDialog(this,
+                    "Tem certeza que deseja excluir o serviço de código: " + codigoServico + "?",
+                    "Confirmação de Exclusão", JOptionPane.YES_NO_OPTION);
+
+            if (resposta == JOptionPane.YES_OPTION) {
+
+                ConServicos controller = new ConServicos();
+                controller.excluir(codigoServico);
+                bntNovo1ActionPerformed(evt);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "O campo Número de Entrada deve conter um código de serviço numérico válido.", "Erro de Formato", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_bntExcluirServico1ActionPerformed
+
+    private void bntEditarServico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarServico1ActionPerformed
+        if (txtNumEntrada.getText().isEmpty()
+                || txtDataSaida.getText().trim().replace(" ", "").length() != 10
+                || // Formato DD/MM/AAAA
+                txtHoraSaida.getText().trim().replace(" ", "").length() != 5) {  // Formato HH:MM
+
+            JOptionPane.showMessageDialog(this,
+                    "Para finalizar a edição (saída), preencha o Código do Serviço, Data de Saída e Hora de Saída corretamente.",
+                    "Dados Ausentes", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+
+            int codigoServico = Integer.parseInt(txtNumEntrada.getText());
+            String dataFinal = txtDataSaida.getText();
+            String horaSaida = txtHoraSaida.getText();
+
+            Servicos servico = new Servicos();
+            servico.setCodigo(codigoServico);
+            servico.setDatafinal(dataFinal);
+            servico.setHorasaida(horaSaida);
+
+            ConServicos controller = new ConServicos();
+
+            controller.editar(servico);
+
+            bntCancelarServico1ActionPerformed(null);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,
+                    "O campo Número de Entrada deve ser um código numérico válido.",
+                    "Erro de Formato", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                    "Ocorreu um erro ao processar a edição: " + e.getMessage(),
+                    "Erro Inesperado", JOptionPane.ERROR_MESSAGE);
+        }    }//GEN-LAST:event_bntEditarServico1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2699,11 +2869,11 @@ public class frmMenu extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 frmMenu menu = new frmMenu();
-                
-                if(!menu.isVisible()){
-                menu.dialogLogin.setSize(250, 200);
-                menu.dialogLogin.setLocationRelativeTo(null);
-                menu.dialogLogin.setVisible(true); 
+
+                if (!menu.isVisible()) {
+                    menu.dialogLogin.setSize(250, 200);
+                    menu.dialogLogin.setLocationRelativeTo(null);
+                    menu.dialogLogin.setVisible(true);
                 }
             }
         });

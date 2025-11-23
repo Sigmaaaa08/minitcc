@@ -83,13 +83,15 @@ public class ConServicos {
 
     public Servicos pesquisar(int idservico) {
         String sql = "Select * from TBSERVICO where idservico= ? ";
+        Servicos servicos = null; // Inicializa como null
 
         try {
             PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
             pstmt.setInt(1, idservico);
             ResultSet rs = pstmt.executeQuery();
-            Servicos servicos = new Servicos();
-            while (rs.next()) {
+
+            if (rs.next()) {
+                servicos = new Servicos();
                 servicos.setCodigo(rs.getInt("idservico"));
                 servicos.setCodfuncionario(rs.getInt("codfunci"));
                 servicos.setCodvaga(rs.getInt("codvaga"));
@@ -100,11 +102,44 @@ public class ConServicos {
                 servicos.setDatafinal(rs.getString("datafinal"));
             }
 
+            conexao.desconectar();
+
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-            return null;
+            JOptionPane.showMessageDialog(null, "Erro na pesquisa: " + ex.getMessage());
         }
-        return null;
+        return servicos;
+    }
+
+    public void editar(Servicos servico) {
+        String sql = "UPDATE TBSERVICO SET datafinal=?, horasaida=? WHERE idservico=?";
+
+        try {
+            PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
+            psmt.setString(1, servico.getDatafinal());
+            psmt.setString(2, servico.getHorasaida());
+            psmt.setInt(3, servico.getCodigo());
+            psmt.executeUpdate();
+
+            conexao.desconectar();
+            JOptionPane.showMessageDialog(null, "Serviço atualizado com sucesso!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um ERRO ao atualizar o serviço: " + ex);
+        }
+    }
+
+    public void excluir(int idservico) {
+        String sql = "DELETE FROM TBSERVICO WHERE idservico=?";
+
+        try {
+            PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
+            psmt.setInt(1, idservico);
+            psmt.executeUpdate();
+
+            conexao.desconectar();
+            JOptionPane.showMessageDialog(null, "Serviço excluído com sucesso!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um ERRO ao excluir o serviço: " + ex);
+        }
     }
 
 }
