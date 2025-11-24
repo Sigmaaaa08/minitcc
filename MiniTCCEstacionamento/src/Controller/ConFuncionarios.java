@@ -13,18 +13,14 @@ public class ConFuncionarios {
     Conexao conexao = new Conexao();
     
     public void cadastrar (Funcionarios funcionario){
-        if (!funcionario.isValid()) {
-            JOptionPane.showMessageDialog(null, "Todos os campos obrigatórios devem ser preenchidos.");
-            return;
-        }
             String sql = "INSERT INTO TBFUNCIONARIO(senhafunci,telefonefunci,emailfunci,nomefunci,cpffunci,statusfunci,datacontfunci)"
                         + "VALUES (?,?,?,?,?,?,?);";
             
                         try {
                 PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
                 // Aplica o hashing na senha antes de salvar
-                String hashedPassword = PasswordHasher.hashPassword(funcionario.getSenha());
-                psmt.setString(1, hashedPassword);
+            //    String hashedPassword = PasswordHasher.hashPassword(funcionario.getSenha());
+                psmt.setString(1, funcionario.getSenha());
                 psmt.setString(2, funcionario.getTelefone());
                 psmt.setString(3, funcionario.getEmail());
                 psmt.setString(4, funcionario.getNome());
@@ -114,11 +110,11 @@ public class ConFuncionarios {
          
 	          public Funcionarios logar(String senha, String email) {
 	        // Aplica o hashing na senha fornecida para comparação
-	        String hashedPassword = PasswordHasher.hashPassword(senha);
+	        //String hashedPassword = PasswordHasher.hashPassword(senha);
 	        String sql = "Select * from TBFUNCIONARIO where senhafunci = ? and emailfunci = ?";
 	        try {
 	            PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
-	            pstmt.setString(1, hashedPassword);
+	            pstmt.setString(1, senha);
                     pstmt.setString(2, email);
             ResultSet rs = pstmt.executeQuery();
 
@@ -165,29 +161,24 @@ public class ConFuncionarios {
         }
     }
           
-	          public void editar(Funcionarios funcionario) {
-	        if (!funcionario.isValid()) {
-	            JOptionPane.showMessageDialog(null, "Todos os campos obrigatórios devem ser preenchidos.");
-	            return;
-	        }
-	        String sql = "UPDATE TBFUNCIONARIO set nomefunci=?,cpffunci=?,telefonefunci=?,senhafunci=?,emailfunci=?, statusfunci=?, datacontfunci=?"
-	                + " where idfunci = ?";
-	        try {
-	            PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
-	            psmt.setString(1, funcionario.getNome());
-	            psmt.setString(2, funcionario.getCpf());
-	            psmt.setString(3, funcionario.getTelefone());
-	            // Aplica o hashing na senha antes de salvar
-	            String hashedPassword = PasswordHasher.hashPassword(funcionario.getSenha());
-	            psmt.setString(4, hashedPassword);
-	            psmt.setString(5, funcionario.getEmail());
-	            psmt.setString(6, funcionario.getStatus());
-	            psmt.setString(7, funcionario.getDatacont());
-	            psmt.setInt(8, funcionario.getCodigo());
-	            psmt.executeUpdate();
+	          public boolean editar(Funcionarios funcionario) {
+        String sql = "UPDATE TBFUNCIONARIO set nomefunci=?,cpffunci=?,telefonefunci=?,senhafunci=?,emailfunci=?, statusfunci=?"
+                + " where idfunci = ?";
+        try {
+            PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
+            psmt.setString(1, funcionario.getNome());
+            psmt.setString(2, funcionario.getCpf());
+            psmt.setString(3, funcionario.getTelefone());
+            psmt.setString(4, funcionario.getSenha());
+            psmt.setString(5, funcionario.getEmail());
+            psmt.setString(6, funcionario.getStatus());
+            psmt.setInt(7, funcionario.getCodigo());
+            int linhasAfetadas = psmt.executeUpdate();
             conexao.desconectar();
+            return linhasAfetadas > 0;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um ERRO:" + ex);
+            return false;
         }
     }
           

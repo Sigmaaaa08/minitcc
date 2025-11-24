@@ -15,15 +15,14 @@ import Model.Operacional;
 import Model.Servicos;
 import Model.Veiculos;
 import java.text.ParseException;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Vector;
-import java.util.function.IntBinaryOperator;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -42,13 +41,63 @@ public class frmMenu extends javax.swing.JFrame {
     public frmMenu() {
     
         initComponents();
-    
+        
+        try{
+            //Mask para Telefone
+          MaskFormatter mascaraTelefone = new MaskFormatter("(##) #####-####");
+          mascaraTelefone.setPlaceholderCharacter('0'); // Permite caracteres inválidos
+          mascaraTelefone.setValidCharacters("0123456789");
+          txtTelefoneCliente1.setColumns(15);
+          txtTelefoneFuncionario.setColumns(15);
+          
+          DefaultFormatterFactory factoryTelefone = new DefaultFormatterFactory(mascaraTelefone);
+         // txtTelefoneCliente1.
+         // txtTelefoneFuncionario.
+          
+         //Mask para Data
+          MaskFormatter mascaraData = new MaskFormatter("##/##/####");
+          mascaraData.setPlaceholderCharacter('_'); // Permite caracteres inválidos
+          mascaraData.setValidCharacters("0123456789");
+          txtDataEntrada.setColumns(10);
+          txtDataSaida.setColumns(10);
+          
+          DefaultFormatterFactory factoryData = new DefaultFormatterFactory(mascaraData);
+          txtDataEntrada.setFormatterFactory(factoryData);
+          txtDataSaida.setFormatterFactory(factoryData);
+          
+          //Mask para Horário
+          MaskFormatter mascaraHorario = new MaskFormatter("##:##:##");
+          mascaraHorario.setPlaceholderCharacter('*'); // Permite caracteres inválidos
+          mascaraHorario.setValidCharacters("0123456789");
+          txtHoraEntrada.setColumns(8);
+          txtHoraSaida.setColumns(8);
+          
+          DefaultFormatterFactory factoryHorario = new DefaultFormatterFactory(mascaraHorario);
+          txtHoraEntrada.setFormatterFactory(factoryHorario);
+          txtHoraSaida.setFormatterFactory(factoryHorario);
+          
+          //Mask para Placa
+          MaskFormatter mascaraPlaca = new MaskFormatter("#######");
+          mascaraPlaca.setPlaceholderCharacter('0'); // Permite caracteres inválidos
+          mascaraPlaca.setValidCharacters("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+        //  txtHoraEntrada.setColumns(8);
+        //  txtHoraSaida.setColumns(8);
+          
+          DefaultFormatterFactory factoryPlaca = new DefaultFormatterFactory(mascaraPlaca);
+        //  txtHoraEntrada.setFormatterFactory(factoryPlaca);
+         // txtHoraSaida.setFormatterFactory(factoryPlaca);
+          
+          
+        }catch(ParseException  e){
+             e.printStackTrace();
+        }
         //Init dialogLogin
         dialogLogin.setTitle("Login");
-        //Foca no campo Senha
-        passwordLoginSenhaFuncionario.requestFocus();
-        //
-        passwordLoginSenhaFuncionario.addKeyListener(new java.awt.event.KeyAdapter() {
+        
+        //Foca no campo Email
+        txtUsuarioLogin.requestFocus();
+        //Caso aperte enter acionará o bntLogar
+        txtUsuarioLogin.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyPressed(java.awt.event.KeyEvent evt){
         if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
         bntLogar.doClick();
@@ -61,7 +110,7 @@ public class frmMenu extends javax.swing.JFrame {
         //Init dialogOperacional
         dialogOperacional.setTitle("Sistema operacional de preços");
         
-        //Init dialog
+        //Init dialogFuncionário
         dialogCadastroFuncionario.setTitle("Cadastro do Funcionário");
         
     tableSourcePlaca.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -158,7 +207,6 @@ public class frmMenu extends javax.swing.JFrame {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel10 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
-        txtSenhaFuncionario = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         txtEmailFuncionario = new javax.swing.JTextField();
@@ -174,6 +222,8 @@ public class frmMenu extends javax.swing.JFrame {
         txtCpfFuncionario = new javax.swing.JTextField();
         bntPesquisarFuncionario = new javax.swing.JButton();
         jLabel49 = new javax.swing.JLabel();
+        txtSenhaFuncionario = new javax.swing.JPasswordField();
+        chbsenhafunci = new javax.swing.JCheckBox();
         jPanel14 = new javax.swing.JPanel();
         bntEditarFuncionario = new javax.swing.JButton();
         bntNovoFuncionario = new javax.swing.JButton();
@@ -195,8 +245,8 @@ public class frmMenu extends javax.swing.JFrame {
         bntSairLogin = new javax.swing.JButton();
         chbsenhafunciLogar = new javax.swing.JCheckBox();
         bntCancelarLogin = new javax.swing.JButton();
-        txtUsuarioLogin = new javax.swing.JPasswordField();
         jLabel35 = new javax.swing.JLabel();
+        txtUsuarioLogin = new javax.swing.JTextField();
         dialogOperacional = new javax.swing.JDialog();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -240,13 +290,6 @@ public class frmMenu extends javax.swing.JFrame {
         tableListarCliente1 = new javax.swing.JTable();
         bntListarCliente1 = new javax.swing.JButton();
         jTabbedPane3 = new javax.swing.JTabbedPane();
-        jPanel22 = new javax.swing.JPanel();
-        jPanel23 = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        tableServico = new javax.swing.JTable();
-        jLabel48 = new javax.swing.JLabel();
-        cbStatusServico1 = new javax.swing.JComboBox<>();
-        bntListarServico1 = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         bntNovo1 = new javax.swing.JButton();
@@ -275,6 +318,7 @@ public class frmMenu extends javax.swing.JFrame {
         jLabel42 = new javax.swing.JLabel();
         txtDataSaida = new javax.swing.JFormattedTextField();
         txtDataEntrada = new javax.swing.JFormattedTextField();
+        txtDataEntrada = new javax.swing.JFormattedTextField();
         txtHoraSaida = new javax.swing.JFormattedTextField();
         txtHoraEntrada = new javax.swing.JFormattedTextField();
         jPanel19 = new javax.swing.JPanel();
@@ -292,6 +336,13 @@ public class frmMenu extends javax.swing.JFrame {
         txtNumPlaca = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         tableSourcePlaca = new javax.swing.JTable();
+        jPanel22 = new javax.swing.JPanel();
+        jPanel23 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tableServico = new javax.swing.JTable();
+        jLabel48 = new javax.swing.JLabel();
+        cbStatusServico1 = new javax.swing.JComboBox<>();
+        bntListarServico1 = new javax.swing.JButton();
         jPanel24 = new javax.swing.JPanel();
         txtNomeFuncionarioLogado = new javax.swing.JLabel();
         bntDialogFuncionario = new javax.swing.JButton();
@@ -367,6 +418,13 @@ public class frmMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        chbsenhafunci.setText("Exibir");
+        chbsenhafunci.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbsenhafunciActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -381,13 +439,16 @@ public class frmMenu extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel32)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtEmailFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(115, 115, 115))
+                                .addComponent(txtEmailFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel13Layout.createSequentialGroup()
                                 .addComponent(jLabel29)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel13Layout.createSequentialGroup()
+                                        .addComponent(chbsenhafunci)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(txtSenhaFuncionario))))
+                        .addGap(115, 115, 115)
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                                 .addComponent(jLabel37)
@@ -427,20 +488,22 @@ public class frmMenu extends javax.swing.JFrame {
                     .addComponent(txtCpfFuncionario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel13Layout.createSequentialGroup()
+                            .addComponent(jLabel37)
+                            .addGap(22, 22, 22))
+                        .addComponent(cbStatusFuncionario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel13Layout.createSequentialGroup()
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel32)
                             .addComponent(txtEmailFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel29)
-                            .addComponent(txtSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel13Layout.createSequentialGroup()
-                            .addComponent(jLabel37)
-                            .addGap(22, 22, 22))
-                        .addComponent(cbStatusFuncionario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                            .addComponent(txtSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chbsenhafunci)))
+                .addContainerGap())
         );
 
         bntEditarFuncionario.setText("Editar");
@@ -659,24 +722,24 @@ public class frmMenu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel35)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel24)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(passwordLoginSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(chbsenhafunciLogar)
-                            .addComponent(txtUsuarioLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(bntLogar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bntCancelarLogin)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bntSairLogin)))
+                        .addComponent(bntSairLogin))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel35)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtUsuarioLogin))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel24)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(passwordLoginSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(chbsenhafunciLogar))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -974,7 +1037,7 @@ public class frmMenu extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setText("CPF:");
+        jLabel11.setText("Placa:");
 
         javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
         jPanel29.setLayout(jPanel29Layout);
@@ -1074,7 +1137,7 @@ public class frmMenu extends javax.swing.JFrame {
             .addGroup(jPanel32Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Consulta", jPanel32);
@@ -1096,77 +1159,6 @@ public class frmMenu extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        tableServico.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane6.setViewportView(tableServico);
-
-        jLabel48.setText("Status");
-
-        cbStatusServico1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Pendente", "Finalizado" }));
-
-        bntListarServico1.setText("Listar");
-        bntListarServico1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntListarServico1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
-        jPanel23.setLayout(jPanel23Layout);
-        jPanel23Layout.setHorizontalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel23Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel23Layout.createSequentialGroup()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel23Layout.createSequentialGroup()
-                        .addComponent(jLabel48)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbStatusServico1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bntListarServico1)
-                        .addGap(14, 14, 14))))
-        );
-        jPanel23Layout.setVerticalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel23Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bntListarServico1)
-                    .addComponent(cbStatusServico1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel48))
-                .addContainerGap(68, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
-        jPanel22.setLayout(jPanel22Layout);
-        jPanel22Layout.setHorizontalGroup(
-            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel22Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel22Layout.setVerticalGroup(
-            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jTabbedPane3.addTab("Consulta", jPanel22);
 
         bntNovo1.setText("Novo");
         bntNovo1.addActionListener(new java.awt.event.ActionListener() {
@@ -1313,8 +1305,10 @@ public class frmMenu extends javax.swing.JFrame {
         jLabel38.setText("Qtd. Horas");
 
         txtQtdHoras1.setEditable(false);
+        txtQtdHoras1.setEnabled(false);
 
         txtQtdDias1.setEditable(false);
+        txtQtdDias1.setEnabled(false);
 
         jLabel39.setText("Data Entrada");
 
@@ -1396,6 +1390,12 @@ public class frmMenu extends javax.swing.JFrame {
 
         jLabel45.setText("Valor Diaria");
 
+        txtValorDiariaMenu.setEnabled(false);
+
+        txtPrimeiraHoraMenu.setEnabled(false);
+
+        txtValorHorasMenu.setEnabled(false);
+
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
@@ -1471,17 +1471,8 @@ public class frmMenu extends javax.swing.JFrame {
         txtNumPlaca.setToolTipText("Nº da Placa");
         txtNumPlaca.setName(""); // NOI18N
 
-        tableSourcePlaca.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        tableSourcePlaca.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tableSourcePlaca.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane4.setViewportView(tableSourcePlaca);
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
@@ -1554,6 +1545,77 @@ public class frmMenu extends javax.swing.JFrame {
         );
 
         jTabbedPane3.addTab("Cadastro", jPanel15);
+
+        tableServico.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane6.setViewportView(tableServico);
+
+        jLabel48.setText("Status");
+
+        cbStatusServico1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Pendente", "Finalizado" }));
+
+        bntListarServico1.setText("Listar");
+        bntListarServico1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntListarServico1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
+        jPanel23.setLayout(jPanel23Layout);
+        jPanel23Layout.setHorizontalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel23Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel23Layout.createSequentialGroup()
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel23Layout.createSequentialGroup()
+                        .addComponent(jLabel48)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbStatusServico1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bntListarServico1)
+                        .addGap(14, 14, 14))))
+        );
+        jPanel23Layout.setVerticalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel23Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bntListarServico1)
+                    .addComponent(cbStatusServico1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel48))
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
+        jPanel22.setLayout(jPanel22Layout);
+        jPanel22Layout.setHorizontalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel22Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel22Layout.setVerticalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jTabbedPane3.addTab("Consulta", jPanel22);
 
         bntDialogFuncionario.setText("Funcionário");
         bntDialogFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -1669,6 +1731,8 @@ public class frmMenu extends javax.swing.JFrame {
             txtSenhaFuncionario.setText("");
             txtCpfFuncionario.setText("");
             
+            chbsenhafunci.setSelected(false);
+            
             cbStatusFuncionario.setSelectedIndex(0);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
@@ -1677,18 +1741,22 @@ public class frmMenu extends javax.swing.JFrame {
 
     private void bntPesquisarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPesquisarFuncionarioActionPerformed
         //
-        try {
+       try {
             Funcionarios funcionario = new Funcionarios();
             ConFuncionarios conFuncionario = new ConFuncionarios();
 
-            if (txtCpfFuncionario1.getText().trim().isEmpty()) {
+            if (txtCpfFuncionario.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Preencha o CPF para realizar a pesquisa");
             } else {
-                funcionario.setCpf(txtCpfFuncionario1.getText());
+                funcionario.setCpf(txtCpfFuncionario.getText());
+                if(conFuncionario.pesquisar(funcionario.getCpf())!=null)
                 funcionario = conFuncionario.pesquisar(funcionario.getCpf());
-                
-                
-                this.txtCpfFuncionario1.setText(funcionario.getCpf());
+                else{
+                JOptionPane.showMessageDialog(null, "Funcionário inválido ou não encontrado"); 
+                return;
+                } 
+
+                this.txtCpfFuncionario.setText(funcionario.getCpf());
                 this.txtNomeFuncionario.setText(funcionario.getNome());
                 this.txtTelefoneFuncionario.setText(funcionario.getTelefone());
                 this.txtEmailFuncionario.setText(funcionario.getEmail());
@@ -1698,7 +1766,7 @@ public class frmMenu extends javax.swing.JFrame {
                 } else {
                     cbStatusFuncionario.setSelectedIndex(1);
                 }
-                codigo1 = funcionario.getCodigo();
+                this.codigo1 = funcionario.getCodigo();
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
@@ -1737,7 +1805,7 @@ public class frmMenu extends javax.swing.JFrame {
 
 	    private void bntLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLogarActionPerformed
                 // TODO add your handling code here:
-                /*try {
+                try {
             ConFuncionarios conFunci = new ConFuncionarios();
             
             String usuario = txtUsuarioLogin.getText().toUpperCase();
@@ -1799,8 +1867,8 @@ public class frmMenu extends javax.swing.JFrame {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
                 }
-        */
-                frmMenu menu = new frmMenu();
+        
+                /*frmMenu menu = new frmMenu();
                         menu.setVisible(true);
                         menu.setSize(700, 450);
                         menu.setLocationRelativeTo(null);
@@ -1843,7 +1911,7 @@ public class frmMenu extends javax.swing.JFrame {
                 conServico.listar(), cabecalhoServico));
                         
                         this.dialogLogin.dispose();
-                        this.dialogLogin.setVisible(false);
+                        this.dialogLogin.setVisible(false);*/
     }//GEN-LAST:event_bntLogarActionPerformed
 
     private void bntDialogFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDialogFuncionarioActionPerformed
@@ -1936,14 +2004,14 @@ public class frmMenu extends javax.swing.JFrame {
             Funcionarios funcionario = new Funcionarios();
             ConFuncionarios conFuncionario = new ConFuncionarios();
 
-            if (txtNomeFuncionario.getText().isEmpty()
-                    || txtCpfFuncionario.getText().isEmpty()
-                    || txtTelefoneFuncionario.getText().isEmpty()
-                    || txtEmailFuncionario.getText().isEmpty()
-                    || txtSenhaFuncionario.getText().isEmpty()) {
+            if (txtNomeFuncionario.getText().trim().isEmpty()
+                    || txtCpfFuncionario.getText().trim().isEmpty()
+                    || txtTelefoneFuncionario.getText().trim().isEmpty()
+                    || txtEmailFuncionario.getText().trim().isEmpty()
+                    || txtSenhaFuncionario.getPassword().length == 0) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
             } else {
-                
+
                 funcionario.setNome(txtNomeFuncionario.getText());
                 funcionario.setTelefone(txtTelefoneFuncionario.getText());
                 funcionario.setCpf(txtCpfFuncionario.getText());
@@ -1952,10 +2020,13 @@ public class frmMenu extends javax.swing.JFrame {
                 funcionario.setStatus(cbStatusFuncionario.getSelectedItem().toString().toUpperCase());
                 funcionario.setCodigo(this.codigo1);
 
-                conFuncionario.editar(funcionario);
-                JOptionPane.showMessageDialog(null, "registro alterado com sucesso!");
+                boolean funcionarioAtualizado = conFuncionario.editar(funcionario);
+                if (funcionarioAtualizado) {
+            JOptionPane.showMessageDialog(null, "Registro alterado com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhum registro foi alterado.");
+       }
             }
-
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
         }
@@ -2070,35 +2141,45 @@ public class frmMenu extends javax.swing.JFrame {
         try {
             Clientes cliente = new Clientes();
             ConClientes conCliente = new ConClientes();
-            
+
             Veiculos veiculo = new Veiculos();
             ConVeiculos conVeiculo = new ConVeiculos();
 
-            if (txtPlacaVeiculo1.getText().isEmpty()
-                || txtModeloVeiculo1.getText().isEmpty()
-                || txtNomeCliente1.getText().isEmpty()
-                || txtCpfCliente1.getText().isEmpty()
-                || txtTelefoneCliente1.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
+            if (txtPlacaVeiculo1.getText().trim().isEmpty()
+                    || txtModeloVeiculo1.getText().trim().isEmpty()
+                    || txtNomeCliente1.getText().trim().isEmpty()
+                    || txtCpfCliente1.getText().trim().isEmpty()
+                    || txtTelefoneCliente1.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha os campos a partir da pesquisa");
             } else {
-                
                 cliente.setNome(txtNomeCliente1.getText());
                 cliente.setTelefone(txtTelefoneCliente1.getText());
                 cliente.setCpf(txtCpfCliente1.getText());
                 cliente.setCodigo(this.codigo1);
 
-                conCliente.editar(cliente);
-                
+                boolean clienteAtualizado = conCliente.editar(cliente);
+
                 veiculo.setPlaca(txtPlacaVeiculo1.getText());
                 veiculo.setModelo(txtModeloVeiculo1.getText());
                 veiculo.setTipo(cbTipoVeiculo1.getSelectedItem().toString().toUpperCase());
                 veiculo.setCodcliente(this.codigo1);
                 veiculo.setCodigo(this.codigo2);
 
-                conVeiculo.editar(veiculo);
-                JOptionPane.showMessageDialog(null, "registro alterado com sucesso!");
-            }
+                boolean veiculoAtualizado = conVeiculo.editar(veiculo);
+                
+                if (clienteAtualizado && veiculoAtualizado) {
+    JOptionPane.showMessageDialog(null, "Registro alterado com sucesso!");
+        } else {
+    JOptionPane.showMessageDialog(null, "Nenhum registro foi alterado.");
+       }
+                
+            Vector<String> cabecalho = new Vector<>();
+            cabecalho.add("Placa");
+            cabecalho.add("Modelo");
 
+            tableSourcePlaca.setModel(new DefaultTableModel(
+            conVeiculo.listarSourcePlaca(), cabecalho));
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
         }
@@ -2120,7 +2201,7 @@ public class frmMenu extends javax.swing.JFrame {
                 veiculo = conVeiculo.pesquisar(veiculo.getPlaca());
                 
                 cliente.setCodigo(veiculo.getCodcliente());
-                cliente = conCliente.pesquisar(String.valueOf(veiculo.getCodcliente()));
+                cliente = conCliente.pesquisar(veiculo.getCodcliente());
 
                 this.codigo1 = cliente.getCodigo();
                 this.codigo2 = veiculo.getCodigo();
@@ -2151,25 +2232,47 @@ public class frmMenu extends javax.swing.JFrame {
             Veiculos veiculo = new Veiculos();
             ConVeiculos conVeiculo = new ConVeiculos();
 
-            if (txtNomeCliente1.getText().isEmpty()
-                    || txtCpfCliente1.getText().isEmpty()
-                    || txtTelefoneCliente1.getText().isEmpty()
-                    || txtPlacaVeiculo1.getText().isEmpty()
-                    || txtModeloVeiculo1.getText().isEmpty()) {
+            if (txtNomeCliente1.getText().trim().isEmpty()
+                    || txtCpfCliente1.getText().trim().isEmpty()
+                    || txtTelefoneCliente1.getText().trim().isEmpty()
+                    || txtPlacaVeiculo1.getText().trim().isEmpty()
+                    || txtModeloVeiculo1.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
             } else {
-                cliente.setNome(txtNomeCliente1.getText());
-                cliente.setTelefone(txtTelefoneCliente1.getText());
-                cliente.setCpf(txtCpfCliente1.getText());
+                
+                cliente.setNome(txtNomeCliente1.getText().trim());
+                cliente.setTelefone(txtTelefoneCliente1.getText().trim());
+                cliente.setCpf(txtCpfCliente1.getText().trim());
+                
+                if(conCliente.pesquisar(cliente.getCpf()) == null){
+                    conCliente.cadastrar(cliente);
+                    veiculo.setCodcliente(conCliente.IDCliente());
+                }else{
+                    cliente = conCliente.pesquisar(cliente.getCpf());
+                    veiculo.setCodcliente(cliente.getCodigo());
+                    txtNomeCliente1.setText(cliente.getNome());
+                    txtTelefoneCliente1.setText(cliente.getTelefone());
+                }
 
-                conCliente.cadastrar(cliente);
-
-                veiculo.setCodcliente(conCliente.IDCliente());
-                veiculo.setPlaca(txtPlacaVeiculo1.getText());
-                veiculo.setModelo(txtModeloVeiculo1.getText());
+                veiculo.setPlaca(txtPlacaVeiculo1.getText().trim());
+                veiculo.setModelo(txtModeloVeiculo1.getText().trim());
                 veiculo.setTipo(cbTipoVeiculo1.getSelectedItem().toString().toUpperCase());
-
+                
+                if (conVeiculo.pesquisar(veiculo.getPlaca()) != null) {
+                JOptionPane.showMessageDialog(null, "Esta placa já está cadastrada!");
+                return;
+                }
+                
                 conVeiculo.cadastrar(veiculo);
+                
+                //Atualizando a tabela de pesquisa de placa na tela principal
+                Vector cabecalhoVeiculo = new Vector();
+           
+                cabecalhoVeiculo.addElement("Placa"); // 1
+                cabecalhoVeiculo.addElement("Modelo"); // 2
+
+                tableSourcePlaca.setModel(new DefaultTableModel(
+                    conVeiculo.listarSourcePlaca(), cabecalhoVeiculo));
 
                 JOptionPane.showMessageDialog(null, "registro cadastrado com sucesso!");
             }
@@ -2384,8 +2487,13 @@ public class frmMenu extends javax.swing.JFrame {
                 cabecalhoServico.addElement("Status"); // 1
                 cabecalhoServico.addElement("Valor Total"); // 1
                 
+                if(!cbStatusServico1.getSelectedItem().equals("...")){
                 this.tableServico.setModel(new DefaultTableModel(
-                conServico.listar(), cabecalhoServico));
+                conServico.listar(cbStatusServico1.getSelectedItem().toString()), cabecalhoServico));
+                } else{
+                this.tableServico.setModel(new DefaultTableModel(
+                conServico.listar(), cabecalhoServico));    
+                }
     }//GEN-LAST:event_bntListarServico1ActionPerformed
 
     private void bntPesquisarServico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPesquisarServico1ActionPerformed
@@ -2477,29 +2585,59 @@ public class frmMenu extends javax.swing.JFrame {
 
     private void bntSalvarFuncionario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarFuncionario1ActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             Funcionarios funcionario = new Funcionarios();
             ConFuncionarios conFuncionario = new ConFuncionarios();
-
+            
+            if(!txtNomeFuncionario.getText().trim().isEmpty()
+               || !txtCpfFuncionario.getText().trim().isEmpty()
+               || !txtTelefoneFuncionario.getText().trim().isEmpty()
+               || !txtEmailFuncionario.getText().trim().isEmpty()
+               || txtSenhaFuncionario.getPassword().length > 0){
+                
             funcionario.setNome(txtNomeFuncionario.getText());
             funcionario.setCpf(txtCpfFuncionario.getText());
             funcionario.setTelefone(txtTelefoneFuncionario.getText());
             funcionario.setEmail(txtEmailFuncionario.getText());
-            funcionario.setSenha(txtSenhaFuncionario.getText());
+                char[] senhaChar = txtSenhaFuncionario.getPassword();
+                String senha = new String(senhaChar);
+                funcionario.setSenha(senha);
+                Arrays.fill(senhaChar, ' ');
             funcionario.setStatus(cbStatusFuncionario.getSelectedItem().toString().toUpperCase());
-
+            
+            if(conFuncionario.pesquisar(funcionario.getCpf()) == null)
             conFuncionario.cadastrar(funcionario);
-            this.codigo1=0;
-
+            else{
+                JOptionPane.showMessageDialog(null, "Este funcionário já existe");
+                return;
+            } 
             JOptionPane.showMessageDialog(null, "registro cadastrado com sucesso!");
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro: "+ex);
+            this.codigo1 = 0;
+            }else{
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos, corretamente");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
         }
     }//GEN-LAST:event_bntSalvarFuncionario1ActionPerformed
+
+    private void chbsenhafunciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbsenhafunciActionPerformed
+        // TODO add your handling code here:
+        if (chbsenhafunci.isSelected()) {
+            txtSenhaFuncionario.setEchoChar((char) 0);
+            chbsenhafunci.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/hide.png")));
+
+        } else {
+            txtSenhaFuncionario.setEchoChar('*');
+            chbsenhafunci.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/view.png")));
+        }
+    }//GEN-LAST:event_chbsenhafunciActionPerformed
 
     /**
      * @param args the command line arguments
      */
+          
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -2572,6 +2710,7 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbStatusFuncionario;
     private javax.swing.JComboBox<String> cbStatusServico1;
     private javax.swing.JComboBox<String> cbTipoVeiculo1;
+    private javax.swing.JCheckBox chbsenhafunci;
     private javax.swing.JCheckBox chbsenhafunciLogar;
     private javax.swing.JDialog dialogCadastroCliente;
     private javax.swing.JDialog dialogCadastroFuncionario;
@@ -2679,10 +2818,10 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrimeiraHoraMenu;
     private javax.swing.JTextField txtQtdDias1;
     private javax.swing.JTextField txtQtdHoras1;
-    private javax.swing.JTextField txtSenhaFuncionario;
+    private javax.swing.JPasswordField txtSenhaFuncionario;
     private javax.swing.JTextField txtTelefoneCliente1;
     private javax.swing.JTextField txtTelefoneFuncionario;
-    private javax.swing.JPasswordField txtUsuarioLogin;
+    private javax.swing.JTextField txtUsuarioLogin;
     private javax.swing.JTextField txtValorDiariaMenu;
     private javax.swing.JFormattedTextField txtValorDiariaOperacional;
     private javax.swing.JTextField txtValorHorasMenu;
