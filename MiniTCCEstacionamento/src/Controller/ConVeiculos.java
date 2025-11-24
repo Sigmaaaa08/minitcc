@@ -129,6 +129,91 @@ public class ConVeiculos {
            return null;
         }
     }
+    
+
+    
+    public Vector listarSourcePlaca(){
+        Vector lista = new Vector();
+        String sql = "Select placaveiculo, modeloveiculo from TBVEICULO";
+        try{
+            PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery();
+            //percorre os resultados obtidos na consulta sql
+            while(rs.next()){
+                Veiculos veiculo = new Veiculos();
+                veiculo.setPlaca(rs.getString("placaveiculo"));
+                veiculo.setModelo(rs.getString("modeloveiculo"));
+                //Cada Linha será um veiculo encontrado
+                Vector novalinha = new Vector();
+                novalinha.addElement(veiculo.getPlaca());
+                novalinha.addElement(veiculo.getModelo());
+                
+                lista.add(novalinha);
+            }
+            psmt.close();
+            rs.close();
+            conexao.desconectar();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        return lista;
+    }
+    
+    public Vector listarSourcePlaca(String Placa){
+        Vector lista = new Vector();
+        String sql = "Select placaveiculo, modeloveiculo from TBVEICULO" +
+                " Where placaveiculo like ?";
+        try{
+            PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
+            psmt.setString(1, "%" + Placa + "%");
+            ResultSet rs = psmt.executeQuery();
+            //percorre os resultados obtidos na consulta sql
+            while(rs.next()){
+                Veiculos veiculo = new Veiculos();
+                veiculo.setPlaca(rs.getString("placaveiculo"));
+                veiculo.setModelo(rs.getString("modeloveiculo"));
+                //Cada Linha será um veiculo encontrado
+                Vector novalinha = new Vector();
+                novalinha.addElement(veiculo.getPlaca());
+                novalinha.addElement(veiculo.getModelo());
+                
+                lista.add(novalinha);
+            }
+            psmt.close();
+            rs.close();
+            conexao.desconectar();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        return lista;
+    }
+    
+    public Veiculos pesquisarVeiculoServico (int codVeiculo){
+        String sql = "Select * from TBVEICULO where idveiculo = ? order by idveiculo desc";
+         
+        try{
+           PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
+           pstmt.setInt(1, codVeiculo);
+           ResultSet rs = pstmt.executeQuery();
+            
+           Veiculos veiculo = new Veiculos();
+            
+           if (rs.next()){
+               veiculo.setCodigo(rs.getInt("idveiculo"));
+               veiculo.setCodcliente(rs.getInt("codcliente"));
+               veiculo.setPlaca(rs.getString("placaveiculo"));
+               veiculo.setModelo(rs.getString("modeloveiculo"));
+               veiculo.setTipo(rs.getString("tipoveiculo"));
+           return veiculo;
+            }else{
+           return null;
+           }
+        }catch(SQLException ex){
+           JOptionPane.showMessageDialog(null, ex);
+           return null;
+        }
+    }
+    
     public void editar(Veiculos veiculo){
         if (!veiculo.isValid()) {
             JOptionPane.showMessageDialog(null, "Todos os campos obrigatórios devem ser preenchidos.");

@@ -11,6 +11,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -69,5 +74,24 @@ public class ConOperacional {
 	DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss"); 
 	Date date = new Date(); 
 	return dateFormat.format(date); 
-        }    
+        }
+        
+        
+    /*public long diferencaEmDias(String data1, String data2) {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate d1 = LocalDate.parse(data1, fmt);
+        LocalDate d2 = LocalDate.parse(data2, fmt);
+        return ChronoUnit.DAYS.between(d1, d2);
+    }
+    public long diferencaEmHoras(String data1, String data2, String hora1, String hora2){
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        LocalDateTime d1 = LocalDateTime.parse(data1 + " " + hora1, fmt);
+        LocalDateTime d2 = LocalDateTime.parse(data1 + " " + hora1, fmt);
+
+        long horas = Duration.between(d1, d2).toHours();
+
+        System.out.println("Diferença em horas: " + horas);
+    }
+    }*/
 }

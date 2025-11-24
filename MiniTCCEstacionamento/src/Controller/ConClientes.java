@@ -70,22 +70,48 @@ public class ConClientes {
         return lista;
     }
 
-    public Clientes pesquisar(String idcliente) {
+    public Clientes pesquisar(int idcliente) {
         String sql = "Select * from TBCLIENTE where idcliente = ?";
         try {
             PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
-            pstmt.setString(1, idcliente);
+            pstmt.setInt(1, idcliente);
             ResultSet rs = pstmt.executeQuery();
 
             Clientes cliente = new Clientes();
             //percorre os resultados obtidos na consulta sql
-            while (rs.next()) {
+            if (rs.next()) {
                 cliente.setCodigo(rs.getInt("idcliente"));
                 cliente.setNome(rs.getString("nomecliente"));
                 cliente.setTelefone(rs.getString("telefonecliente"));
                 cliente.setCpf(rs.getString("cpfcliente"));
-            }
             return cliente;
+            }else{
+                return null;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+            return null;
+        }
+    }
+    
+    public Clientes pesquisar(String cpf) {
+        String sql = "Select * from TBCLIENTE where cpfcliente = ?";
+        try {
+            PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
+            pstmt.setString(1, cpf);
+            ResultSet rs = pstmt.executeQuery();
+
+            Clientes cliente = new Clientes();
+            //percorre os resultados obtidos na consulta sql
+            if (rs.next()) {
+                cliente.setCodigo(rs.getInt("idcliente"));
+                cliente.setNome(rs.getString("nomecliente"));
+                cliente.setTelefone(rs.getString("telefonecliente"));
+                cliente.setCpf(rs.getString("cpfcliente"));
+            return cliente;
+            }else{
+                return null;
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
             return null;
@@ -108,6 +134,7 @@ public class ConClientes {
         return 0;
     }
 
+    
     public void editar(Clientes cliente) {
         if (!cliente.isValid()) {
             JOptionPane.showMessageDialog(null, "Todos os campos obrigatórios devem ser preenchidos.");

@@ -112,13 +112,14 @@ public class ConFuncionarios {
         return lista;
     }
          
-	          public Funcionarios logar(String senha) {
+	          public Funcionarios logar(String senha, String email) {
 	        // Aplica o hashing na senha fornecida para comparação
 	        String hashedPassword = PasswordHasher.hashPassword(senha);
-	        String sql = "Select * from TBFUNCIONARIO where senhafunci = ?";
+	        String sql = "Select * from TBFUNCIONARIO where senhafunci = ? and emailfunci = ?";
 	        try {
 	            PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
 	            pstmt.setString(1, hashedPassword);
+                    pstmt.setString(2, email);
             ResultSet rs = pstmt.executeQuery();
 
             //percorre os resultados obtidos na consulta sql
