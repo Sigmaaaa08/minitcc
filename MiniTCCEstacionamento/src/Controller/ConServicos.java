@@ -54,21 +54,18 @@ public class ConServicos {
     }
     
      public void cadastrar(Servicos servico) {
-        String sql = "INSERT INTO TBSERVICO(datafinal,datainicial,horaentrada,horasaida,codfunci_entrada,codfunci_saida,codveiculo, statusservico, valortotal, codcat)"
+        String sql = "INSERT INTO TBSERVICO(datainicial,horaentrada,codfunci_entrada,codveiculo, statusservico, valortotal, codcat)"
                 + "VALUES (?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
-            psmt.setString(1, servico.getDatafinal());
-            psmt.setString(2, servico.getDatainicial());
-            psmt.setString(3, servico.getHoraentrada());
-            psmt.setString(4, servico.getHorasaida());
-            psmt.setInt(5, servico.getCodfuncionario_entrada());
-            psmt.setInt(6, servico.getCodfuncionario_saida());
-            psmt.setInt(7, servico.getCodveiculo());
-            psmt.setString(8, servico.getStatus());
-            psmt.setDouble(9, servico.getValorTotal());
-            psmt.setInt(10, servico.getCodCat());
+            psmt.setString(1, servico.getDatainicial());
+            psmt.setString(2, servico.getHoraentrada());
+            psmt.setInt(3, servico.getCodfuncionario_entrada());
+            psmt.setInt(4, servico.getCodveiculo());
+            psmt.setString(5, servico.getStatus());
+            psmt.setDouble(6, servico.getValorTotal());
+            psmt.setInt(7, 1);
             psmt.executeUpdate();
 
             conexao.desconectar();

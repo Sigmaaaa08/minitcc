@@ -1797,7 +1797,7 @@ public class frmMenu extends javax.swing.JFrame {
                 menu.setLocationRelativeTo(null);              
 
                 menu.txtNomeFuncionarioLogado.setText(funcionario.getNome());
-                this.codFuncionarioLogado = funcionario.getCodigo();
+                menu.codFuncionarioLogado = funcionario.getCodigo();
 
                 ConOperacional conOperacional = new ConOperacional();
                 Operacional operacional = conOperacional.precos();
@@ -2296,44 +2296,36 @@ public class frmMenu extends javax.swing.JFrame {
 
             String dataEntrada = txtDataEntrada.getText().trim();
             String horaEntrada = txtHoraEntrada.getText().trim();
-            String dataSaida = txtDataSaida.getText().trim();
-            String horaSaida = txtHoraSaida.getText().trim();
+            
 
-            if (dataEntrada.trim().isEmpty()
-                    || horaEntrada.trim().isEmpty()
+            if (txtDataEntrada.getText() == null || txtDataEntrada.getText().trim().isEmpty() || txtDataEntrada.getText().contains("_")
+                    || txtHoraEntrada.getText() == null || txtHoraEntrada.getText().trim().isEmpty() || txtHoraEntrada.getText().contains("*")
                     || txtModeloVeiculoServico.getText().trim().isEmpty()
-                    || txtNomeCliente1.getText().trim().isEmpty()
+                    || txtNomeClienteServico.getText().trim().isEmpty()
                     || txtPlacaVeiculoServico.getText().trim().isEmpty()){
 
                 JOptionPane.showMessageDialog(null, "Preencha os campos necessários (Data Entrada, Hora Entrada, Cliente)");
                 return;
             }else{
             
-                servico.setDatafinal(conOperacional.formatarDataParaAmericana(dataSaida));
-                servico.setHorasaida(horaSaida);
+                
                 servico.setDatainicial(conOperacional.formatarDataParaAmericana(dataEntrada));
                 servico.setHoraentrada(horaEntrada);
                 servico.setStatus("Pendente");
+                servico.setCodCat(1);
+                servico.setCodfuncionario_entrada(codFuncionarioLogado);
+                System.out.println(codFuncionarioLogado);
                 
-            if(!dataSaida.trim().isEmpty()
-               || !horaSaida.trim().isEmpty()){
-
                 String placa = txtPlacaVeiculoServico.getText();
                 veiculo = conVeiculo.pesquisar(placa);
                 servico.setCodveiculo(veiculo.getCodigo());
                 
-                
-                /*conOperacional.diferencaEmDias(dataEntrada, dataSaida);*/
-                
-                
-                servico.setStatus("Finalizado");
-            }
+            
             
 
-            conServico.editar(servico);
+            conServico.cadastrar(servico);
 
             bntNovo1ActionPerformed(evt);
-            
           }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Erro no formato do número de entrada do serviço: " + ex.getMessage());
@@ -2407,19 +2399,43 @@ public class frmMenu extends javax.swing.JFrame {
         }
 
         try {
-
-            String dataFinal = txtDataSaida.getText();
+            ConServicos conServico = new ConServicos();
+            //Servicos servico = new Servico();
+            
+            
+            String dataSaida = txtDataSaida.getText();
             String dataEntrada = txtDataEntrada.getText();
             String horaSaida = txtHoraSaida.getText();
             String horaEntrada = txtHoraEntrada.getText();
+            
+            
+                
+                String placa = txtPlacaVeiculoServico.getText();
+               // veiculo = conVeiculo.pesquisar(placa);
+               // servico.setCodveiculo(veiculo.getCodigo());
+                
+               // servico.setDatafinal(conOperacional.formatarDataParaAmericana(dataSaida));
+               // servico.setHorasaida(horaSaida);
+                
+              //  txtQtdDias1.setText(String.valueOf(conOperacional.diferencaEmDias(dataEntrada, dataSaida)));
+              //  txtQtdHoras1.setText(String.valueOf(conOperacional.diferencaEmHoras(dataEntrada, dataSaida, horaEntrada, horaSaida)));
+                
+               // txtValorTotal.setText(conOperacional.ValorTotal(dataEntrada, dataSaida, horaEntrada, horaSaida).toString());
+              //  servico.setValorTotal(Double.parseDouble(txtValorTotal.getText()));
+                
+                //servico.setStatus("Finalizado");
+               // conServico.editar(servico);
+                
+                bntNovo1ActionPerformed(evt);
+                return;
+            
+            
+          //  servico.setDatafinal(dataFinal);
+           // servico.setHorasaida(horaSaida);
 
-            Servicos servico = new Servicos();
-            servico.setDatafinal(dataFinal);
-            servico.setHorasaida(horaSaida);
+            //ConServicos controller = new ConServicos();
 
-            ConServicos controller = new ConServicos();
-
-            controller.editar(servico);
+          //  controller.editar(servico);
             
             Vector cabecalhoVeiculo = new Vector();
                 ConVeiculos conVeiculo = new ConVeiculos();
@@ -2488,15 +2504,30 @@ public class frmMenu extends javax.swing.JFrame {
                 
                 cliente.setCodigo(veiculo.getCodcliente());
                 cliente = conCliente.pesquisar(cliente.getCodigo());
-
+                
+                if(servico.getStatus().equals("Finalizado")){
+                this.txtDataSaida.setText(conOperacional.formatarDataParaBrasileira(servico.getDatafinal()));
+                this.txtHoraSaida.setText(servico.getHorasaida());
+                this.txtValorTotal.setText(String.valueOf(servico.getValorTotal()));
+                
+                String dataEntrada = txtDataEntrada.getText().trim();
+                String horaEntrada = txtHoraEntrada.getText().trim();
+                String dataSaida = txtDataSaida.getText().trim();
+                String horaSaida = txtHoraSaida.getText().trim();
+                
+                this.txtQtdDias1.setText(String.valueOf(conOperacional.diferencaEmDias(dataEntrada, dataSaida)));
+                this.txtQtdHoras1.setText(String.valueOf(conOperacional.diferencaEmHoras(dataEntrada, dataSaida, horaEntrada, horaSaida)));
+                }
+                
                 this.txtModeloVeiculoServico.setText(veiculo.getModelo());
                 this.txtPlacaVeiculoServico.setText(veiculo.getPlaca());
                 this.txtNomeClienteServico.setText(cliente.getNome());
-                this.txtDataEntrada.setText(conOperacional.formatarDataParaBrasileira(servico.getDatainicial()));
-                this.txtDataSaida.setText(conOperacional.formatarDataParaBrasileira(servico.getDatafinal()));
                 this.txtHoraEntrada.setText(servico.getHoraentrada());
-                this.txtHoraSaida.setText(servico.getHorasaida());
-                this.txtValorTotal.setText(String.valueOf(servico.getValorTotal()));
+                this.txtDataEntrada.setText(conOperacional.formatarDataParaBrasileira(servico.getDatainicial()));
+                
+                
+                
+                
             }   
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);

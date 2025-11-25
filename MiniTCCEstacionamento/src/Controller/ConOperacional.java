@@ -107,21 +107,73 @@ public class ConOperacional {
         }
         
         
-    /*public long diferencaEmDias(String data1, String data2) {
+    public long diferencaEmDias(String data1, String data2) {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate d1 = LocalDate.parse(data1, fmt);
         LocalDate d2 = LocalDate.parse(data2, fmt);
+        
         return ChronoUnit.DAYS.between(d1, d2);
     }
     public long diferencaEmHoras(String data1, String data2, String hora1, String hora2){
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
         LocalDateTime d1 = LocalDateTime.parse(data1 + " " + hora1, fmt);
-        LocalDateTime d2 = LocalDateTime.parse(data1 + " " + hora1, fmt);
+        LocalDateTime d2 = LocalDateTime.parse(data2 + " " + hora2, fmt);
 
         long horas = Duration.between(d1, d2).toHours();
 
-        System.out.println("Diferença em horas: " + horas);
+        return horas;
     }
-    }*/
+    
+    public Double ValorTotal(String data1, String data2, String hora1, String hora2){
+    try{
+        // 1. Otimização: Chama precos() apenas UMA vez
+        Operacional operacional = precos();
+        Double diaria = operacional.getPrecoDiaria();
+        Double primeiraHora = operacional.getPrecoPrimeiraHora();
+        Double horasAdicionais = operacional.getPrecoHorasAdicionais();
+        
+        // 2. Assumindo que diferencaEmHoras e diferencaEmDias estão corrigidas.
+        long horasTotais = diferencaEmHoras(data1, data2, hora1, hora2);
+        long diasCompletos = diferencaEmDias(data1, data2); // Reutiliza a função de dias
+        
+        // 3. Lógica: Verifica a condição MAIOR primeiro (Diária)
+        if(horasTotais > 24){
+            
+            // Calcula as horas restantes após subtrair os dias completos
+            // Exemplo: 26h -> 1 dia completo e 2h restantes
+            long horasRestantes = horasTotais % 24;
+            
+            // Aplica a tarifa diária para os dias completos
+            Double valorDiarias = diasCompletos * diaria;
+            
+            // Aplica a tarifa horária para as horas restantes
+            Double valorRestante;
+            if (horasRestantes <= 1) {
+                // Se sobrou 1h ou menos, usa o preço da primeira hora
+                valorRestante = primeiraHora;
+            } else {
+                // Se sobrou mais de 1h, usa a primeira hora + adicionais
+                valorRestante = primeiraHora + (horasRestantes - 1) * horasAdicionais;
+            }
+            
+            return valorDiarias + valorRestante;
+            
+        } 
+        // 4. Se o tempo for maior que 1 hora, mas menor ou igual a 24 horas
+        else if(horasTotais > 1){
+            // Cobra a primeira hora + as horas adicionais (horasTotais - 1)
+            return primeiraHora + (horasTotais - 1) * horasAdicionais;
+        }
+        // 5. Se o tempo for 1 hora ou menos
+        else {
+            return primeiraHora;
+        }
+        
+    }catch(Exception e){
+        // 6. Correção: Tratamento de Exceção (NUNCA DEIXE VAZIO!)
+        System.err.println("Erro ao calcular ValorTotal: " + e.getMessage());
+        return 0.0; // Retorna 0.0 ou outro valor de erro, em vez de deixar a função retornar 'null'
+    }
+}
 }
