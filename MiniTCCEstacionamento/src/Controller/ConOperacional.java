@@ -76,6 +76,36 @@ public class ConOperacional {
 	return dateFormat.format(date); 
         }
         
+        public String formatarDataParaBrasileira(String dataAmericana){
+            // 2. Definir o formatador para o formato de entrada
+        DateTimeFormatter formatoAmericano = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        // 3. Converter a String americana para um objeto LocalDate
+        LocalDate data = LocalDate.parse(dataAmericana, formatoAmericano);
+
+        // 4. Definir o formatador para o formato de saída (brasileiro)
+        DateTimeFormatter formatoBrasileiro = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        // 5. Formatar o objeto LocalDate para a String no formato brasileiro
+        String dataBrasileira = data.format(formatoBrasileiro);
+        return dataBrasileira;
+        }
+        
+        public String formatarDataParaAmericana(String dataBrasileira){
+            // 2. Definir o formatador para o formato de entrada
+        DateTimeFormatter formatoAmericano = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        // 3. Converter a String americana para um objeto LocalDate
+        LocalDate data = LocalDate.parse(dataBrasileira, formatoAmericano);
+
+        // 4. Definir o formatador para o formato de saída (brasileiro)
+        DateTimeFormatter formatoBrasileiro = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        // 5. Formatar o objeto LocalDate para a String no formato brasileiro
+        String dataAmericana = data.format(formatoBrasileiro);
+        return dataAmericana;
+        }
+        
         
     /*public long diferencaEmDias(String data1, String data2) {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");

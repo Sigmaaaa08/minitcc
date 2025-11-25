@@ -132,22 +132,22 @@
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="txtCpfFuncionario1" min="-2" pref="98" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
                                               <Component id="jLabel34" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Component id="txtNomeFuncionario" min="-2" pref="98" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="txtCpfFuncionario1" min="-2" pref="98" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtTelefoneFuncionario" min="-2" pref="99" max="-2" attributes="0"/>
+                                      <Component id="txtTelefoneFuncionario" min="-2" pref="100" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -223,8 +223,6 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomeFuncionarioActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtCpfFuncionario1">
-                    </Component>
                     <Component class="javax.swing.JLabel" name="jLabel36">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Telefone:"/>
@@ -234,8 +232,6 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Senha:"/>
                       </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="txtTelefoneFuncionario">
                     </Component>
                     <Component class="javax.swing.JComboBox" name="cbStatusFuncionario">
                       <Properties>
@@ -315,6 +311,10 @@
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chbsenhafunciActionPerformed"/>
                       </Events>
+                    </Component>
+                    <Component class="javax.swing.JFormattedTextField" name="txtTelefoneFuncionario">
+                    </Component>
+                    <Component class="javax.swing.JFormattedTextField" name="txtCpfFuncionario1">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -804,19 +804,22 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jPanel30" min="-2" max="-2" attributes="0"/>
-                              <Component id="jPanel31" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jPanel31" alignment="0" min="-2" pref="456" max="-2" attributes="0"/>
                               <Component id="jPanel34" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="206" pref="206" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtPesquisarPlacaVeiculo" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="txtPesquisarPlacaVeiculo" min="-2" pref="98" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="bntPesquisarCliente1" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -832,11 +835,11 @@
                           <Component id="jPanel30" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtPesquisarPlacaVeiculo" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="bntPesquisarCliente1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtPesquisarPlacaVeiculo" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="10" max="32767" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel31" min="-2" max="-2" attributes="0"/>
@@ -937,63 +940,56 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtNomeCliente1" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="txtNomeCliente1" min="-2" pref="99" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtCpfCliente1" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txtCpfCliente1" min="-2" pref="96" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtTelefoneCliente1" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtTelefoneCliente1" min="-2" pref="99" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace pref="19" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtTelefoneCliente1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                      <Component id="txtNomeCliente1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtCpfCliente1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace pref="12" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtCpfCliente1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtTelefoneCliente1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNomeCliente1" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JTextField" name="txtTelefoneCliente1">
-                    </Component>
                     <Component class="javax.swing.JLabel" name="jLabel9">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Telefone:"/>
                       </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="txtCpfCliente1">
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel10">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="CPF:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtNomeCliente1">
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomeCliente1ActionPerformed"/>
-                      </Events>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="jLabel15">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Nome:"/>
                       </Properties>
+                    </Component>
+                    <Component class="javax.swing.JFormattedTextField" name="txtTelefoneCliente1">
+                    </Component>
+                    <Component class="javax.swing.JFormattedTextField" name="txtCpfCliente1">
+                    </Component>
+                    <Component class="javax.swing.JFormattedTextField" name="txtNomeCliente1">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1030,9 +1026,9 @@
                                   </Group>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtPlacaVeiculo1" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel13" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
                                       <Component id="txtModeloVeiculo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtPlacaVeiculo1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
@@ -1058,11 +1054,6 @@
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtPlacaVeiculo1">
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPlacaVeiculo1ActionPerformed"/>
-                      </Events>
-                    </Component>
                     <Component class="javax.swing.JTextField" name="txtModeloVeiculo1">
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtModeloVeiculo1ActionPerformed"/>
@@ -1083,6 +1074,8 @@
                         <Property name="text" type="java.lang.String" value="Placa:"/>
                       </Properties>
                     </Component>
+                    <Component class="javax.swing.JFormattedTextField" name="txtPlacaVeiculo1">
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Component class="javax.swing.JLabel" name="jLabel1">
@@ -1094,11 +1087,6 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ve&#xed;culo"/>
                   </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="txtPesquisarPlacaVeiculo">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPesquisarPlacaVeiculoActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="bntPesquisarCliente1">
                   <Properties>
@@ -1112,6 +1100,8 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Placa:"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JFormattedTextField" name="txtPesquisarPlacaVeiculo">
                 </Component>
               </SubComponents>
             </Container>
@@ -1285,9 +1275,9 @@
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <Component id="jPanel17" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jPanel17" min="-2" pref="500" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="7" max="32767" attributes="0"/>
                               <Component id="jPanel21" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -1316,7 +1306,7 @@
                           </Group>
                           <Component id="jPanel21" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="16" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1409,30 +1399,32 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel26" min="-2" pref="72" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="jLabel27" min="-2" pref="72" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <Component id="txtNumEntrada" min="-2" pref="100" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="bntPesquisarServico1" pref="32" max="32767" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="txtPlacaVeiculoServico" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="bntPesquisarServico1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtModeloVeiculoServico" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="jLabel28" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtPlacaVeiculoServico" min="-2" pref="99" max="-2" attributes="0"/>
+                              <Component id="jLabel27" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtModeloVeiculoServico" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="txtNomeClienteServico" min="-2" pref="100" max="-2" attributes="0"/>
                               <Component id="jLabel30" min="-2" pref="72" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1451,9 +1443,9 @@
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="txtModeloVeiculoServico" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="bntPesquisarServico1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                                      <Component id="txtPlacaVeiculoServico" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtNumEntrada" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtNomeClienteServico" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtPlacaVeiculoServico" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="jLabel26" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1479,11 +1471,6 @@
                     <Property name="text" type="java.lang.String" value="Placa"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtPlacaVeiculoServico">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPlacaVeiculoServicoActionPerformed"/>
-                  </Events>
-                </Component>
                 <Component class="javax.swing.JLabel" name="jLabel28">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Modelo do Ve&#xed;culo"/>
@@ -1505,6 +1492,8 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtNomeClienteServico">
+                </Component>
+                <Component class="javax.swing.JFormattedTextField" name="txtPlacaVeiculoServico">
                 </Component>
               </SubComponents>
             </Container>
@@ -1547,7 +1536,7 @@
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="txtHoraEntrada" min="-2" pref="100" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Component id="txtDataSaida" min="-2" pref="100" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="txtHoraSaida" min="-2" pref="100" max="-2" attributes="0"/>
@@ -1587,8 +1576,8 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtDataSaida" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtHoraSaida" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtDataSaida" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="16" max="32767" attributes="0"/>
                       </Group>
@@ -1609,13 +1598,11 @@
                 <Component class="javax.swing.JTextField" name="txtQtdHoras1">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtQtdDias1">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel39">
@@ -1638,8 +1625,6 @@
                     <Property name="text" type="java.lang.String" value="Hora Sa&#xed;da"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JFormattedTextField" name="txtDataSaida">
-                </Component>
                 <Component class="javax.swing.JFormattedTextField" name="txtDataEntrada">
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="txtDataEntrada = new javax.swing.JFormattedTextField();"/>
@@ -1648,6 +1633,8 @@
                 <Component class="javax.swing.JFormattedTextField" name="txtHoraSaida">
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="txtHoraEntrada">
+                </Component>
+                <Component class="javax.swing.JFormattedTextField" name="txtDataSaida">
                 </Component>
               </SubComponents>
             </Container>
@@ -1726,17 +1713,17 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtValorDiariaMenu">
                   <Properties>
-                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="editable" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtPrimeiraHoraMenu">
                   <Properties>
-                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="editable" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtValorHorasMenu">
                   <Properties>
-                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="editable" type="boolean" value="false"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1789,11 +1776,11 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel47" alignment="0" pref="125" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel47" alignment="0" pref="126" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtNumPlaca" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jScrollPane4" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jScrollPane4" pref="0" max="32767" attributes="0"/>
+                              <Component id="txtNumPlaca" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -1819,15 +1806,6 @@
                     <Property name="text" type="java.lang.String" value="Localizar Ve&#xed;culo"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtNumPlaca">
-                  <Properties>
-                    <Property name="toolTipText" type="java.lang.String" value="N&#xba; da Placa"/>
-                    <Property name="name" type="java.lang.String" value="" noResource="true"/>
-                  </Properties>
-                  <AccessibilityProperties>
-                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
-                  </AccessibilityProperties>
-                </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane4">
                   <AuxValues>
                     <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -1838,7 +1816,7 @@
                     <Component class="javax.swing.JTable" name="tableSourcePlaca">
                       <Properties>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Cursor Padr&#xe3;o"/>
+                          <Color id="Default Cursor"/>
                         </Property>
                         <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
                           <JTableSelectionModel selectionMode="0"/>
@@ -1847,6 +1825,8 @@
                     </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JFormattedTextField" name="txtNumPlaca">
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>
@@ -1912,7 +1892,7 @@
                               <Component id="cbStatusServico1" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel48" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="68" max="32767" attributes="0"/>
+                          <EmptySpace pref="84" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
