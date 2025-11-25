@@ -24,7 +24,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
-
+import com.formdev.flatlaf.*;
 /**
  *
  * @author LABINFO
@@ -41,6 +41,11 @@ public class frmMenu extends javax.swing.JFrame {
     public frmMenu() {
     
         initComponents();
+        
+        new FlatLightLaf().setup();
+        
+        this.dialogLogin.setVisible(true);
+        
         
         try{
             //Mask para Telefone
@@ -2427,7 +2432,7 @@ public class frmMenu extends javax.swing.JFrame {
                // conServico.editar(servico);
                 
                 bntNovo1ActionPerformed(evt);
-                return;
+// é aqui o erro
             
             
           //  servico.setDatafinal(dataFinal);
@@ -2437,10 +2442,9 @@ public class frmMenu extends javax.swing.JFrame {
 
           //  controller.editar(servico);
             
-            Vector cabecalhoVeiculo = new Vector();
                 ConVeiculos conVeiculo = new ConVeiculos();
-           
-            cabecalhoVeiculo.addElement("Placa"); // 1
+           Vector cabecalhoVeiculo = new Vector();
+            cabecalhoVeiculo.addElement("Placa"); // 1 
             cabecalhoVeiculo.addElement("Modelo"); // 2
 
             tableSourcePlaca.setModel(new DefaultTableModel(
