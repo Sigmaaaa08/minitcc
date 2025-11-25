@@ -260,8 +260,8 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel49" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtCpfFuncionario" min="-2" pref="98" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtCpfFuncionario" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="bntPesquisarFuncionario" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
@@ -272,9 +272,9 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace pref="9" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="txtCpfFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="bntPesquisarFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel49" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtCpfFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -282,11 +282,6 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JTextField" name="txtCpfFuncionario">
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCpfFuncionarioActionPerformed"/>
-                          </Events>
-                        </Component>
                         <Component class="javax.swing.JButton" name="bntPesquisarFuncionario">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Pesquisar"/>
@@ -299,6 +294,8 @@
                           <Properties>
                             <Property name="text" type="java.lang.String" value="CPF:"/>
                           </Properties>
+                        </Component>
+                        <Component class="javax.swing.JFormattedTextField" name="txtCpfFuncionario">
                         </Component>
                       </SubComponents>
                     </Container>

@@ -15,9 +15,7 @@ import Model.Operacional;
 import Model.Servicos;
 import Model.Veiculos;
 import java.text.ParseException;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Vector;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -26,7 +24,6 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
-import java.time.LocalDate;
 
 /**
  *
@@ -82,14 +79,16 @@ public class frmMenu extends javax.swing.JFrame {
           
           //Mask para CPF
           MaskFormatter mascaraCPF = new MaskFormatter("###.###.###-##");
-          mascaraCPF.setPlaceholderCharacter(' '); // Permite caracteres inválidos
+          mascaraCPF.setPlaceholderCharacter('*'); // Permite caracteres inválidos
           mascaraCPF.setValidCharacters("0123456789");
           txtCpfCliente1.setColumns(14);
           txtCpfFuncionario1.setColumns(14);
+          txtCpfFuncionario.setColumns(14);
           
           DefaultFormatterFactory factoryCPF = new DefaultFormatterFactory(mascaraCPF);
           txtCpfCliente1.setFormatterFactory(factoryCPF);
           txtCpfFuncionario1.setFormatterFactory(factoryCPF);
+          txtCpfFuncionario.setFormatterFactory(factoryCPF);
           
           //Mask para preço
           MaskFormatter mascaraPreco = new MaskFormatter("##.##");
@@ -233,9 +232,9 @@ public class frmMenu extends javax.swing.JFrame {
         cbStatusFuncionario = new javax.swing.JComboBox<>();
         jLabel37 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        txtCpfFuncionario = new javax.swing.JTextField();
         bntPesquisarFuncionario = new javax.swing.JButton();
         jLabel49 = new javax.swing.JLabel();
+        txtCpfFuncionario = new javax.swing.JFormattedTextField();
         txtSenhaFuncionario = new javax.swing.JPasswordField();
         chbsenhafunci = new javax.swing.JCheckBox();
         txtTelefoneFuncionario = new javax.swing.JFormattedTextField();
@@ -395,12 +394,6 @@ public class frmMenu extends javax.swing.JFrame {
 
         jLabel37.setText("Status");
 
-        txtCpfFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCpfFuncionarioActionPerformed(evt);
-            }
-        });
-
         bntPesquisarFuncionario.setText("Pesquisar");
         bntPesquisarFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -418,8 +411,8 @@ public class frmMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel49)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bntPesquisarFuncionario)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -428,9 +421,9 @@ public class frmMenu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(9, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntPesquisarFuncionario)
-                    .addComponent(jLabel49))
+                    .addComponent(jLabel49)
+                    .addComponent(txtCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -2551,10 +2544,6 @@ public class frmMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bntCancelarLoginActionPerformed
 
-    private void txtCpfFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfFuncionarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCpfFuncionarioActionPerformed
-
     private void bntSalvarFuncionario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarFuncionario1ActionPerformed
         // TODO add your handling code here:
         try {
@@ -2769,7 +2758,7 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JTable tableServico;
     private javax.swing.JTable tableSourcePlaca;
     private javax.swing.JFormattedTextField txtCpfCliente1;
-    private javax.swing.JTextField txtCpfFuncionario;
+    private javax.swing.JFormattedTextField txtCpfFuncionario;
     private javax.swing.JFormattedTextField txtCpfFuncionario1;
     private javax.swing.JFormattedTextField txtDataEntrada;
     private javax.swing.JFormattedTextField txtDataSaida;
