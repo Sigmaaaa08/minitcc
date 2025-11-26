@@ -69,6 +69,16 @@ public class frmMenu extends javax.swing.JFrame {
           DefaultFormatterFactory factoryData = new DefaultFormatterFactory(mascaraData);
           txtDataEntrada.setFormatterFactory(factoryData);
           txtDataSaida.setFormatterFactory(factoryData);
+          
+          //Mask para Placa
+          MaskFormatter mascaraPlaca = new MaskFormatter("UUU-####");
+          mascaraPlaca.setPlaceholderCharacter('X');
+          txtPlacaVeiculo1.setColumns(8);
+          txtPlacaVeiculoServico.setColumns(8);
+          
+          DefaultFormatterFactory factoryPlaca = new DefaultFormatterFactory(mascaraPlaca);
+          txtPlacaVeiculo1.setFormatterFactory(factoryPlaca);
+          txtPlacaVeiculoServico.setFormatterFactory(factoryPlaca);
  
           //Mask para Horário
           MaskFormatter mascaraHorario = new MaskFormatter("##:##:##");
@@ -985,6 +995,12 @@ public class frmMenu extends javax.swing.JFrame {
 
         jLabel14.setText("Placa:");
 
+        txtPlacaVeiculo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPlacaVeiculo1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel34Layout = new javax.swing.GroupLayout(jPanel34);
         jPanel34.setLayout(jPanel34Layout);
         jPanel34Layout.setHorizontalGroup(
@@ -1239,6 +1255,12 @@ public class frmMenu extends javax.swing.JFrame {
         bntPesquisarServico1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntPesquisarServico1ActionPerformed(evt);
+            }
+        });
+
+        txtPlacaVeiculoServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPlacaVeiculoServicoActionPerformed(evt);
             }
         });
 
@@ -2187,7 +2209,6 @@ public class frmMenu extends javax.swing.JFrame {
                 txtCpfCliente1.setText(cliente.getCpf());
                 txtNomeCliente1.setText(cliente.getNome());
                 txtTelefoneCliente1.setText(cliente.getTelefone());
-                
                 txtPlacaVeiculo1.setText(veiculo.getPlaca());
                 txtModeloVeiculo1.setText(veiculo.getModelo());
                 switch (veiculo.getTipo()) {
@@ -2229,7 +2250,7 @@ public class frmMenu extends javax.swing.JFrame {
                     cliente = conCliente.pesquisar(cliente.getCpf());
                     veiculo.setCodcliente(cliente.getCodigo());
                     txtNomeCliente1.setText(cliente.getNome());
-                    txtTelefoneCliente1.setText(cliente.getTelefone());
+                    txtTelefoneCliente1.setText(cliente.getTelefone());  
                 }
 
                 veiculo.setPlaca(txtPlacaVeiculo1.getText().trim());
@@ -2339,24 +2360,24 @@ public class frmMenu extends javax.swing.JFrame {
     private void aplicarMascaras() {
         try {
             MaskFormatter cpfMask = new MaskFormatter("###.###.###-##");
-            cpfMask.install((JFormattedTextField) txtCpfFuncionario1);
-            cpfMask.install((JFormattedTextField) txtCpfCliente1);
+            cpfMask.install((JFormattedTextField)txtCpfFuncionario);
+            cpfMask.install((JFormattedTextField)txtCpfCliente1);
 
             MaskFormatter telMask = new MaskFormatter("(##) #####-####");
-            telMask.install((JFormattedTextField) txtTelefoneFuncionario);
-            telMask.install((JFormattedTextField) txtTelefoneCliente1);
+            telMask.install((JFormattedTextField)txtTelefoneFuncionario);
+            telMask.install((JFormattedTextField)txtTelefoneCliente1);
 
             MaskFormatter dateMask = new MaskFormatter("##/##/####");
-            dateMask.install(txtDataEntrada);
-            dateMask.install(txtDataSaida);
+            dateMask.install((JFormattedTextField)txtDataEntrada);
+            dateMask.install((JFormattedTextField)txtDataSaida);
 
             MaskFormatter timeMask = new MaskFormatter("##:##");
-            timeMask.install(txtHoraEntrada);
-            timeMask.install(txtHoraSaida);
+            timeMask.install((JFormattedTextField)txtHoraEntrada);
+            timeMask.install((JFormattedTextField)txtHoraSaida);
 
             MaskFormatter placaMask = new MaskFormatter("UUU-####");
-            placaMask.install((JFormattedTextField) txtPlacaVeiculo1);
-            placaMask.install((JFormattedTextField) txtPlacaVeiculoServico);
+            placaMask.install((JFormattedTextField)txtPlacaVeiculo1);
+            placaMask.install((JFormattedTextField)txtPlacaVeiculoServico);
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -2626,6 +2647,14 @@ public class frmMenu extends javax.swing.JFrame {
             chbsenhafunci.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/view.png")));
         }
     }//GEN-LAST:event_chbsenhafunciActionPerformed
+
+    private void txtPlacaVeiculo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlacaVeiculo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPlacaVeiculo1ActionPerformed
+
+    private void txtPlacaVeiculoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlacaVeiculoServicoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPlacaVeiculoServicoActionPerformed
 
     /**
      * @param args the command line arguments
