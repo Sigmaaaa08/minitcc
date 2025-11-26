@@ -15,7 +15,12 @@ import Model.Operacional;
 import Model.Servicos;
 import Model.Veiculos;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Month;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -67,7 +72,7 @@ public class frmMenu extends javax.swing.JFrame {
  
           //Mask para Horário
           MaskFormatter mascaraHorario = new MaskFormatter("##:##:##");
-          mascaraHorario.setPlaceholderCharacter('*'); // Permite caracteres inválidos
+          mascaraHorario.setPlaceholderCharacter('0'); // Permite caracteres inválidos
           mascaraHorario.setValidCharacters("0123456789");
           txtHoraEntrada.setColumns(8);
           txtHoraSaida.setColumns(8);
@@ -2300,7 +2305,10 @@ public class frmMenu extends javax.swing.JFrame {
 
             String dataEntrada = txtDataEntrada.getText().trim();
             String horaEntrada = txtHoraEntrada.getText().trim();
-            
+            LocalTime limiteHora = LocalTime.of(23,59,59);
+            LocalDate limiteData = LocalDate.now();
+            LocalTime horaEntrada_Time = LocalTime.parse(horaEntrada);
+            LocalDate dataEntrada_Time = LocalDate.parse(conOperacional.formatarDataParaAmericana(dataEntrada));
 
             if (txtDataEntrada.getText() == null || txtDataEntrada.getText().trim().isEmpty() || txtDataEntrada.getText().contains("_")
                     || txtHoraEntrada.getText() == null || txtHoraEntrada.getText().trim().isEmpty() || txtHoraEntrada.getText().contains("*")
@@ -2310,7 +2318,14 @@ public class frmMenu extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Preencha os campos necessários (Data Entrada, Hora Entrada, Cliente)");
                 return;
-            }else{
+            }else if(horaEntrada_Time.isAfter(limiteHora)){
+            JOptionPane.showMessageDialog(null, "Hora de Entrada inválida ", "Erro de Horário", JOptionPane.ERROR_MESSAGE);
+            return;
+            }else if(dataEntrada_Time.isAfter(limiteData)){
+            JOptionPane.showMessageDialog(null, "Data de Entrada inválida ", "Erro de Horário", JOptionPane.ERROR_MESSAGE);
+            return;
+            }
+            else{
             
                 
                 servico.setDatainicial(conOperacional.formatarDataParaAmericana(dataEntrada));
@@ -2333,36 +2348,15 @@ public class frmMenu extends javax.swing.JFrame {
           }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Erro no formato do número de entrada do serviço: " + ex.getMessage());
+        }catch (DateTimeParseException e) {
+    // ESSA EXCEÇÃO SERÁ EXECUTADA SE caso a string data não estiver no formato esperado (dd/MM/yyyy),
+    // ou se for uma data inválida (ex: 30/02/2025) - formato PT-BR.
+    JOptionPane.showMessageDialog(null, "Erro ao converter a data limite: " + e.getMessage(), "Erro de Formato", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao salvar o serviço: " + ex.getMessage());
         }
     }//GEN-LAST:event_bntSalvarServico1ActionPerformed
-    private void aplicarMascaras() {
-        try {
-            MaskFormatter cpfMask = new MaskFormatter("###.###.###-##");
-            cpfMask.install((JFormattedTextField) txtCpfFuncionario1);
-            cpfMask.install((JFormattedTextField) txtCpfCliente1);
 
-            MaskFormatter telMask = new MaskFormatter("(##) #####-####");
-            telMask.install((JFormattedTextField) txtTelefoneFuncionario);
-            telMask.install((JFormattedTextField) txtTelefoneCliente1);
-
-            MaskFormatter dateMask = new MaskFormatter("##/##/####");
-            dateMask.install(txtDataEntrada);
-            dateMask.install(txtDataSaida);
-
-            MaskFormatter timeMask = new MaskFormatter("##:##");
-            timeMask.install(txtHoraEntrada);
-            timeMask.install(txtHoraSaida);
-
-            MaskFormatter placaMask = new MaskFormatter("UUU-####");
-            placaMask.install((JFormattedTextField) txtPlacaVeiculo1);
-            placaMask.install((JFormattedTextField) txtPlacaVeiculoServico);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
     private void bntExcluirServico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirServico1ActionPerformed
         // TODO add your handling code here:
         if (txtNumEntrada.getText().isEmpty()) {
@@ -2385,22 +2379,16 @@ public class frmMenu extends javax.swing.JFrame {
                 controller.excluir(codigoServico);
                 bntNovo1ActionPerformed(evt);
             }
-        } catch (NumberFormatException e) {
+        }catch (DateTimeParseException e) {
+    // ESSA EXCEÇÃO SERÁ EXECUTADA SE caso a string data não estiver no formato esperado (dd/MM/yyyy),
+    // ou se for uma data inválida (ex: 30/02/2025) - formato PT-BR.
+    JOptionPane.showMessageDialog(null, "Erro ao converter a data limite: " + e.getMessage(), "Erro de Formato", JOptionPane.ERROR_MESSAGE);
+        }catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "O campo Número de Entrada deve conter um código de serviço numérico válido.", "Erro de Formato", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_bntExcluirServico1ActionPerformed
 
     private void bntEditarServico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarServico1ActionPerformed
-        if (txtNumEntrada.getText().isEmpty()
-                || txtDataSaida.getText().trim().replace(" ", "").length() != 10
-                || // Formato DD/MM/AAAA
-                txtHoraSaida.getText().trim().replace(" ", "").length() != 8) {  // Formato HH:MM
-
-            JOptionPane.showMessageDialog(this,
-                    "Para finalizar a edição (saída), preencha o Código do Serviço, Data de Saída e Hora de Saída corretamente.",
-                    "Dados Ausentes", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
 
         try {
             Servicos servico = new Servicos();
@@ -2417,8 +2405,36 @@ public class frmMenu extends javax.swing.JFrame {
             String horaSaida = txtHoraSaida.getText();
             String horaEntrada = txtHoraEntrada.getText();
             
-            
+            LocalTime limiteHora = LocalTime.of(23,59,59);
+            LocalDate limiteData = LocalDate.now();
+            LocalTime horaEntrada_Time = LocalTime.parse(horaEntrada);
+            LocalDate dataEntrada_Time = LocalDate.parse(conOperacional.formatarDataParaAmericana(dataEntrada));
+            LocalTime horaSaida_Time = LocalTime.parse(horaSaida);
+            LocalDate dataSaida_Time = LocalDate.parse(conOperacional.formatarDataParaAmericana(dataSaida));
                 
+        if (txtNumEntrada.getText().isEmpty()
+                || txtDataSaida.getText().trim().replace(" ", "").length() != 10
+                || // Formato DD/MM/AAAA
+                txtHoraSaida.getText().trim().replace(" ", "").length() != 8) {  // Formato HH:MM
+
+            JOptionPane.showMessageDialog(this,
+                    "Para finalizar a edição (saída), preencha o Código do Serviço, Data de Saída e Hora de Saída corretamente.",
+                    "Dados Ausentes", JOptionPane.WARNING_MESSAGE);
+            return;
+            }else if(horaEntrada_Time.isAfter(limiteHora)){
+            JOptionPane.showMessageDialog(null, "Hora de Entrada inválida ", "Erro de Horário", JOptionPane.ERROR_MESSAGE);
+            return;
+            }else if(dataEntrada_Time.isAfter(limiteData)){
+            JOptionPane.showMessageDialog(null, "Data de Entrada inválida ", "Erro de Horário", JOptionPane.ERROR_MESSAGE);
+            return;
+            }else if(horaSaida_Time.isAfter(limiteHora)){
+            JOptionPane.showMessageDialog(null, "Hora de Entrada inválida ", "Erro de Horário", JOptionPane.ERROR_MESSAGE);
+            return;
+            }else if(dataSaida_Time.isAfter(limiteData)){
+            JOptionPane.showMessageDialog(null, "Data de Entrada inválida ", "Erro de Horário", JOptionPane.ERROR_MESSAGE);
+            return;
+            }
+            
             String placa = txtPlacaVeiculoServico.getText();
             veiculo = conVeiculo.pesquisar(placa);
             servico.setCodveiculo(veiculo.getCodigo());
