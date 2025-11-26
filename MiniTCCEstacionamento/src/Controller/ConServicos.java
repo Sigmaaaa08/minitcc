@@ -22,7 +22,7 @@ public class ConServicos {
 
 
     public void editar(Servicos servico) {
-        String sql = "UPDATE TBSERVICO SET datafinal=?, horasaida=?, datainicial=?, horainicial=?, STATUSSERVICO=?, codveiculo=?, codfunci_saida=? WHERE idservico=?";
+        String sql = "UPDATE TBSERVICO SET datafinal=?, horasaida=?, datainicial=?, horaentrada=?, STATUSSERVICO=?, codveiculo=?, codfunci_saida=? WHERE idservico=?";
 
         try {
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);

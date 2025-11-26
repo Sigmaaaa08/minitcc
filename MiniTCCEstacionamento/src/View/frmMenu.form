@@ -1471,6 +1471,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtModeloVeiculoServico">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel30">
                   <Properties>
@@ -1486,8 +1489,14 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtNomeClienteServico">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="txtPlacaVeiculoServico">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
