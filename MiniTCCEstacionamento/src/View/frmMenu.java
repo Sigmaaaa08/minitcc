@@ -2311,7 +2311,7 @@ public class frmMenu extends javax.swing.JFrame {
                 
                 servico.setDatainicial(conOperacional.formatarDataParaAmericana(dataEntrada));
                 servico.setHoraentrada(horaEntrada);
-                servico.setStatus("Pendente");
+                servico.setStatus("PENDENTE");
                 servico.setCodCat(1);
                 servico.setCodfuncionario_entrada(codFuncionarioLogado);
                 System.out.println(codFuncionarioLogado);
@@ -2390,7 +2390,7 @@ public class frmMenu extends javax.swing.JFrame {
         if (txtNumEntrada.getText().isEmpty()
                 || txtDataSaida.getText().trim().replace(" ", "").length() != 10
                 || // Formato DD/MM/AAAA
-                txtHoraSaida.getText().trim().replace(" ", "").length() != 5) {  // Formato HH:MM
+                txtHoraSaida.getText().trim().replace(" ", "").length() != 8) {  // Formato HH:MM
 
             JOptionPane.showMessageDialog(this,
                     "Para finalizar a edição (saída), preencha o Código do Serviço, Data de Saída e Hora de Saída corretamente.",
@@ -2399,8 +2399,13 @@ public class frmMenu extends javax.swing.JFrame {
         }
 
         try {
+            Servicos servico = new Servicos();
             ConServicos conServico = new ConServicos();
-            //Servicos servico = new Servico();
+            
+            ConVeiculos conVeiculo = new ConVeiculos();
+            Veiculos veiculo = new Veiculos();
+            
+            ConOperacional conOperacional = new ConOperacional();
             
             
             String dataSaida = txtDataSaida.getText();
@@ -2410,35 +2415,30 @@ public class frmMenu extends javax.swing.JFrame {
             
             
                 
-                String placa = txtPlacaVeiculoServico.getText();
-               // veiculo = conVeiculo.pesquisar(placa);
-               // servico.setCodveiculo(veiculo.getCodigo());
+            String placa = txtPlacaVeiculoServico.getText();
+            veiculo = conVeiculo.pesquisar(placa);
+            servico.setCodveiculo(veiculo.getCodigo());
                 
-               // servico.setDatafinal(conOperacional.formatarDataParaAmericana(dataSaida));
-               // servico.setHorasaida(horaSaida);
-                
-              //  txtQtdDias1.setText(String.valueOf(conOperacional.diferencaEmDias(dataEntrada, dataSaida)));
-              //  txtQtdHoras1.setText(String.valueOf(conOperacional.diferencaEmHoras(dataEntrada, dataSaida, horaEntrada, horaSaida)));
-                
-               // txtValorTotal.setText(conOperacional.ValorTotal(dataEntrada, dataSaida, horaEntrada, horaSaida).toString());
-              //  servico.setValorTotal(Double.parseDouble(txtValorTotal.getText()));
-                
-                //servico.setStatus("Finalizado");
-               // conServico.editar(servico);
-                
-                bntNovo1ActionPerformed(evt);
-                return;
+            servico.setCodigo(Integer.parseInt(txtNumEntrada.getText()));
             
+                servico.setDatafinal(conOperacional.formatarDataParaAmericana(dataSaida));
+                servico.setHorasaida(horaSaida);
+                servico.setDatainicial(conOperacional.formatarDataParaAmericana(dataEntrada));
+                servico.setHoraentrada(horaEntrada);
+                
+                 txtQtdDias1.setText(String.valueOf(conOperacional.diferencaEmDias(dataEntrada, dataSaida)));
+                 txtQtdHoras1.setText(String.valueOf(conOperacional.diferencaEmHoras(dataEntrada, dataSaida, horaEntrada, horaSaida)));
+                
+                txtValorTotal.setText(conOperacional.ValorTotal(dataEntrada, dataSaida, horaEntrada, horaSaida).toString());
+                 servico.setValorTotal(Double.parseDouble(txtValorTotal.getText()));
+                
+          servico.setDatafinal(conOperacional.formatarDataParaAmericana(dataSaida));
+          servico.setHorasaida(horaSaida);
+          servico.setStatus("FINALIZADO");
+          servico.setCodfuncionario_saida(codFuncionarioLogado);
+            conServico.editar(servico);
             
-          //  servico.setDatafinal(dataFinal);
-           // servico.setHorasaida(horaSaida);
-
-            //ConServicos controller = new ConServicos();
-
-          //  controller.editar(servico);
-            
-            Vector cabecalhoVeiculo = new Vector();
-                ConVeiculos conVeiculo = new ConVeiculos();
+               Vector cabecalhoVeiculo = new Vector();
            
             cabecalhoVeiculo.addElement("Placa"); // 1
             cabecalhoVeiculo.addElement("Modelo"); // 2

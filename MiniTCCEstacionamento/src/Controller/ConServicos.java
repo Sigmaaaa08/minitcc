@@ -22,13 +22,18 @@ public class ConServicos {
 
 
     public void editar(Servicos servico) {
-        String sql = "UPDATE TBSERVICO SET datafinal=?, horasaida=? WHERE idservico=?";
+        String sql = "UPDATE TBSERVICO SET datafinal=?, horasaida=?, datainicial=?, horainicial=?, STATUSSERVICO=?, codveiculo=?, codfunci_saida=? WHERE idservico=?";
 
         try {
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
             psmt.setString(1, servico.getDatafinal());
             psmt.setString(2, servico.getHorasaida());
-            psmt.setInt(3, servico.getCodigo());
+            psmt.setString(3, servico.getDatainicial());
+            psmt.setString(4, servico.getHoraentrada());
+            psmt.setString(5, servico.getStatus());
+            psmt.setInt(6, servico.getCodfuncionario_saida());
+            psmt.setInt(7, servico.getCodveiculo());
+            psmt.setInt(8, servico.getCodigo());
             psmt.executeUpdate();
 
             conexao.desconectar();
@@ -69,6 +74,7 @@ public class ConServicos {
             psmt.executeUpdate();
 
             conexao.desconectar();
+            JOptionPane.showMessageDialog(null, "Serviço Cadastrado com sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um ERRO: " + ex);
         }

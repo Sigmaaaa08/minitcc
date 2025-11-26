@@ -30,6 +30,7 @@ public class ConFuncionarios {
                 psmt.executeUpdate();
                           
                 conexao.desconectar();
+                JOptionPane.showMessageDialog(null, "Serviço Cadastrado com sucesso!");
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, "Ocorreu um ERRO:"+ ex);
             }
@@ -175,6 +176,7 @@ public class ConFuncionarios {
             psmt.setInt(7, funcionario.getCodigo());
             int linhasAfetadas = psmt.executeUpdate();
             conexao.desconectar();
+            JOptionPane.showMessageDialog(null, "Serviço alterado com sucesso!");
             return linhasAfetadas > 0;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um ERRO:" + ex);
