@@ -104,12 +104,13 @@ public class ConServicos {
                 servico.setStatus(rs.getString("STATUSSERVICO"));
                 servico.setValorTotal(rs.getDouble("valortotal"));
                 //Cada Linha será um cliente encontrado
+                ConOperacional conOperacional = new ConOperacional();
                 Vector novalinha = new Vector();
                 novalinha.addElement(servico.getCodigo());
                 novalinha.addElement(veiculo.getPlaca());
                 novalinha.addElement(cliente.getNome());
-                novalinha.addElement(servico.getDatainicial());
-                novalinha.addElement(servico.getDatafinal());
+                novalinha.addElement(conOperacional.formatarDataParaBrasileira(servico.getDatainicial()));
+                novalinha.addElement(conOperacional.formatarDataParaBrasileira(servico.getDatafinal()));
                 novalinha.addElement(servico.getHoraentrada());
                 novalinha.addElement(servico.getHorasaida());
                 novalinha.addElement(servico.getStatus());

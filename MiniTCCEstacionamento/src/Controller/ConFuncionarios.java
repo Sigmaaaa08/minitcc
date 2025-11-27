@@ -145,7 +145,7 @@ public class ConFuncionarios {
 
             Funcionarios funcionario = new Funcionarios();
             //percorre os resultados obtidos na consulta sql
-            while (rs.next()) {
+            if (rs.next()) {
                 funcionario.setCodigo(rs.getInt("idfunci"));
                 funcionario.setNome(rs.getString("nomefunci"));
                 funcionario.setCpf(rs.getString("cpffunci"));
@@ -154,8 +154,10 @@ public class ConFuncionarios {
                 funcionario.setSenha(rs.getString("senhafunci"));
                 funcionario.setStatus(rs.getString("STATUSFUNCI"));
                 funcionario.setDatacont(rs.getString("datacontfunci"));
-            }
             return funcionario;
+            }else{
+                return null;
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
             return null;
