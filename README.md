@@ -11,7 +11,7 @@
   **[José Eduardo Rodrigues Sabino](https://github.com/Revestus)** <br>
 
 ## Dependencias 
-** [https://download.oracle.com/java/25/archive/jdk-25_windows-x64_bin.zip](JDK25) **
+**[https://download.oracle.com/java/25/archive/jdk-25_windows-x64_bin.zip](JDK25)**
 ## Tema
 Aplicativo *desktop* na linguagem *Java* para gerenciamento de um estacionamento.  <br>
 
