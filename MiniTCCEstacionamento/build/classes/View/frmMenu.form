@@ -296,6 +296,9 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JFormattedTextField" name="txtCpfFuncionario">
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCpfFuncionarioActionPerformed"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>

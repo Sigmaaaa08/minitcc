@@ -418,6 +418,12 @@ public class frmMenu extends javax.swing.JFrame {
 
         jLabel49.setText("CPF:");
 
+        txtCpfFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCpfFuncionarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -1733,7 +1739,7 @@ public class frmMenu extends javax.swing.JFrame {
             txtTelefoneFuncionario.setText("");
             txtEmailFuncionario.setText("");
             txtSenhaFuncionario.setText("");
-            txtCpfFuncionario.setText("");
+            txtCpfFuncionario1.setText("");
             
             chbsenhafunci.setSelected(false);
             
@@ -1760,7 +1766,7 @@ public class frmMenu extends javax.swing.JFrame {
                 return;
                 } 
 
-                this.txtCpfFuncionario.setText(funcionario.getCpf());
+                this.txtCpfFuncionario1.setText(funcionario.getCpf());
                 this.txtNomeFuncionario.setText(funcionario.getNome());
                 this.txtTelefoneFuncionario.setText(funcionario.getTelefone());
                 this.txtEmailFuncionario.setText(funcionario.getEmail());
@@ -2655,6 +2661,10 @@ public class frmMenu extends javax.swing.JFrame {
     private void txtPlacaVeiculoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlacaVeiculoServicoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPlacaVeiculoServicoActionPerformed
+
+    private void txtCpfFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfFuncionarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCpfFuncionarioActionPerformed
 
     /**
      * @param args the command line arguments
