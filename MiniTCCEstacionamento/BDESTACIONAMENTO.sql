@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS TBFUNCIONARIO (
 INSERT INTO TBFUNCIONARIO (senhafunci, telefonefunci, emailfunci, nomefunci, cpffunci, statusfunci) VALUES
 ('Carol11', '(13) 24318-5853', 'carolalmeida@gmail.com', 'Carolina Almeida Barbosa', '440.984.373-76', 'ATIVO'),
 ('Ana12', '(81) 74117-5612', 'annaaraujo@gmail.com', 'Anna Araujo Ferreira', '165.001.792-85', 'ATIVO'),
+('Joana14', '(69) 74117-5612', 'joanabanana@gmail.com', 'Joana Silva Banana', '167.069.792-69', 'INATIVO'),
 ('Kaua13', '(41) 85469-3091', 'kauamelo@gmail.com', 'Kaua Melo Ribeiro', '840.936.057-18', 'ATIVO');
 
 CREATE TABLE IF NOT EXISTS TBVEICULO (
