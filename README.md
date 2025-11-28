@@ -5,6 +5,11 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/Sigmaaaa08/minitcc?style=for-the-badge)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/Sigmaaaa08/minitcc?style=for-the-badge&color=%23800080)
 
+<h1 align="center">Sistema de estacionamento rotativo</h1>
+ <div align="center">
+Aplicativo <b>desktop</b> na linguagem <b>Java</b> para <b>gerenciamento de um estacionamento rotativo em geral</b>.
+</div>
+
 ## Participantes 
   **[Karen Luísa da Silva Nabas](https://github.com/Sigmaaaa08)** <br>
   **[Lucas de Paula Gailhardo](https://github.com/lucasdepaulagailhardo-crypto)** <br>
@@ -12,8 +17,6 @@
 
 ## Dependencias 
 **[JDK25](https://download.oracle.com/java/25/archive/jdk-25_windows-x64_bin.exe)**
-## Tema
-Aplicativo *desktop* na linguagem *Java* para gerenciamento de um estacionamento.  <br>
 
 ## Der
 <img src="https://i.imgur.com/FmkNJC5.jpeg"> <br>
