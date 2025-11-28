@@ -22,7 +22,7 @@ public class ConServicos {
 
 
     public void editar(Servicos servico) {
-        String sql = "UPDATE TBSERVICO SET datafinal=?, horasaida=?, datainicial=?, horaentrada=?, STATUSSERVICO=?, codveiculo=?, codfunci_saida=? WHERE idservico=?";
+        String sql = "UPDATE TBSERVICO SET datafinal=?, horasaida=?, datainicial=?, horaentrada=?, STATUSSERVICO=?, codveiculo=?, codfunci_saida=?, valortotal=? WHERE idservico=?";
 
         try {
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
@@ -31,9 +31,10 @@ public class ConServicos {
             psmt.setString(3, servico.getDatainicial());
             psmt.setString(4, servico.getHoraentrada());
             psmt.setString(5, servico.getStatus());
-            psmt.setInt(6, servico.getCodfuncionario_saida());
-            psmt.setInt(7, servico.getCodveiculo());
-            psmt.setInt(8, servico.getCodigo());
+            psmt.setInt(6, servico.getCodveiculo());
+            psmt.setInt(7, servico.getCodfuncionario_saida());
+            psmt.setDouble(8, servico.getValorTotal());
+            psmt.setInt(9, servico.getCodigo());
             psmt.executeUpdate();
 
             conexao.desconectar();
@@ -85,7 +86,8 @@ public class ConServicos {
         String sql = "Select s.idservico,v.PLACAVEICULO,c.nomecliente,s.datainicial,s.datafinal,s.horaentrada,s.horasaida,s.VALORTOTAL,s.STATUSSERVICO"
                 + " from TBSERVICO s Inner Join tbveiculo v "
                 + "on v.idveiculo=s.codveiculo Inner Join tbcliente c"
-                + " on c.idcliente=v.codcliente";
+                + " on c.idcliente=v.codcliente"
+                + " order by idservico desc";
         try {
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
             ResultSet rs = psmt.executeQuery();
@@ -130,7 +132,8 @@ public class ConServicos {
                 + " from TBSERVICO s Inner Join tbveiculo v "
                 + "on v.idveiculo=s.codveiculo Inner Join tbcliente c"
                 + " on c.idcliente=v.codcliente"
-                + " Where statusservico = ?";
+                + " Where statusservico = ?"
+                + " order by idservico desc";
         try {
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
             psmt.setString(1, Status);

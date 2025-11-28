@@ -37,7 +37,8 @@ public class ConFuncionarios {
         }
          public Vector listar(){
         Vector lista = new Vector();
-        String sql = "Select idfunci, senhafunci, telefonefunci, emailfunci, cpffunci, nomefunci, statusfunci, datacontfunci from TBFUNCIONARIO";
+        String sql = "Select idfunci, senhafunci, telefonefunci, emailfunci, cpffunci, nomefunci, statusfunci, datacontfunci from TBFUNCIONARIO"
+                + " order by idfunci desc";
         try{
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
             ResultSet rs = psmt.executeQuery();
@@ -74,7 +75,8 @@ public class ConFuncionarios {
     public Vector listar(String status){
         Vector lista = new Vector();
         String sql = "Select idfunci, senhafunci, telefonefunci, emailfunci, cpffunci, nomefunci, statusfunci, datacontfunci from TBFUNCIONARIO" +
-                " Where statusfunci=?";
+                " Where statusfunci=?"
+                + " order by idfuncionario desc";
         try{
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
             psmt.setString(1, status);
@@ -112,7 +114,7 @@ public class ConFuncionarios {
 	          public Funcionarios logar(String senha, String email) {
 	        // Aplica o hashing na senha fornecida para comparação
 	        //String hashedPassword = PasswordHasher.hashPassword(senha);
-	        String sql = "Select * from TBFUNCIONARIO where senhafunci = ? and emailfunci = ?";
+	        String sql = "Select * from TBFUNCIONARIO where senhafunci = ? and emailfunci = ? and statusfunci='ATIVO'";
 	        try {
 	            PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
 	            pstmt.setString(1, senha);

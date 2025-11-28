@@ -14,7 +14,6 @@ import Model.Funcionarios;
 import Model.Operacional;
 import Model.Servicos;
 import Model.Veiculos;
-import java.awt.geom.FlatteningPathIterator;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -82,7 +81,6 @@ public class frmMenu extends javax.swing.JFrame {
           txtHoraEntrada.setFormatterFactory(factoryHorario);
           txtHoraSaida.setFormatterFactory(factoryHorario);
           
-          
           //Mask para CPF
           MaskFormatter mascaraCPF = new MaskFormatter("###.###.###-##");
           mascaraCPF.setPlaceholderCharacter('*'); // Permite caracteres inválidos
@@ -90,6 +88,7 @@ public class frmMenu extends javax.swing.JFrame {
           txtCpfCliente1.setColumns(14);
           txtCpfFuncionario1.setColumns(14);
           txtCpfFuncionario.setColumns(14);
+          txtPesquisarCPFCliente.setColumns(14);
           
           DefaultFormatterFactory factoryCPF = new DefaultFormatterFactory(mascaraCPF);
           txtCpfCliente1.setFormatterFactory(factoryCPF);
@@ -316,6 +315,9 @@ public class frmMenu extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         txtPlacaVeiculo1 = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
+        bntPesquisarCliente2 = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        txtPesquisarCPFCliente = new javax.swing.JFormattedTextField();
         jPanel32 = new javax.swing.JPanel();
         jPanel33 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -475,7 +477,7 @@ public class frmMenu extends javax.swing.JFrame {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(9, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntPesquisarFuncionario)
                     .addComponent(jLabel49)
@@ -506,12 +508,14 @@ public class frmMenu extends javax.swing.JFrame {
                                 .addComponent(txtEmailFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel13Layout.createSequentialGroup()
                                 .addComponent(jLabel29)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel13Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(chbsenhafunci)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(txtSenhaFuncionario))))
+                                    .addGroup(jPanel13Layout.createSequentialGroup()
+                                        .addGap(3, 3, 3)
+                                        .addComponent(txtSenhaFuncionario)))))
                         .addGap(223, 223, 223))
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -541,7 +545,7 @@ public class frmMenu extends javax.swing.JFrame {
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -860,7 +864,7 @@ public class frmMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel20)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtValorPrimeiraHoraOperacional, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel23))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -872,7 +876,7 @@ public class frmMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtValorHorasOperacional, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel51))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1063,16 +1067,17 @@ public class frmMenu extends javax.swing.JFrame {
                         .addComponent(jLabel14)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(txtPlacaVeiculo1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtPlacaVeiculo1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel34Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel2)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel34Layout.setVerticalGroup(
             jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel34Layout.createSequentialGroup()
-                .addContainerGap(9, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(txtPlacaVeiculo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1087,6 +1092,15 @@ public class frmMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        bntPesquisarCliente2.setText("Pesquisar");
+        bntPesquisarCliente2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntPesquisarCliente2ActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setText("CPF:");
+
         javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
         jPanel29.setLayout(jPanel29Layout);
         jPanel29Layout.setHorizontalGroup(
@@ -1095,18 +1109,26 @@ public class frmMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel29Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel29Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPesquisarPlacaVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bntPesquisarCliente1))
+                            .addGroup(jPanel29Layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtPesquisarCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bntPesquisarCliente2)))
+                        .addContainerGap(9, Short.MAX_VALUE))
                     .addGroup(jPanel29Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPesquisarPlacaVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bntPesquisarCliente1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46))))
         );
         jPanel29Layout.setVerticalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1118,11 +1140,16 @@ public class frmMenu extends javax.swing.JFrame {
                     .addComponent(bntPesquisarCliente1)
                     .addComponent(jLabel11)
                     .addComponent(txtPesquisarPlacaVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntPesquisarCliente2)
+                    .addComponent(jLabel16)
+                    .addComponent(txtPesquisarCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Cadastro", jPanel29);
@@ -1138,6 +1165,7 @@ public class frmMenu extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tableListarCliente1.setRowSelectionAllowed(false);
         jScrollPane7.setViewportView(tableListarCliente1);
 
         bntListarCliente1.setText("Listar");
@@ -1190,14 +1218,13 @@ public class frmMenu extends javax.swing.JFrame {
         dialogCadastroClienteLayout.setHorizontalGroup(
             dialogCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogCadastroClienteLayout.createSequentialGroup()
-                .addGap(0, 6, Short.MAX_VALUE)
-                .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         dialogCadastroClienteLayout.setVerticalGroup(
             dialogCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogCadastroClienteLayout.createSequentialGroup()
-                .addGap(0, 10, Short.MAX_VALUE)
-                .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1250,7 +1277,7 @@ public class frmMenu extends javax.swing.JFrame {
                 .addComponent(bntEditarServico1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bntExcluirServico1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 286, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 334, Short.MAX_VALUE)
                 .addComponent(bntOperacional1)
                 .addContainerGap())
         );
@@ -1364,34 +1391,40 @@ public class frmMenu extends javax.swing.JFrame {
             .addGroup(jPanel18Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel18Layout.createSequentialGroup()
-                        .addComponent(jLabel39)
-                        .addGap(51, 51, 51)
-                        .addComponent(jLabel40))
-                    .addGroup(jPanel18Layout.createSequentialGroup()
-                        .addComponent(jLabel41)
-                        .addGap(63, 63, 63)
-                        .addComponent(jLabel42))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel18Layout.createSequentialGroup()
+                                .addComponent(txtDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtHoraEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel18Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel39)
+                                .addGap(51, 51, 51)
+                                .addComponent(jLabel40)))
+                        .addContainerGap())
                     .addGroup(jPanel18Layout.createSequentialGroup()
                         .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtQtdDias1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel31))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel38)
-                            .addComponent(txtQtdHoras1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 6, Short.MAX_VALUE))
-            .addGroup(jPanel18Layout.createSequentialGroup()
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel18Layout.createSequentialGroup()
-                        .addComponent(txtDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtHoraEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel18Layout.createSequentialGroup()
-                        .addComponent(txtDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtHoraSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                            .addGroup(jPanel18Layout.createSequentialGroup()
+                                .addComponent(txtDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtHoraSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel18Layout.createSequentialGroup()
+                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel18Layout.createSequentialGroup()
+                                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtQtdDias1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel31))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel38)
+                                            .addComponent(txtQtdHoras1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel18Layout.createSequentialGroup()
+                                        .addComponent(jLabel41)
+                                        .addGap(63, 63, 63)
+                                        .addComponent(jLabel42)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 6, Short.MAX_VALUE))))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1404,7 +1437,7 @@ public class frmMenu extends javax.swing.JFrame {
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtQtdDias1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtQtdHoras1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel39)
                     .addComponent(jLabel40))
@@ -1412,15 +1445,14 @@ public class frmMenu extends javax.swing.JFrame {
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtHoraEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel41)
                     .addComponent(jLabel42))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtHoraSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(txtDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jLabel43.setText("Valor 1ª Hora");
@@ -1514,16 +1546,14 @@ public class frmMenu extends javax.swing.JFrame {
         jPanel20Layout.setHorizontalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel20Layout.createSequentialGroup()
-                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel20Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel55)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel20Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel46)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(jLabel46)
+                .addContainerGap(38, Short.MAX_VALUE))
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel55)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtValorTotal))
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1531,9 +1561,9 @@ public class frmMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel46)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel55))
+                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel55)
+                    .addComponent(txtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -1564,7 +1594,8 @@ public class frmMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNumPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(149, 149, 149))
         );
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
@@ -1593,21 +1624,19 @@ public class frmMenu extends javax.swing.JFrame {
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
                         .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel15Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel15Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Cadastro", jPanel15);
@@ -1644,7 +1673,7 @@ public class frmMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel23Layout.createSequentialGroup()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel23Layout.createSequentialGroup()
                         .addComponent(jLabel48)
@@ -1664,7 +1693,7 @@ public class frmMenu extends javax.swing.JFrame {
                     .addComponent(bntListarServico1)
                     .addComponent(cbStatusServico1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel48))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
@@ -1725,7 +1754,7 @@ public class frmMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel24Layout.createSequentialGroup()
-                        .addGap(0, 6, Short.MAX_VALUE)
+                        .addGap(0, 3, Short.MAX_VALUE)
                         .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bntDialogFuncionario)
                             .addComponent(bntSair)
@@ -1739,19 +1768,22 @@ public class frmMenu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jTabbedPane3)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
+                .addComponent(jTabbedPane3))
         );
 
         pack();
@@ -1823,7 +1855,7 @@ public class frmMenu extends javax.swing.JFrame {
                 return;
                 } 
 
-                this.txtCpfFuncionario.setText(funcionario.getCpf());
+                this.txtCpfFuncionario1.setText(funcionario.getCpf());
                 this.txtNomeFuncionario.setText(funcionario.getNome());
                 this.txtTelefoneFuncionario.setText(funcionario.getTelefone());
                 this.txtEmailFuncionario.setText(funcionario.getEmail());
@@ -1871,7 +1903,7 @@ public class frmMenu extends javax.swing.JFrame {
                 try {
             ConFuncionarios conFunci = new ConFuncionarios();
             
-            String usuario = txtUsuarioLogin.getText().toUpperCase();
+            String usuario = txtUsuarioLogin.getText().trim().toUpperCase();
             
             char[] senhaChar = passwordLoginSenhaFuncionario.getPassword();
             String senha = new String(senhaChar);
@@ -1930,51 +1962,6 @@ public class frmMenu extends javax.swing.JFrame {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
                 }
-        
-                /*frmMenu menu = new frmMenu();
-                        menu.setVisible(true);
-                        menu.setSize(700, 450);
-                        menu.setLocationRelativeTo(null);
-
-                       
-
-                        ConOperacional conOperacional = new ConOperacional();
-                        Operacional operacional = conOperacional.precos();
-
-                        menu.txtDataEntrada.setText(conOperacional.getDate());
-                        menu.txtHoraEntrada.setText(conOperacional.getTime());
-
-                        menu.txtPrimeiraHoraMenu.setText(String.valueOf(operacional.getPrecoPrimeiraHora()));
-                        menu.txtValorHorasMenu.setText(String.valueOf(operacional.getPrecoHorasAdicionais()));
-                        menu.txtValorDiariaMenu.setText(String.valueOf(operacional.getPrecoDiaria()));
-                        
-                         Vector cabecalhoVeiculo = new Vector();
-                ConVeiculos conVeiculo = new ConVeiculos();
-           
-                cabecalhoVeiculo.addElement("Placa"); // 1
-                cabecalhoVeiculo.addElement("Modelo"); // 2
-
-                menu.tableSourcePlaca.setModel(new DefaultTableModel(
-                conVeiculo.listarSourcePlaca(), cabecalhoVeiculo));
-                
-                Vector cabecalhoServico = new Vector();
-                ConServicos conServico = new ConServicos();
-                
-                cabecalhoServico.addElement("Nº Entrada"); // 1
-                cabecalhoServico.addElement("Veículo"); // 1
-                cabecalhoServico.addElement("Cliente"); // 1
-                cabecalhoServico.addElement("D. Entrada"); // 1
-                cabecalhoServico.addElement("D. Saída"); // 1
-                cabecalhoServico.addElement("H. Entrada"); // 1
-                cabecalhoServico.addElement("H. Saída"); // 1
-                cabecalhoServico.addElement("Status"); // 1
-                cabecalhoServico.addElement("Valor Total"); // 1
-                
-                menu.tableServico.setModel(new DefaultTableModel(
-                conServico.listar(), cabecalhoServico));
-                        
-                        this.dialogLogin.dispose();
-                        this.dialogLogin.setVisible(false);*/
     }//GEN-LAST:event_bntLogarActionPerformed
 
     private void bntDialogFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDialogFuncionarioActionPerformed
@@ -2084,11 +2071,9 @@ public class frmMenu extends javax.swing.JFrame {
                 funcionario.setCodigo(this.codigo1);
 
                 boolean funcionarioAtualizado = conFuncionario.editar(funcionario);
-                if (funcionarioAtualizado) {
-            JOptionPane.showMessageDialog(null, "Registro alterado com sucesso!");
-        } else {
+                if (!funcionarioAtualizado) {
             JOptionPane.showMessageDialog(null, "Nenhum registro foi alterado.");
-       }
+            }
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex);
@@ -2163,6 +2148,9 @@ public class frmMenu extends javax.swing.JFrame {
             this.txtPrimeiraHoraMenu.setText(String.valueOf(operacional.getPrecoPrimeiraHora()));
             this.txtValorHorasMenu.setText(String.valueOf(operacional.getPrecoHorasAdicionais()));
             this.txtValorDiariaMenu.setText(String.valueOf(operacional.getPrecoDiaria()));
+            
+            this.txtQtdDias1.setText("");
+            this.txtQtdHoras1.setText("");
 
             this.txtPlacaVeiculoServico.setText("");
             this.txtNumEntrada.setText("");
@@ -2186,12 +2174,13 @@ public class frmMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             ConVeiculos conVeiculo = new ConVeiculos();
-            if (this.codigo1 == 0) {
+            if (this.codigo2 == 0) {
                 JOptionPane.showMessageDialog(null, "Pesquise os campos do funcionárioa a ser excluido");
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir?", "Confirme exclusão", JOptionPane.YES_NO_OPTION) != 1) {
-                    conVeiculo.excluir(this.codigo1);
+                    conVeiculo.excluir(this.codigo2);
                     JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso!");
+                    bntNovoClienteActionPerformed(evt);
                 }
             }
         } catch (Exception ex) {
@@ -2231,8 +2220,9 @@ public class frmMenu extends javax.swing.JFrame {
                 boolean veiculoAtualizado = conVeiculo.editar(veiculo);
                 
                 if (!clienteAtualizado && !veiculoAtualizado)
-
                 JOptionPane.showMessageDialog(null, "Nenhum registro foi alterado.");
+                else
+                JOptionPane.showMessageDialog(null, "Registro alterado.");
        
             Vector<String> cabecalho = new Vector<>();
             cabecalho.add("Placa");
@@ -2334,7 +2324,9 @@ public class frmMenu extends javax.swing.JFrame {
 
                 tableSourcePlaca.setModel(new DefaultTableModel(
                     conVeiculo.listarSourcePlaca(), cabecalhoVeiculo));
-
+                
+                bntNovo1ActionPerformed(evt);
+                
                 JOptionPane.showMessageDialog(null, "registro cadastrado com sucesso!");
             }
             this.codigo1 = 0;
@@ -2416,9 +2408,6 @@ public class frmMenu extends javax.swing.JFrame {
                 veiculo = conVeiculo.pesquisar(placa);
                 servico.setCodveiculo(veiculo.getCodigo());
                 
-            
-            
-
             conServico.cadastrar(servico);
 
             bntNovo1ActionPerformed(evt);
@@ -2498,17 +2487,17 @@ public class frmMenu extends javax.swing.JFrame {
                     "Para finalizar a edição (saída), preencha o Código do Serviço, Data de Saída e Hora de Saída corretamente.",
                     "Dados Ausentes", JOptionPane.WARNING_MESSAGE);
             return;
-            }else if(horaEntrada_Time.isAfter(limiteHora)){
+            }else if(horaEntrada_Time.isAfter(limiteHora) && dataEntrada_Time.isEqual(dataSaida_Time)){
             JOptionPane.showMessageDialog(null, "Hora de Entrada inválida ", "Erro de Horário", JOptionPane.ERROR_MESSAGE);
             return;
             }else if(dataEntrada_Time.isAfter(limiteData)){
-            JOptionPane.showMessageDialog(null, "Data de Entrada inválida ", "Erro de Horário", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Data de Entrada inválida ", "Erro de Data", JOptionPane.ERROR_MESSAGE);
             return;
-            }else if(horaSaida_Time.isAfter(limiteHora)){
-            JOptionPane.showMessageDialog(null, "Hora de Entrada inválida ", "Erro de Horário", JOptionPane.ERROR_MESSAGE);
+            }else if(horaSaida_Time.isBefore(horaEntrada_Time) && dataEntrada_Time.isEqual(dataSaida_Time)){
+            JOptionPane.showMessageDialog(null, "Hora de Saída inválida ", "Erro de Horário", JOptionPane.ERROR_MESSAGE);
             return;
-            }else if(dataSaida_Time.isAfter(limiteData)){
-            JOptionPane.showMessageDialog(null, "Data de Entrada inválida ", "Erro de Horário", JOptionPane.ERROR_MESSAGE);
+            }else if(dataSaida_Time.isBefore(dataEntrada_Time)){
+            JOptionPane.showMessageDialog(null, "Data de Saída inválida ", "Erro de Data", JOptionPane.ERROR_MESSAGE);
             return;
             }
             
@@ -2527,7 +2516,8 @@ public class frmMenu extends javax.swing.JFrame {
                  txtQtdHoras1.setText(String.valueOf(conOperacional.diferencaEmHoras(dataEntrada, dataSaida, horaEntrada, horaSaida)));
                 
                 txtValorTotal.setText(conOperacional.ValorTotal(dataEntrada, dataSaida, horaEntrada, horaSaida).toString());
-                 servico.setValorTotal(Double.parseDouble(txtValorTotal.getText()));
+                servico.setValorTotal(Double.parseDouble(txtValorTotal.getText()));
+                System.out.println(txtValorTotal.getText());
                 
           servico.setDatafinal(conOperacional.formatarDataParaAmericana(dataSaida));
           servico.setHorasaida(horaSaida);
@@ -2542,6 +2532,9 @@ public class frmMenu extends javax.swing.JFrame {
 
             tableSourcePlaca.setModel(new DefaultTableModel(
                     conVeiculo.listarSourcePlaca(), cabecalhoVeiculo));
+            
+            
+            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this,
                     "O campo Número de Entrada deve ser um código numérico válido.",
@@ -2602,7 +2595,7 @@ public class frmMenu extends javax.swing.JFrame {
                 cliente.setCodigo(veiculo.getCodcliente());
                 cliente = conCliente.pesquisar(cliente.getCodigo());
                 
-                if(servico.getStatus().equals("Finalizado")){
+                if(servico.getStatus().equals("FINALIZADO")){
                 this.txtDataSaida.setText(conOperacional.formatarDataParaBrasileira(servico.getDatafinal()));
                 this.txtHoraSaida.setText(servico.getHorasaida());
                 this.txtValorTotal.setText(String.valueOf(servico.getValorTotal()));
@@ -2677,7 +2670,7 @@ public class frmMenu extends javax.swing.JFrame {
             ConFuncionarios conFuncionario = new ConFuncionarios();
             
             if(!txtNomeFuncionario.getText().trim().isEmpty()
-               || !txtCpfFuncionario.getText().trim().isEmpty()
+               || !txtCpfFuncionario1.getText().trim().isEmpty()
                || !txtTelefoneFuncionario.getText().trim().isEmpty()
                || !txtEmailFuncionario.getText().trim().isEmpty()
                || txtSenhaFuncionario.getPassword().length > 0){
@@ -2715,6 +2708,26 @@ public class frmMenu extends javax.swing.JFrame {
             txtSenhaFuncionario.setEchoChar('*');
         }
     }//GEN-LAST:event_chbsenhafunciActionPerformed
+
+    private void bntPesquisarCliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPesquisarCliente2ActionPerformed
+        // TODO add your handling code here:
+        try {
+            ConClientes conCliente = new ConClientes();
+            Clientes cliente = conCliente.pesquisar(txtPesquisarCPFCliente.getText());
+
+            if (txtPesquisarCPFCliente.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha o CPF para realizar a pesquisa");
+            } else {
+                this.codigo1 = cliente.getCodigo();
+                
+                txtCpfCliente1.setText(cliente.getCpf());
+                txtNomeCliente1.setText(cliente.getNome());
+                txtTelefoneCliente1.setText(cliente.getTelefone());
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro:" + ex);
+        }
+    }//GEN-LAST:event_bntPesquisarCliente2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2781,6 +2794,7 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JButton bntNovoFuncionario;
     private javax.swing.JButton bntOperacional1;
     private javax.swing.JButton bntPesquisarCliente1;
+    private javax.swing.JButton bntPesquisarCliente2;
     private javax.swing.JButton bntPesquisarFuncionario;
     private javax.swing.JButton bntPesquisarServico1;
     private javax.swing.JButton bntSair;
@@ -2807,6 +2821,7 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -2903,6 +2918,7 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JLabel txtNomeFuncionarioLogado;
     private javax.swing.JTextField txtNumEntrada;
     private javax.swing.JFormattedTextField txtNumPlaca;
+    private javax.swing.JFormattedTextField txtPesquisarCPFCliente;
     private javax.swing.JFormattedTextField txtPesquisarPlacaVeiculo;
     private javax.swing.JFormattedTextField txtPlacaVeiculo1;
     private javax.swing.JFormattedTextField txtPlacaVeiculoServico;

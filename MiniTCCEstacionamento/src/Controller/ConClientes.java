@@ -44,7 +44,8 @@ public class ConClientes {
 
     public Vector listar() {
         Vector lista = new Vector();
-        String sql = "Select idcliente,nomecliente,telefonecliente,cpfcliente from TBCLIENTE";
+        String sql = "Select idcliente,nomecliente,telefonecliente,cpfcliente from TBCLIENTE"
+                + " order by idcliente desc";
         try {
             PreparedStatement psmt = conexao.conectar().prepareStatement(sql);
             ResultSet rs = psmt.executeQuery();
